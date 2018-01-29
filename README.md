@@ -6,10 +6,13 @@
     <th>Student ID</th>
   </tr>
   <tr>
+    <td>David Ronci</td>
+    <td>26565549</td>
+  </tr>
+  <tr>
     <td>Oumar Ba</td>
     <td>40003603</td>
   </tr>
-  <tr>
 <tr>
     <td>Elie Kheirallah</td>
     <td>27779550</td>
