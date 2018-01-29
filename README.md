@@ -7,6 +7,7 @@
   </tr>
   <tr>
     <td>Oumar Ba</td>
+    <td>oumarba221296@hotmail.fr</td>
     <td>40003603</td>
   </tr>
   <tr>
