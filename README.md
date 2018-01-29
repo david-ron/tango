@@ -4,6 +4,7 @@
   <tr>
     <th>Name</th>
     <th>Student ID</th>
+    <th>Email</th>
   </tr>
   <tr>
     <td>David Ronci</td>
@@ -12,6 +13,7 @@
   <tr>
     <td>Oumar Ba</td>
     <td>40003603</td>
+    <td>oumarba221296@hotmail.fr</td>
   </tr>
 <tr>
     <td>Elie Kheirallah</td>
