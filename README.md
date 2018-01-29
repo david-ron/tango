@@ -4,11 +4,12 @@
   <tr>
     <th>Name</th>
     <th>Student ID</th>
+    <th>Email</th>
   </tr>
   <tr>
     <td>Oumar Ba</td>
-    <td>oumarba221296@hotmail.fr</td>
     <td>40003603</td>
+    <td>oumarba221296@hotmail.fr</td>
   </tr>
   <tr>
 <tr>
