@@ -26,6 +26,7 @@
   <tr>
     <td>Daniel Privorotsky</td>
     <td>40002150</td>
+	<td>privorotskyd@gmail.com</td>
   </tr>
   <tr>
     <td> Antoine Betenjaneh </td>
