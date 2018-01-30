@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<project name="DiscountStrategy" default="compile">
+  <property name="blddir" location="build" />
+  <property name="classdir" location="${blddir}/classes" />
+
+  <target name="init">
+    <mkdir dir="${blddir}" />
+    <mkdir dir="${classdir}" />
+  </target>
+
+  <target name="compile" depends="init">
+    <javac
+      srcdir="src"
+      destdir="${classdir}" />
+  </target>
+</project>
