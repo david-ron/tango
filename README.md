@@ -7,7 +7,7 @@
     <th>Email</th>
   </tr>
   <tr>
-    <td>David Ronci</td>
+    <td>David Ronci (Team Lead)</td>
     <td>26565549</td>
   </tr>
   <tr>
@@ -22,6 +22,7 @@
   <tr>
     <td>Charles Chan</td>
     <td>27841523</td>
+    <td>chanc09@gmail.com</td>
   </tr>
   <tr>
     <td>Daniel Privorotsky</td>
