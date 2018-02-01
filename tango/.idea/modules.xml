@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://E:\Dropbox\Dropbox\Concordia\SOEN\06_Winter2018\SOEN341\Project\SOEN341_app\tango\app\app.iml" filepath="E:\Dropbox\Dropbox\Concordia\SOEN\06_Winter2018\SOEN341\Project\SOEN341_app\tango\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/tango.iml" filepath="$PROJECT_DIR$/tango.iml" />
+      <module fileurl="file://E:\Dropbox\Dropbox\Concordia\SOEN\06_Winter2018\SOEN341\Project\SOEN341_app\tango\tango.iml" filepath="E:\Dropbox\Dropbox\Concordia\SOEN\06_Winter2018\SOEN341\Project\SOEN341_app\tango\tango.iml" />
     </modules>
   </component>
 </project>
