@@ -30,12 +30,20 @@ public class Register extends AppCompatActivity {
         rgRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Add data from each field into database
+                //Super basic input validation
                 boolean promptFail = false;
                 if(rgName.getText().toString().equals("") || rgEmail.getText().toString().equals("") || rgUsername.getText().toString().equals("") || rgPassword.getText().toString().equals("")){promptFail = true;};
                 if(promptFail){
                     rgFailPrompt.setText("YOU MUST FILL IN ALL TEXT FIELDS!");
                     rgFailPrompt.setTextColor(Color.RED);
+                }
+                //place everything in database
+                else{
+                    rgName.getText().toString();
+                    rgEmail.getText().toString();
+                    rgUsername.getText().toString();
+                    rgPassword.getText().toString();
+
                 }
             }
         });
