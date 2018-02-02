@@ -39,6 +39,7 @@ public class Register extends AppCompatActivity {
                 }
                 //place everything in database
                 else{
+                    rgFailPrompt.setText("");
                     rgName.getText().toString();
                     rgEmail.getText().toString();
                     rgUsername.getText().toString();
