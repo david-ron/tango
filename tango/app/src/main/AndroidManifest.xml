@@ -12,12 +12,11 @@
         <activity android:name=".Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".Register" />
-        <activity android:name=".Dummy"></activity>
+        <activity android:name=".Feed" />
     </application>
 
 </manifest>
