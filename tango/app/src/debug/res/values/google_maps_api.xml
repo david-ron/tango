@@ -1,0 +1,24 @@
+<resources>
+    <!--
+    TODO: Before you run your application, you need a Google Maps API key.
+
+    To get one, follow this link, follow the directions and press "Create" at the end:
+
+    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=F6:EE:8C:47:73:34:98:EB:5A:08:D8:5A:B6:56:F2:01:AA:83:C0:DF%3Bcom.tango
+
+    You can also add your credentials to an existing key, using these values:
+
+    Package name:
+    F6:EE:8C:47:73:34:98:EB:5A:08:D8:5A:B6:56:F2:01:AA:83:C0:DF
+
+    SHA-1 certificate fingerprint:
+    F6:EE:8C:47:73:34:98:EB:5A:08:D8:5A:B6:56:F2:01:AA:83:C0:DF
+
+    Alternatively, follow the directions here:
+    https://developers.google.com/maps/documentation/android/start#get-key
+
+    Once you have your key (it starts with "AIza"), replace the "google_maps_key"
+    string in this file.
+    -->
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">YOUR_KEY_HERE</string>
+</resources>
