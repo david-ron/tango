@@ -3,6 +3,7 @@ package com.tango;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+//import com.tango.R;
 
 /**
  * Created by daveb on 2018-02-04.
