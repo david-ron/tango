@@ -16,7 +16,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Feed"></activity>
+        <activity android:name=".Register" />
+
+        <activity android:name=".Feed" />
+        <activity android:name=".Login" />
+
+        <activity android:name=".MasterQuestion" />
+
     </application>
 
 </manifest>
