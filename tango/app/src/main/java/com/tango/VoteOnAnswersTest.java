@@ -13,6 +13,13 @@ public class VoteOnAnswersTest extends AppCompatActivity {
 
     private int pointValue;
 
+    //the Vote enum is used to check the status of the vote
+    enum Vote
+    {
+        UNSELECTED, UPVOTED, DOWNVOTED;
+    }
+    private Vote vote = Vote.UNSELECTED;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,17 +42,52 @@ public class VoteOnAnswersTest extends AppCompatActivity {
         //occurs when up arrow is pressed
         upvoteButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                upvoteButton.setImageResource(R.drawable.ic_up_arrow_selected);
-                pointQty.setText(Integer.toString(++pointValue));
+                //If no votes yet, upvoting will add a point.
+                if(vote == Vote.UNSELECTED) {
+                    upvoteButton.setImageResource(R.drawable.ic_up_arrow_selected);
+                    pointQty.setText(Integer.toString(++pointValue));
+                    vote = Vote.UPVOTED;
+                }
+                //if downvoted, upvoting adds 2 points
+                else if(vote == Vote.DOWNVOTED){
+                    upvoteButton.setImageResource(R.drawable.ic_up_arrow_selected);
+                    downvoteButton.setImageResource(R.drawable.ic_down_arrow_unselected);
+                    pointValue++;
+                    pointQty.setText(Integer.toString(++pointValue));
+                    vote = Vote.UPVOTED;
+                }
+                //if already upvoted, upvoting again reverts to unselected, so removes a point
+                else if(vote == Vote.UPVOTED){
+                    upvoteButton.setImageResource(R.drawable.ic_up_arrow_unselected);
+                    pointQty.setText(Integer.toString(--pointValue));
+                    vote = Vote.UNSELECTED;
 
+                }
             }
         });
         //occurs when down arrow is pressed
         downvoteButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+            //If no votes yet, downvoting will remove a point.
+                if(vote == Vote.UNSELECTED) {
                 downvoteButton.setImageResource(R.drawable.ic_down_arrow_selected);
                 pointQty.setText(Integer.toString(--pointValue));
-
+                vote = Vote.DOWNVOTED;
+            }
+            //if upvoted, downvoting removes 2 points
+                else if(vote == Vote.UPVOTED){
+                upvoteButton.setImageResource(R.drawable.ic_up_arrow_unselected);
+                downvoteButton.setImageResource(R.drawable.ic_down_arrow_selected);
+                pointValue--;
+                pointQty.setText(Integer.toString(--pointValue));
+                vote = Vote.DOWNVOTED;
+            }
+            //if already downvoted, downvoting again reverts to unselected, so adds a point
+                else if(vote == Vote.DOWNVOTED) {
+                    downvoteButton.setImageResource(R.drawable.ic_down_arrow_unselected);
+                    pointQty.setText(Integer.toString(++pointValue));
+                    vote = Vote.UNSELECTED;
+                }
             }
         });
     }
