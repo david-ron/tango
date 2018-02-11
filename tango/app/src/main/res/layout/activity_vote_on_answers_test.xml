@@ -17,9 +17,23 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.58
-"
+        app:layout_constraintVertical_bias="0.58"
         app:srcCompat="@drawable/ic_up_arrow_unselected" />
+
+    <ImageButton
+        android:id="@+id/downvote_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
+        android:background="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.62
+"
+        app:srcCompat="@drawable/ic_down_arrow_unselected" />
 
 
     <TextView

@@ -18,16 +18,18 @@ public class VoteOnAnswersTest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vote_on_answers_test);
 
-        //instantiate the buttonimage (the up arrow)
-        final ImageButton upvoteButton= (ImageButton) findViewById(R.id.upvote_button);
-
         //TODO get value from database, dont just assign 0
         pointValue = 0;
 
-        //the value of the arrow
+        //the pointage to be displayed is the Textview
         final TextView pointQty = (TextView) findViewById(R.id.pointQty);
 
+        //instantiate the buttonimages (the up and down arrows)
+        final ImageButton upvoteButton= (ImageButton) findViewById(R.id.upvote_button);
+        final ImageButton downvoteButton= (ImageButton) findViewById(R.id.downvote_button);
 
+
+        //display correct pointage
         pointQty.setText(Integer.toString(pointValue));
 
         //occurs when up arrow is pressed
@@ -35,6 +37,14 @@ public class VoteOnAnswersTest extends AppCompatActivity {
             public void onClick(View v) {
                 upvoteButton.setImageResource(R.drawable.ic_up_arrow_selected);
                 pointQty.setText(Integer.toString(++pointValue));
+
+            }
+        });
+        //occurs when down arrow is pressed
+        downvoteButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                downvoteButton.setImageResource(R.drawable.ic_down_arrow_selected);
+                pointQty.setText(Integer.toString(--pointValue));
 
             }
         });
