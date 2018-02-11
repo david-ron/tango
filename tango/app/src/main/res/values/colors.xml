@@ -6,4 +6,7 @@
     <color name="colorBackground">#413e4f</color>
     <color name="colorText">#FFFFFF</color>
     <color name="colorTextHint">#51d8c7</color>
+    <color name="colorQuestionBackground">#fbedded9</color>
+    <color name="colorAnswersBackground">#fbedd9e9</color>
+
 </resources>

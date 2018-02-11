@@ -1,0 +1,63 @@
+package com.tango;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.Button;
+import android.view.View;
+import android.content.Intent;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+
+public class AnsweringQuestion extends AppCompatActivity {
+    private Button reply;
+    private Button submit;
+    LinearLayout textbox;
+
+    EditText writtenAnswer;   // Answer in the text box
+    TextView displayedAnswer; // Answer box in the the page s
+    String answers="";           // This is the text that will be displayed in the answer box
+    ArrayList<String> listOfAnswers= new ArrayList<String>();  // The answers will be stored in a list for voting system it will be easy to reorganise the list
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_answering_question);
+
+        ///////////
+        reply = (Button) findViewById(R.id.reply);
+        submit = (Button) findViewById(R.id.submit);
+        textbox = (LinearLayout) findViewById(R.id.textBox);
+        ///////////
+        writtenAnswer = (EditText) findViewById(R.id.writtenAnswer);   // Answer in the text box
+        displayedAnswer = (TextView) findViewById(R.id.answers);     // Answer in the main page
+
+        reply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                textbox.setVisibility(View.VISIBLE);          // The textbox appears
+            }
+        });
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                answers = ""; // Reinitialises the answer string
+
+                listOfAnswers.add(writtenAnswer.getText().toString());      // Answers are added in the list
+
+                for(int i =0; i<listOfAnswers.size(); i++){          // Answers are stored one by one in a string
+                    answers+= "UserName"+(i+1)+"\n" +listOfAnswers.get(i)+"\n\n\n"; ///////////  saves username skips a line and displays answer
+                }
+
+                displayedAnswer.setText(answers);    // The string containing all the answers is displayed
+                textbox.setVisibility(View.GONE);    // After submitting the answer the textbox dissapears
+            }
+        });
+    }
+}
