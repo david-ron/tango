@@ -1,22 +1,47 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nestedScrollView"
+    android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
-    android:paddingBottom="20dp"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp"
-    android:paddingTop="20dp"
-    tools:context=".GoogleSignInActivity">
-
-    <android.support.v7.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    android:background="@color/LightGrey"
+    android:orientation="vertical"
+    android:weightSum="4">
 
 
+    <RelativeLayout
 
-    </android.support.v7.widget.LinearLayoutCompat>
-</android.support.v4.widget.NestedScrollView>
+        android:layout_width="101dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@color/LightGrey">
+
+
+        <LinearLayout
+            android:id="@+id/sign_out_and_disconnect"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal"
+            android:paddingLeft="100dp"
+            android:paddingRight="16dp"
+            android:visibility="visible"
+            tools:visibility="gone">
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/sign_out_button"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/sign_out_and_disconnect"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_weight="1"
+            android:text="@string/sign_out"
+            android:theme="@style/ThemeOverlay.MyDarkButton"
+            android:visibility="visible"
+            tools:visibility="invisible" />
+
+    </RelativeLayout>
+
+</LinearLayout>

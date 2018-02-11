@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Firebase Authentication</string>
+    <string name="app_name">Tango</string>
 
     <string name="label_google_sign_in">Firebase + Google Sign In</string>
     <string name="desc_google_sign_in">Use a Google Sign In credential to authenticate with Firebase.</string>
@@ -38,7 +38,7 @@
     <string name="firebase_user_management">Firebase User Management</string>
 
     <string name="google_status_fmt">Google User: %s</string>
-    <string name="google_title_text">Google Sign In</string>
+    <string name="google_title_text">Welcome</string>
 
     <string name="facebook_status_fmt">Facebook User: %s</string>
     <string name="facebook_title_text">Facebook Login</string>
