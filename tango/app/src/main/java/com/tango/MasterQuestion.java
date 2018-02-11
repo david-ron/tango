@@ -70,7 +70,7 @@ public class MasterQuestion extends AppCompatActivity {
                        Log.d("btnClickListener", "-----TextView Clicked : " + v.getTag());
                        Toast.makeText(MasterQuestion.this, "TextView Clicked : " + v.getTag(),
                                Toast.LENGTH_SHORT).show();
-                           Intent intentRegister = new Intent(getApplicationContext(), Register.class);
+                           Intent intentRegister = new Intent(getApplicationContext(), GoogleSignInActivity.class);
                            startActivity(intentRegister);
                    }
                 }
