@@ -19,7 +19,6 @@
         <activity android:name=".Register" />
         <activity android:name=".Feed" />
         <activity android:name=".Login" />
-        <activity android:name=".WrittingAnswer"></activity>
     </application>
 
 </manifest>
