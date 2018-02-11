@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "140843826902",
+    "firebase_url": "https://tango-33b29.firebaseio.com",
+    "project_id": "tango-33b29",
+    "storage_bucket": "tango-33b29.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:140843826902:android:5132f2749ddfdb13",
+        "android_client_info": {
+          "package_name": "com.tango"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "140843826902-3ikrn919hkbhu572o45g6efc7jf4fv7l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tango",
+            "certificate_hash": "c10c52cf3d0ffa6d635402b3d0e555a2bbfdcfef"
+          }
+        },
+        {
+          "client_id": "140843826902-e0d62fvilqm8q00telh84kva5vkqg5ji.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tango",
+            "certificate_hash": "f6ee8c47733498eb5a08d85ab656f201aa83c0df"
+          }
+        },
+        {
+          "client_id": "140843826902-078spu0i3d3sq2hj2hjva0us2uv1ge1t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiGuhtJOjgmx8wTUP3_OnR5hmn0CRzZG4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "140843826902-078spu0i3d3sq2hj2hjva0us2uv1ge1t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
