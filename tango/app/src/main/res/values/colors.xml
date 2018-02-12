@@ -6,4 +6,7 @@
     <color name="colorBackground">#413e4f</color>
     <color name="colorText">#FFFFFF</color>
     <color name="colorTextHint">#51d8c7</color>
+    <color name="black">#000000</color>
+    <color name="blue">#0032B4</color>
+    <color name="red">#C80000</color>
 </resources>
