@@ -88,6 +88,7 @@
                         android:layout_width="30dp"
                         android:layout_height="wrap_content"
                         android:ems="0"
+                        android:text="1"
                         android:inputType="number" />
 
                 </RadioGroup>

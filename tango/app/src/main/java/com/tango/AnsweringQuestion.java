@@ -86,7 +86,7 @@ public class AnsweringQuestion extends AppCompatActivity {
         acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-                int num = Integer.parseInt(numR.getText().toString());
+                int num = Integer.parseInt(numR.getText().toString()) -1;
                 String str = listOfAnswers.get(num) + "    \n *Accepted*";
                 listOfAnswers.set(num, str);
 
@@ -97,7 +97,7 @@ public class AnsweringQuestion extends AppCompatActivity {
         declineButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-                int num = Integer.parseInt(numR.getText().toString());
+                int num = Integer.parseInt(numR.getText().toString()) - 1;
                 String str = listOfAnswers.get(num) + "    \n *Declined*";
                 listOfAnswers.set(num, str);
             }
