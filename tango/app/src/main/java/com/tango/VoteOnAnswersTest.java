@@ -13,6 +13,7 @@ public class VoteOnAnswersTest extends AppCompatActivity {
 
     private int pointValue;
 
+
     //the Vote enum is used to check the status of the vote
     enum Vote
     {
@@ -47,20 +48,19 @@ public class VoteOnAnswersTest extends AppCompatActivity {
         upvoteButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //If no votes yet, upvoting will add a point.
+                //(up arrow becomes blue)
                 if(vote == Vote.UNSELECTED) {
-                    upvoteButton.setImageResource(R.drawable.ic_up_arrow_selected);
-                    upvoteButton.setColorFilter(Color.argb(255, 0, 50, 180));
+                    upvoteButton.setColorFilter(getResources().getColor(R.color.blue));
                     pointQty.setText(Integer.toString(++pointValue));
                     vote = Vote.UPVOTED;
                     //TODO assign pointage value to Database
                     //TODO assign vote status to Database
                 }
                 //if downvoted, upvoting adds 2 points
+                //(down arrow becomes black and up becomes blue)
                 else if(vote == Vote.DOWNVOTED){
-                    upvoteButton.setImageResource(R.drawable.ic_up_arrow_selected);
-                    upvoteButton.setColorFilter(Color.argb(255, 0, 50, 180));
-                    downvoteButton.setImageResource(R.drawable.ic_down_arrow_unselected);
-                    downvoteButton.setColorFilter(Color.argb(255, 0, 0, 0));
+                    upvoteButton.setColorFilter(getResources().getColor(R.color.blue));
+                    downvoteButton.setColorFilter(getResources().getColor(R.color.black));
                     pointValue++;
                     pointQty.setText(Integer.toString(++pointValue));
                     vote = Vote.UPVOTED;
@@ -68,9 +68,10 @@ public class VoteOnAnswersTest extends AppCompatActivity {
                     //TODO assign vote status to Database
                 }
                 //if already upvoted, upvoting again reverts to unselected, so removes a point
+                //(up becomes black)
                 else if(vote == Vote.UPVOTED){
                     upvoteButton.setImageResource(R.drawable.ic_up_arrow_unselected);
-                    upvoteButton.setColorFilter(Color.argb(255, 0, 0, 0));
+                    upvoteButton.setColorFilter(getResources().getColor(R.color.black));
                     pointQty.setText(Integer.toString(--pointValue));
                     vote = Vote.UNSELECTED;
                     //TODO assign pointage value to Database
@@ -83,21 +84,19 @@ public class VoteOnAnswersTest extends AppCompatActivity {
         downvoteButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
             //If no votes yet, downvoting will remove a point.
+                //down becomes red
                 if(vote == Vote.UNSELECTED) {
-                    downvoteButton.setImageResource(R.drawable.ic_down_arrow_selected);
-                    downvoteButton.setColorFilter(Color.argb(255, 200, 0, 0));
+                    downvoteButton.setColorFilter(getResources().getColor(R.color.red));
                     pointQty.setText(Integer.toString(--pointValue));
                     vote = Vote.DOWNVOTED;
                     //TODO assign pointage value to Database
                     //TODO assign vote status to Database
             }
             //if upvoted, downvoting removes 2 points
+                //up becomes black, down becomes red
                 else if(vote == Vote.UPVOTED){
-                    upvoteButton.setImageResource(R.drawable.ic_up_arrow_unselected);
-                    upvoteButton.setColorFilter(Color.argb(255, 0, 0, 0));
-                    downvoteButton.setImageResource(R.drawable.ic_down_arrow_selected);
-                    downvoteButton.setColorFilter(Color.argb(255, 200, 0, 0));
-
+                    upvoteButton.setColorFilter(getResources().getColor(R.color.black));
+                    downvoteButton.setColorFilter(getResources().getColor(R.color.red));
                     pointValue--;
                     pointQty.setText(Integer.toString(--pointValue));
                     vote = Vote.DOWNVOTED;
@@ -105,9 +104,10 @@ public class VoteOnAnswersTest extends AppCompatActivity {
                     // TODO assign vote status to Database
                 }
             //if already downvoted, downvoting again reverts to unselected, so adds a point
+                //downbecomes black
                 else if(vote == Vote.DOWNVOTED) {
                     downvoteButton.setImageResource(R.drawable.ic_down_arrow_unselected);
-                    downvoteButton.setColorFilter(Color.argb(255, 0, 0, 0));
+                    downvoteButton.setColorFilter(getResources().getColor(R.color.black));
                     pointQty.setText(Integer.toString(++pointValue));
                     vote = Vote.UNSELECTED;
                     //TODO assign pointage value to Database
