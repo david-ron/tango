@@ -64,7 +64,36 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="5dp"
                     android:text="Answers" />
+
+                <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:text="Status"
+                    android:id="@+id/status">
+
+                    <RadioButton
+                        android:id="@+id/acceptButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Accept" />
+                    <RadioButton
+                        android:id="@+id/declineButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Decline" />
+
+                    <EditText
+                        android:id="@+id/numRadio"
+                        android:layout_width="30dp"
+                        android:layout_height="wrap_content"
+                        android:ems="0"
+                        android:inputType="number" />
+
+                </RadioGroup>
             </LinearLayout>
+
+
         </ScrollView>
 
         <Button
@@ -105,7 +134,10 @@
                 android:layout_height="match_parent"
                 android:hint="Write your answer"
                 android:orientation="vertical" />
+
+
         </ScrollView>
+
 
         <Button
             android:id="@+id/submit"
@@ -116,6 +148,8 @@
             android:layout_marginLeft="105dp"
             android:layout_marginTop="14dp"
             android:text="Submit" />
+
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
