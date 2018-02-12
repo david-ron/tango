@@ -22,6 +22,7 @@
   <tr>
     <td>Charles Chan</td>
     <td>27841523</td>
+	<td>chanc09@gmail.com</td>
   </tr>
   <tr>
     <td>Daniel Privorotsky</td>
