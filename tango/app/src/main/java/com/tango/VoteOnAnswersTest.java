@@ -67,7 +67,6 @@ public class VoteOnAnswersTest extends AppCompatActivity {
                 //if already upvoted, upvoting again reverts to unselected, so removes a point
                 //(up becomes black)
                 else if(vote == Vote.UPVOTED){
-                    upvoteButton.setImageResource(R.drawable.ic_up_arrow_unselected);
                     upvoteButton.setColorFilter(getResources().getColor(R.color.black));
                     pointQty.setText(Integer.toString(--pointValue));
                     vote = Vote.UNSELECTED;
@@ -103,7 +102,6 @@ public class VoteOnAnswersTest extends AppCompatActivity {
             //if already downvoted, downvoting again reverts to unselected, so adds a point
                 //downbecomes black
                 else if(vote == Vote.DOWNVOTED) {
-                    downvoteButton.setImageResource(R.drawable.ic_down_arrow_unselected);
                     downvoteButton.setColorFilter(getResources().getColor(R.color.black));
                     pointQty.setText(Integer.toString(++pointValue));
                     vote = Vote.UNSELECTED;
