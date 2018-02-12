@@ -68,12 +68,14 @@ public class MasterQuestion extends AppCompatActivity {
                            LinearLayoutQ.addView(createNewTextView(futureQuestion.getText().toString()));
                            break;
                        default:
+
                            TextView textquestion= (TextView) v;
                        questions= textquestion.getText().toString();   // get the text of the question and assign to a string
 
                            Intent intentAnswers = new Intent(MasterQuestion.this, AnsweringQuestion.class); // redirecting to answer page
                            intentAnswers.putExtra("questions",questions); // Transfering the string to the answer page
                            startActivity(intentAnswers);
+
                    }
                 }
             };
