@@ -1,0 +1,27 @@
+<project name="soen341" default="dist" basedir=".">
+    <description>
+        simple example build file
+    </description>
+    <!-- set global properties for this build -->
+    <property name="src" location="src"/>
+    <property name="build" location="build"/>
+	 <property name="dist" location="dist"/>
+    
+    <target name="init">
+        <!-- Create the time stamp -->
+        <tstamp/>
+        <!-- Create the build directory structure used by compile -->
+        <mkdir dir="${build}"/>
+    </target>
+    
+    <target name="compile">
+        <echo message="Compiling source code"/>
+    </target>
+    
+    <target name="test" description="empty test">
+        </target>
+		
+	    <target name="dist" description="empty test">
+	        </target>
+    
+</project>
