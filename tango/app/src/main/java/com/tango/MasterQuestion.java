@@ -36,6 +36,8 @@ public class MasterQuestion extends AppCompatActivity {
     //tempstatic var
     public static int counterTextView;
 
+    public static String questions="";
+
        @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
@@ -43,8 +45,6 @@ public class MasterQuestion extends AppCompatActivity {
         setContentView(R.layout.activity_masterquestion);
         getSupportActionBar().setTitle("");
 
-        //initViews();
-        //initListeners();
         LinearLayoutQ = (LinearLayoutCompat)findViewById(R.id.LinearLayoutQ);
         futureQuestion = (EditText)findViewById(R.id.futureQuestion);
         newQuestionButton = (Button)findViewById(R.id.newQuestionButton);
@@ -62,16 +62,20 @@ public class MasterQuestion extends AppCompatActivity {
             return new OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                    switch (v.getId()) {
                        case R.id.newQuestionButton:
                            LinearLayoutQ.addView(createNewTextView(futureQuestion.getText().toString()));
                            break;
                        default:
-                       Log.d("btnClickListener", "-----TextView Clicked : " + v.getTag());
-                       Toast.makeText(MasterQuestion.this, "TextView Clicked : " + v.getTag(),
-                               Toast.LENGTH_SHORT).show();
-                           Intent intentRegister = new Intent(getApplicationContext(), GoogleSignInActivity.class);
-                           startActivity(intentRegister);
+
+                           TextView textquestion= (TextView) v;
+                       questions= textquestion.getText().toString();   // get the text of the question and assign to a string
+
+                           Intent intentAnswers = new Intent(MasterQuestion.this, AnsweringQuestion.class); // redirecting to answer page
+                           intentAnswers.putExtra("questions",questions); // Transfering the string to the answer page
+                           startActivity(intentAnswers);
+
                    }
                 }
             };
@@ -84,19 +88,6 @@ public class MasterQuestion extends AppCompatActivity {
         }
 
     };
-//    private void initListeners()
-//    {
-//        newQuestionButton.setOnClickListener(onClick());
-//
-//    }
-//    private void initViews()
-//    {
-//      for(TextView q : Questions){
-//         // findViewById(R.id.QuestionMaster)
-//      }
-////    private void initListeners(){
-////        newQuestionButton.setOnClickListener(this);
-//    }
 private TextView createNewTextView(String text) {
     final ViewGroup.LayoutParams lparams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     final TextView textView = new TextView(this);
@@ -104,6 +95,7 @@ private TextView createNewTextView(String text) {
     textView.setText(Html.fromHtml("<h3>" +text +"</h3>"));
     textView.setTag("" + counterTextView);
     textView.setId(counterTextView);
+
 
     counterTextView++;
     textView.setClickable(true);
