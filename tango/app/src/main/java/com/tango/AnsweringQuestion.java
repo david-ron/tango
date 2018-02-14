@@ -82,26 +82,32 @@ public class AnsweringQuestion extends AppCompatActivity {
             }
         });
         numR = (EditText) findViewById(R.id.numRadio);
+        if(!listOfAnswers.isEmpty()) { // handles empty list
+            acceptButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-        acceptButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-                int num = Integer.parseInt(numR.getText().toString()) -1;
-                String str = listOfAnswers.get(num) + "    \n *Accepted*";
-                listOfAnswers.set(num, str);
 
-//                SpannableString str1 = new SpannableString(listOfAnswers.get(0));
-//                str1.setSpan(new ForegroundColorSpan(Color.RED), 0, str1.length(), 0);
-            }
-        });
-        declineButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-                int num = Integer.parseInt(numR.getText().toString()) - 1;
-                String str = listOfAnswers.get(num) + "    \n *Declined*";
-                listOfAnswers.set(num, str);
-            }
-        });
+                    int num = Integer.parseInt(numR.getText().toString()) - 1;
+                    String str = listOfAnswers.get(num) + "    \n *Accepted*";
+                    listOfAnswers.set(num, str);
+
+                }
+            });
+        }
+        if(!listOfAnswers.isEmpty()) { // handles empty list
+            declineButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+
+                    int num = Integer.parseInt(numR.getText().toString()) - 1;
+                    String str = listOfAnswers.get(num) + "    \n *Declined*";
+                    listOfAnswers.set(num, str);
+                }
+
+            });
+        }
 
 
 
