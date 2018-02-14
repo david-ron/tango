@@ -47,8 +47,9 @@ public class VoteButtons {
         //Upvote Button
         upvoteButton = new ImageButton(context);
         upvoteButton.setX(position_x-100);
-        upvoteButton.setY(position_y-70);
+        upvoteButton.setY(position_y-45);
         upvoteButton.setImageResource(R.drawable.ic_up_arrow_unselected);
+        upvoteButton.setPadding(0,0,0,0);
         upvoteButton.setBackgroundColor(Color.TRANSPARENT);
         layout.addView(upvoteButton);
         initializeUpvote(context);
@@ -56,8 +57,9 @@ public class VoteButtons {
         //Downvote Button
         downvoteButton = new ImageButton(context);
         downvoteButton.setX(position_x-100);
-        downvoteButton.setY(position_y-20);
+        downvoteButton.setY(position_y+15);
         downvoteButton.setImageResource(R.drawable.ic_down_arrow_unselected);
+        downvoteButton.setPadding(0,0,0,0);
         downvoteButton.setBackgroundColor(Color.TRANSPARENT);
         layout.addView(downvoteButton);
         initializeDownvote(context);
