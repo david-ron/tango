@@ -127,7 +127,7 @@ public class GoogleSignInActivity extends BaseActivity implements
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
-                            Intent mainFeed = new Intent(activity,Feed.class);
+                            Intent mainFeed = new Intent(activity,MasterQuestion.class);
                             startActivity(mainFeed);
                         } else {
                             // If sign in fails, display a message to the user.
