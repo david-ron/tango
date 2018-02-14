@@ -21,6 +21,8 @@
         <activity android:name=".Feed"/>
         <activity android:name=".MasterQuestion" />
         <activity android:name=".BaseActivity" />
+        <activity android:name=".VoteOnAnswersTest" />
+
     </application>
 
 </manifest>
