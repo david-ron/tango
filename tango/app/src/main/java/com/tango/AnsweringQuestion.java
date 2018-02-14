@@ -29,7 +29,6 @@ public class AnsweringQuestion extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_answering_question);
 
@@ -41,7 +40,7 @@ public class AnsweringQuestion extends AppCompatActivity {
         writtenAnswer = (EditText) findViewById(R.id.writtenAnswer);   // Answer in the text box
         displayedAnswer = (TextView) findViewById(R.id.answers);     // Answer in the main page
 
-
+        //******
         acceptButton = (RadioButton) findViewById(R.id.acceptButton);
         declineButton = (RadioButton) findViewById(R.id.declineButton);
         numR = (EditText) findViewById(R.id.numRadio);
@@ -69,11 +68,14 @@ public class AnsweringQuestion extends AppCompatActivity {
 
                 textbox.setVisibility(View.GONE);    // After submitting the answer the textbox dissapears
 
+                //unchecked buttons
+                acceptButton.setChecked(false);
+                declineButton.setChecked(false);
             }
         });
         numR = (EditText) findViewById(R.id.numRadio);
 
-        //actions for accepting and declincing answers
+        //actions for accepting and declining answers
 
         acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
