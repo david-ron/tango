@@ -18,7 +18,9 @@ import android.widget.TextView;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,13 +37,15 @@ import java.util.ArrayList;
  */
 
 
-public class MasterQuestion extends BaseActivity {
+public class MasterQuestion extends BaseActivity implements
+        View.OnClickListener{
     private Button  newQuestionButton;
     private ArrayList<TextView> Questions;
     private EditText futureQuestion;
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
     private LinearLayoutCompat LinearLayoutQ;
+    private final AppCompatActivity activity = MasterQuestion.this;
     //tempstatic var
     public static int counterTextView;
 
@@ -58,10 +62,14 @@ public class MasterQuestion extends BaseActivity {
         futureQuestion = (EditText)findViewById(R.id.futureQuestion);
         newQuestionButton = (Button)findViewById(R.id.newQuestionButton);
        newQuestionButton.setOnClickListener(onClick());
-
-
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        findViewById(R.id.sign_out_button).setOnClickListener(this);
         TextView textView = new TextView(this);
         textView.setText("New text");
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
 
     }
@@ -103,9 +111,17 @@ public class MasterQuestion extends BaseActivity {
                     }
 
                 });
-        Intent signinGoogle = new Intent(getBaseContext(), GoogleSignInActivity.class);
+        Intent signinGoogle = new Intent(activity, GoogleSignInActivity.class);
         startActivity(signinGoogle);
 
+    }
+    @Override
+    public void onClick(View v) {
+        int i = v.getId();
+        if (i == R.id.sign_out_button) {
+            signOut();
+
+        }
     }
     OnClickListener btnClickListener = new OnClickListener() {
 
@@ -139,6 +155,7 @@ private TextView createNewTextView(String text) {
   // INSERT NEW textView into DB here
     return textView;
     }
+
 
 
 }
