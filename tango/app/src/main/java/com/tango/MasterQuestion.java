@@ -2,6 +2,7 @@ package com.tango;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
@@ -17,6 +18,12 @@ import android.widget.TextView;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.ArrayList;
 
 
@@ -28,10 +35,12 @@ import java.util.ArrayList;
  */
 
 
-public class MasterQuestion extends AppCompatActivity {
+public class MasterQuestion extends BaseActivity {
     private Button  newQuestionButton;
     private ArrayList<TextView> Questions;
     private EditText futureQuestion;
+    private FirebaseAuth mAuth;
+    private GoogleSignInClient mGoogleSignInClient;
     private LinearLayoutCompat LinearLayoutQ;
     //tempstatic var
     public static int counterTextView;
@@ -44,7 +53,7 @@ public class MasterQuestion extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_masterquestion);
         getSupportActionBar().setTitle("");
-
+        mAuth = FirebaseAuth.getInstance();
         LinearLayoutQ = (LinearLayoutCompat)findViewById(R.id.LinearLayoutQ);
         futureQuestion = (EditText)findViewById(R.id.futureQuestion);
         newQuestionButton = (Button)findViewById(R.id.newQuestionButton);
@@ -80,6 +89,24 @@ public class MasterQuestion extends AppCompatActivity {
                 }
             };
     }
+    private void signOut() {
+        // Firebase sign out
+        mAuth.signOut();
+
+        // Google sign out
+        mGoogleSignInClient.signOut().addOnCompleteListener(this,
+                new OnCompleteListener<Void>() {
+
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        updateUI(null);
+                    }
+
+                });
+        Intent signinGoogle = new Intent(getBaseContext(), GoogleSignInActivity.class);
+        startActivity(signinGoogle);
+
+    }
     OnClickListener btnClickListener = new OnClickListener() {
 
         @Override
@@ -88,6 +115,15 @@ public class MasterQuestion extends AppCompatActivity {
         }
 
     };
+
+    private void updateUI(FirebaseUser user) {
+        hideProgressDialog();
+        if (user != null) {
+
+            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
+            findViewById(R.id.sign_out_button).setVisibility(View.VISIBLE);
+        }
+    }
 private TextView createNewTextView(String text) {
     final ViewGroup.LayoutParams lparams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     final TextView textView = new TextView(this);
