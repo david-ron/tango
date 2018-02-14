@@ -80,7 +80,7 @@ public class AnsweringQuestion extends AppCompatActivity {
             public void onClick(View view) {
                 if (!listOfAnswers.isEmpty()) { // handles empty list
                     int num = Integer.parseInt(numR.getText().toString()) - 1;
-                    if (listOfAnswers.size() >= num) { //handles answers not available
+                    if (listOfAnswers.size()-1 >= num) { //handles answers not available
                         String str = listOfAnswers.get(num) + "    \n *Accepted*";
                         listOfAnswers.set(num, str);
                     }
