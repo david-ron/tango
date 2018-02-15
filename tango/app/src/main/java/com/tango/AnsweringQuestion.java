@@ -66,12 +66,15 @@ public class AnsweringQuestion extends AppCompatActivity {
 
                 for(int i =0; i<listOfAnswers.size(); i++){          // Answers are stored one by one in a string
                     answers+= "UserName"+(i+1)+"\n" +listOfAnswers.get(i)+"\n\n\n"; ///////////  saves username skips a line and displays answer
-                    voteButtons.add(new VoteButtons(relayout.getContext(), relayout, displayedAnswer.getX()-50, displayedAnswer.getY()+i*200));
                 }
 
                 displayedAnswer.setText(answers);    // The string containing all the answers is displayed
                 textbox.setVisibility(View.GONE);    // After submitting the answer the textbox dissapears
                 writtenAnswer.setText("");          //Sets text back to empty
+                voteButtons.add(new VoteButtons(relayout, displayedAnswer.getX()-50, displayedAnswer.getY()+0));
+                voteButtons.add(new VoteButtons(relayout, displayedAnswer.getX()-50, displayedAnswer.getY()+200));
+                voteButtons.add(new VoteButtons(relayout, displayedAnswer.getX()-50, displayedAnswer.getY()+400));
+                voteButtons.add(new VoteButtons(relayout, displayedAnswer.getX()-50, displayedAnswer.getY()+600));
 
 
             }

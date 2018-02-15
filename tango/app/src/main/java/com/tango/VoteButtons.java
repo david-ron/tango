@@ -31,7 +31,7 @@ public class VoteButtons {
     }
     private Vote vote;
 
-    VoteButtons(final Context context, RelativeLayout layout, float input_x, float input_y) {
+    VoteButtons(RelativeLayout layout, float input_x, float input_y) {
        //initial values
         position_x = input_x;
         position_y = input_y;
@@ -41,31 +41,31 @@ public class VoteButtons {
         pointValue = 0;
 
         //TextView
-        pointValueTextView = new TextView(context);
+        pointValueTextView = new TextView(layout.getContext());
         pointValueTextView.setText(Integer.toString(pointValue));
         pointValueTextView.setX(position_x);
         pointValueTextView.setY(position_y);
         layout.addView(pointValueTextView);
 
         //Upvote Button
-        upvoteButton = new ImageButton(context);
+        upvoteButton = new ImageButton(layout.getContext());
         upvoteButton.setX(position_x-100);
         upvoteButton.setY(position_y-45);
         upvoteButton.setImageResource(R.drawable.ic_up_arrow_unselected);
         upvoteButton.setPadding(0,0,0,0);
         upvoteButton.setBackgroundColor(Color.TRANSPARENT);
         layout.addView(upvoteButton);
-        initializeUpvote(context);
+        initializeUpvote(layout.getContext());
 
         //Downvote Button
-        downvoteButton = new ImageButton(context);
+        downvoteButton = new ImageButton(layout.getContext());
         downvoteButton.setX(position_x-100);
         downvoteButton.setY(position_y+15);
         downvoteButton.setImageResource(R.drawable.ic_down_arrow_unselected);
         downvoteButton.setPadding(0,0,0,0);
         downvoteButton.setBackgroundColor(Color.TRANSPARENT);
         layout.addView(downvoteButton);
-        initializeDownvote(context);
+        initializeDownvote(layout.getContext());
     }
 
     void initializeUpvote(final Context context){
