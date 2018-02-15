@@ -51,10 +51,6 @@ public class AnsweringQuestion extends AppCompatActivity {
         question.setText(questions);
         //-----------------------------------
 
-        acceptButton = (RadioButton) findViewById(R.id.acceptButton);
-        declineButton = (RadioButton) findViewById(R.id.declineButton);
-        numR = (EditText) findViewById(R.id.numRadio);
-
         reply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,6 +79,9 @@ public class AnsweringQuestion extends AppCompatActivity {
                 declineButton.setChecked(false);
             }
         });
+
+        acceptButton = (RadioButton) findViewById(R.id.acceptButton);
+        declineButton = (RadioButton) findViewById(R.id.declineButton);
         numR = (EditText) findViewById(R.id.numRadio);
 
         //actions for accepting and declining answers
