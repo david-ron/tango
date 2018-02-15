@@ -7,6 +7,8 @@ import android.view.View;
 import android.content.Intent;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +23,7 @@ public class AnsweringQuestion extends AppCompatActivity {
     TextView displayedAnswer; // Answer box in the the page s
     String answers="";           // This is the text that will be displayed in the answer box
     ArrayList<String> listOfAnswers= new ArrayList<String>();  // The answers will be stored in a list for voting system it will be easy to reorganise the list
-
+    ArrayList<VoteButtons> voteButtons = new ArrayList<VoteButtons>();
 
     TextView question; // This is where the question will appear on the answer page
     String questions; // This is the text that will be displayed
@@ -39,6 +41,7 @@ public class AnsweringQuestion extends AppCompatActivity {
         question = (TextView) findViewById(R.id.questionInAnswerPage);
         writtenAnswer = (EditText) findViewById(R.id.writtenAnswer);   // Answer in the text box
         displayedAnswer = (TextView) findViewById(R.id.answers);     // Answer in the main page
+        final RelativeLayout relayout = (RelativeLayout) findViewById(R.id.relativeLayout3);
 
         //--------- This is where we get the intent from the question page
         //--------- and assign the text to the question section on the answer page
@@ -63,10 +66,14 @@ public class AnsweringQuestion extends AppCompatActivity {
 
                 for(int i =0; i<listOfAnswers.size(); i++){          // Answers are stored one by one in a string
                     answers+= "UserName"+(i+1)+"\n" +listOfAnswers.get(i)+"\n\n\n"; ///////////  saves username skips a line and displays answer
+                    voteButtons.add(new VoteButtons(relayout.getContext(), relayout, displayedAnswer.getX()-50, displayedAnswer.getY()+i*200));
                 }
 
                 displayedAnswer.setText(answers);    // The string containing all the answers is displayed
                 textbox.setVisibility(View.GONE);    // After submitting the answer the textbox dissapears
+                writtenAnswer.setText("");          //Sets text back to empty
+
+
             }
         });
     }

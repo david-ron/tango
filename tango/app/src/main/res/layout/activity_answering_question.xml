@@ -46,6 +46,7 @@
 
 
         <ScrollView
+            android:id="@+id/mainscrollview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
@@ -53,6 +54,7 @@
             android:layout_marginBottom="46dp">
 
             <LinearLayout
+                android:id="@+id/AnswerLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -61,7 +63,7 @@
                     android:id="@+id/answers"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="60dp"
                     android:layout_marginTop="5dp"
                     android:text="Answers" />
             </LinearLayout>
