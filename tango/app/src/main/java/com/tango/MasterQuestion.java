@@ -152,6 +152,10 @@ private TextView createNewTextView(String text) {
     counterTextView++;
     textView.setClickable(true);
     textView.setOnClickListener(onClick());
+
+    Intent intentAnswers = new Intent(MasterQuestion.this, AnsweringQuestion.class); // redirecting to answer page
+    intentAnswers.putExtra("questions",text); // Transfering the string to the answer page
+    startActivity(intentAnswers);
   // INSERT NEW textView into DB here
     return textView;
     }
