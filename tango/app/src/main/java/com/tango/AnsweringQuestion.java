@@ -7,6 +7,7 @@ import android.view.View;
 import android.content.Intent;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,13 +23,18 @@ public class AnsweringQuestion extends AppCompatActivity {
     String answers="";           // This is the text that will be displayed in the answer box
     ArrayList<String> listOfAnswers= new ArrayList<String>();  // The answers will be stored in a list for voting system it will be easy to reorganise the list
 
+    TextView question; // This is where the question will appear on the answer page
+    String questions; // This is the text that will be displayed
+    //******
+    private RadioButton acceptButton;
+    private RadioButton declineButton;
+    EditText numR;
 
     TextView question; // This is where the question will appear on the answer page
     String questions; // This is the text that will be displayed
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_answering_question);
@@ -61,12 +67,50 @@ public class AnsweringQuestion extends AppCompatActivity {
 
                 listOfAnswers.add(writtenAnswer.getText().toString());      // Answers are added in the list
 
-                for(int i =0; i<listOfAnswers.size(); i++){          // Answers are stored one by one in a string
-                    answers+= "UserName"+(i+1)+"\n" +listOfAnswers.get(i)+"\n\n\n"; ///////////  saves username skips a line and displays answer
+
+                for (int i = 0; i < listOfAnswers.size(); i++) {          // Answers are stored one by one in a string
+                    answers += "UserName" + (i + 1) + "\n" + listOfAnswers.get(i) + "\n\n\n"; ///////////  saves username skips a line and displays answer
                 }
 
                 displayedAnswer.setText(answers);    // The string containing all the answers is displayed
+
                 textbox.setVisibility(View.GONE);    // After submitting the answer the textbox dissapears
+
+                //unchecked buttons
+                acceptButton.setChecked(false);
+                declineButton.setChecked(false);
+            }
+        });
+
+        acceptButton = (RadioButton) findViewById(R.id.acceptButton);
+        declineButton = (RadioButton) findViewById(R.id.declineButton);
+        numR = (EditText) findViewById(R.id.numRadio);
+
+        //actions for accepting and declining answers
+
+        acceptButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!listOfAnswers.isEmpty()) { // handles empty list
+                    int num = Integer.parseInt(numR.getText().toString()) - 1;
+                    if (listOfAnswers.size()-1 >= num) { //handles answers not available
+                        String str = listOfAnswers.get(num) + "    \n *Accepted*";
+                        listOfAnswers.set(num, str);
+                    }
+                }
+            }
+        });
+
+        declineButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!listOfAnswers.isEmpty()) { // handles empty list
+                    int num = Integer.parseInt(numR.getText().toString()) - 1;
+                    if (listOfAnswers.size() - 1 >= num) { //handles answers not available
+                        String str = listOfAnswers.get(num) + "    \n *Declined*";
+                        listOfAnswers.set(num, str);
+                    }
+                }
             }
         });
     }
