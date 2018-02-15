@@ -4,11 +4,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.view.View;
+import android.content.Intent;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.content.Intent;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -41,7 +41,6 @@ public class AnsweringQuestion extends AppCompatActivity {
         submit = (Button) findViewById(R.id.submit);
         textbox = (LinearLayout) findViewById(R.id.textBox);
         question = (TextView) findViewById(R.id.questionInAnswerPage);
-        ///////////
         writtenAnswer = (EditText) findViewById(R.id.writtenAnswer);   // Answer in the text box
         displayedAnswer = (TextView) findViewById(R.id.answers);     // Answer in the main page
 
@@ -51,7 +50,7 @@ public class AnsweringQuestion extends AppCompatActivity {
         questions= intent.getStringExtra("questions");
         question.setText(questions);
         //-----------------------------------
-        //******
+
         acceptButton = (RadioButton) findViewById(R.id.acceptButton);
         declineButton = (RadioButton) findViewById(R.id.declineButton);
         numR = (EditText) findViewById(R.id.numRadio);
