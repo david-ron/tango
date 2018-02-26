@@ -30,9 +30,6 @@ public class AnsweringQuestion extends AppCompatActivity {
     private RadioButton declineButton;
     EditText numR;
 
-    TextView question; // This is where the question will appear on the answer page
-    String questions; // This is the text that will be displayed
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
