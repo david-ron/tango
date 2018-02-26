@@ -25,6 +25,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -37,8 +39,8 @@ import java.util.ArrayList;
  */
 
 
-public class MasterQuestion extends BaseActivity implements
-        View.OnClickListener{
+public class MasterQuestion extends BaseActivity implements View.OnClickListener{
+
     private Button  newQuestionButton;
     private ArrayList<TextView> Questions;
     private EditText futureQuestion;
@@ -46,9 +48,12 @@ public class MasterQuestion extends BaseActivity implements
     private GoogleSignInClient mGoogleSignInClient;
     private LinearLayoutCompat LinearLayoutQ;
     private final AppCompatActivity activity = MasterQuestion.this;
-    //tempstatic var
-    public static int counterTextView;
 
+    // Create Database Reference
+    DatabaseReference databaseQuestion;
+
+    //temp static var
+    public static int counterTextView;
     public static String questions="";
 
        @Override
@@ -57,19 +62,23 @@ public class MasterQuestion extends BaseActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_masterquestion);
         getSupportActionBar().setTitle("");
+
         mAuth = FirebaseAuth.getInstance();
         LinearLayoutQ = (LinearLayoutCompat)findViewById(R.id.LinearLayoutQ);
         futureQuestion = (EditText)findViewById(R.id.futureQuestion);
         newQuestionButton = (Button)findViewById(R.id.newQuestionButton);
-       newQuestionButton.setOnClickListener(onClick());
+
+        newQuestionButton.setOnClickListener(onClick());
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
+
         findViewById(R.id.sign_out_button).setOnClickListener(this);
         TextView textView = new TextView(this);
         textView.setText("New text");
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
 
 
     }
@@ -87,11 +96,11 @@ public class MasterQuestion extends BaseActivity implements
                        default:
 
                            TextView textquestion= (TextView) v;
-                       questions= textquestion.getText().toString();   // get the text of the question and assign to a string
+                           questions = textquestion.getText().toString();   // get the text of the question and assign to a string
 
-                           Intent intentAnswers = new Intent(MasterQuestion.this, AnsweringQuestion.class); // redirecting to answer page
-                           intentAnswers.putExtra("questions",questions); // Transfering the string to the answer page
-                           startActivity(intentAnswers);
+//                           Intent intentAnswers = new Intent(MasterQuestion.this, AnsweringQuestion.class); // redirecting to answer page
+//                           intentAnswers.putExtra("questions",questions); // Transfering the string to the answer page
+//                           startActivity(intentAnswers);
 
                    }
                 }
@@ -141,6 +150,7 @@ public class MasterQuestion extends BaseActivity implements
         }
     }
 private TextView createNewTextView(String text) {
+
     final ViewGroup.LayoutParams lparams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     final TextView textView = new TextView(this);
     textView.setLayoutParams(lparams);
@@ -148,14 +158,30 @@ private TextView createNewTextView(String text) {
     textView.setTag("" + counterTextView);
     textView.setId(counterTextView);
 
+    String questionToAdd = futureQuestion.getText().toString().trim();
+
+    // Initialize Database Reference with FireBase
+    databaseQuestion = FirebaseDatabase.getInstance().getReference("Question");
+
+    // Save to database
+    String id = databaseQuestion.push().getKey();
+    Question newQuestion = new Question(questionToAdd, id);
+    databaseQuestion.child(id).setValue(newQuestion);
+
+    //Test Confirmation
+    Toast.makeText(MasterQuestion.this , "This is my Toast message!",
+            Toast.LENGTH_LONG).show();
+
 
     counterTextView++;
     textView.setClickable(true);
     textView.setOnClickListener(onClick());
 
-    Intent intentAnswers = new Intent(MasterQuestion.this, AnsweringQuestion.class); // redirecting to answer page
-    intentAnswers.putExtra("questions",text); // Transfering the string to the answer page
-    startActivity(intentAnswers);
+//    Intent intentAnswers = new Intent(MasterQuestion.this, AnsweringQuestion.class); // redirecting to answer page
+//    intentAnswers.putExtra("questions",text); // Transfering the string to the answer page
+//    startActivity(intentAnswers);
+
+
   // INSERT NEW textView into DB here
     return textView;
     }

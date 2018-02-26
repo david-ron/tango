@@ -9,6 +9,8 @@ public class Question {
     // assuming we need to keep track of who created the question
     private String ownerID;
     private int score;
+
+    // Constructors
     Question(){
         question = "";
         ownerID = "";
@@ -19,6 +21,7 @@ public class Question {
         this.ownerID = ownerID;
         //this.score = score;
     }
+
     public String getQuestion(){
         return question;
     }
@@ -26,7 +29,7 @@ public class Question {
         return ownerID;
     }
 
-    public int getScore() {
-        return score;
-    }
+//      public int getScore() {
+//      return score;
+//    }
 }
