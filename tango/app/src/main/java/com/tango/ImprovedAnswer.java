@@ -5,13 +5,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 
 public class ImprovedAnswer extends AppCompatActivity {
     LinearLayout answerContainer;
-    Button acceptButton;
-    Button declineButton;
+    RadioButton acceptButton;
+    RadioButton declineButton;
     Button testButton;
     TextView dynamicAnswers;
     VoteButtons voteButton;
@@ -29,11 +30,11 @@ public class ImprovedAnswer extends AppCompatActivity {
                 dynamicAnswers = new TextView(answerContainer.getContext());
                 dynamicAnswers.setText("hello hello "+ i);
                 answerContainer.addView(dynamicAnswers);
-                acceptButton = new Button(answerContainer.getContext());
+                acceptButton = new RadioButton(answerContainer.getContext());
                 acceptButton.setText("Accept " + i);
                 answerContainer.addView(acceptButton);
 
-                declineButton = new Button(answerContainer.getContext());
+                declineButton = new RadioButton(answerContainer.getContext());
                 declineButton.setText("Decline " + i);
                 answerContainer.addView(declineButton);
 
