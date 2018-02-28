@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.support.constraint.ConstraintLayout;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -28,7 +29,7 @@ public class VoteButtons {
     }
     private Vote vote;
 
-    VoteButtons(final Context context, ConstraintLayout layout, float input_x, float input_y) {
+    VoteButtons(final Context context, LinearLayout layout, float input_x, float input_y) {
        //initial values
         position_x = input_x;
         position_y = input_y;

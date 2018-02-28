@@ -21,11 +21,11 @@ public class VoteOnAnswersTest extends AppCompatActivity {
 
         //Create button through java
         //First we need to set up the layout
-        ConstraintLayout testLayout = (ConstraintLayout) findViewById(R.id.testLayout);
+        //ConstraintLayout testLayout = (ConstraintLayout) findViewById(R.id.testLayout);
 
         //Then add button through the custom button object
-        VoteButtons testButton1 = new VoteButtons(this, testLayout, 200, 200);
-        VoteButtons testButton2 = new VoteButtons(this, testLayout, 200, 350);
+        //VoteButtons testButton1 = new VoteButtons(this, testLayout, 200, 200);
+        //VoteButtons testButton2 = new VoteButtons(this, testLayout, 200, 350);
 
     }
 

@@ -10,8 +10,12 @@ import android.widget.TextView;
 
 public class ImprovedAnswer extends AppCompatActivity {
     LinearLayout answerContainer;
+    Button acceptButton;
+    Button declineButton;
     Button testButton;
     TextView dynamicAnswers;
+    VoteButtons voteButton;
+    int i = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,9 +25,19 @@ public class ImprovedAnswer extends AppCompatActivity {
         testButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                i++;
                 dynamicAnswers = new TextView(answerContainer.getContext());
-                dynamicAnswers.setText("hello hello");
+                dynamicAnswers.setText("hello hello "+ i);
                 answerContainer.addView(dynamicAnswers);
+                acceptButton = new Button(answerContainer.getContext());
+                acceptButton.setText("Accept " + i);
+                answerContainer.addView(acceptButton);
+
+                declineButton = new Button(answerContainer.getContext());
+                declineButton.setText("Decline " + i);
+                answerContainer.addView(declineButton);
+
+                voteButton = new VoteButtons(answerContainer.getContext(), answerContainer, 0,0);
 
             }
         });
