@@ -15,16 +15,32 @@
         android:layout_below="@+id/testButton"
         android:layout_height="wrap_content">
         <LinearLayout
-            android:id="@+id/LinearLayout"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/LinearLayout"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Hello.............."/>
+                android:gravity="center"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hello.............."/>
 
+            </LinearLayout>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="write your answer here"/>
+
+            <Button
+                android:id="@+id/SubmitID"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="submit"/>
 
         </LinearLayout>
 
