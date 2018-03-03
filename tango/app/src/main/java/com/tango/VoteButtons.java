@@ -2,6 +2,7 @@ package com.tango;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.constraint.ConstraintLayout;
 import android.view.View;
 import android.widget.ImageButton;
@@ -42,16 +43,17 @@ public class VoteButtons {
         //Upvote Button
         upvoteButton = new ImageButton(layout.getContext());
         upvoteButton.setImageResource(R.drawable.ic_up_arrow_unselected);
-        upvoteButton.setPadding(0,0,0,0);
-        upvoteButton.setBackgroundColor(Color.TRANSPARENT);
+        Drawable d = layout.getContext().getResources().getDrawable(R.drawable.ic_up_arrow_unselected);
+        upvoteButton.setLayoutParams(new LinearLayout.LayoutParams(d.getIntrinsicWidth(),d.getIntrinsicHeight()));
+        //upvoteButton.setBackgroundColor(Color.TRANSPARENT);
         layout.addView(upvoteButton);
         initializeUpvote(layout.getContext());
 
         //Downvote Button
         downvoteButton = new ImageButton(layout.getContext());
         downvoteButton.setImageResource(R.drawable.ic_down_arrow_unselected);
-        downvoteButton.setPadding(0,0,0,0);
-        downvoteButton.setBackgroundColor(Color.TRANSPARENT);
+        downvoteButton.setLayoutParams(new LinearLayout.LayoutParams(d.getIntrinsicWidth(),d.getIntrinsicHeight()));
+        //downvoteButton.setBackgroundColor(Color.TRANSPARENT);
         layout.addView(downvoteButton);
         initializeDownvote(layout.getContext());
     }
