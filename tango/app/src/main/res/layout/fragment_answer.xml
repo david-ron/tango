@@ -9,36 +9,40 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="15dp"
         android:text="Hello!! This is placeholder text it doesnt matter what it says,but lets see what happens when i just keep adding text without restrain, the idea is tht the other elements should be moving accordingly and dynamically"/>
+
     <ImageButton
         android:id="@+id/upvoteButton"
         android:layout_width="25dp"
         android:layout_height="25dp"
+        android:layout_alignParentLeft="@+id/answerText"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="7dp"
-        android:layout_alignParentLeft="@+id/answerText"
-        android:src="@drawable/ic_up_arrow_unselected"
-        android:background="@null"/>
+        android:background="@null"
+        android:contentDescription="upvote arrow"
+        android:src="@drawable/ic_up_arrow_unselected" />
+
     <ImageButton
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:layout_marginLeft="10dp"
-        android:padding="0dp"
         android:layout_below="@id/upvoteButton"
-        android:src="@drawable/ic_down_arrow_unselected"
-        android:background="@null"/>
+        android:layout_marginLeft="10dp"
+        android:background="@null"
+        android:contentDescription="downvote arrow"
+        android:padding="0dp"
+        android:src="@drawable/ic_down_arrow_unselected" />
     <RadioButton
         android:id="@+id/acceptButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/answerText"
         android:layout_marginLeft="90dp"
-        android:text="Accept"/>
+        android:text="@string/accept_text"/>
     <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/answerText"
         android:layout_toRightOf="@id/acceptButton"
         android:layout_marginLeft="45dp"
-        android:text="Deny"/>
+        android:text="@string/deny_string"/>
 
 </RelativeLayout>

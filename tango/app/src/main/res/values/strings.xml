@@ -67,4 +67,6 @@
     <string name="action_settings">Settings</string>
     <string name="text_hello">Hello,</string>
     <string name="question_in_answer_page">Question will be displayed here.</string>
+    <string name="accept_text">Accept</string>
+    <string name="deny_string">Deny</string>
 </resources>
