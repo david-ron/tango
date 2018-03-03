@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/answerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="15dp"
+        android:text="Hello!! This is placeholder text it doesnt matter what it says"/>
+    <ImageButton
+        android:id="@+id/upvoteButton"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="7dp"
+        android:layout_alignParentLeft="@+id/answerText"
+        android:src="@drawable/ic_up_arrow_unselected"
+        android:background="@null"/>
+    <ImageButton
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginLeft="10dp"
+        android:padding="0dp"
+        android:layout_below="@id/upvoteButton"
+        android:src="@drawable/ic_down_arrow_unselected"
+        android:background="@null"/>
 
 </RelativeLayout>
