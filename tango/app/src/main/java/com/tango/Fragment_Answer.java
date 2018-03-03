@@ -8,16 +8,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by Play on 03/03/2018.
+ * Created by Daniel on 03/03/2018.
  */
 
 public class Fragment_Answer extends Fragment {
 
+    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view =inflater.inflate(R.layout.fragment_answer, container, false);
         return view;
     }
 
-    
+
 }
