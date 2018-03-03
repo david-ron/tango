@@ -20,8 +20,6 @@ public class VoteButtons {
     TextView pointValueTextView;
     ImageButton upvoteButton;
     ImageButton downvoteButton;
-    float position_x;
-    float position_y;
 
     enum Vote
     {
@@ -29,10 +27,8 @@ public class VoteButtons {
     }
     private Vote vote;
 
-    VoteButtons(final Context context, LinearLayout layout, float input_x, float input_y) {
+    VoteButtons(final Context context, LinearLayout layout) {
        //initial values
-        position_x = input_x;
-        position_y = input_y;
         vote = Vote.UNSELECTED;
 
         //TODO initialize to Database value
@@ -41,14 +37,10 @@ public class VoteButtons {
         //TextView
         pointValueTextView = new TextView(context);
         pointValueTextView.setText(Integer.toString(pointValue));
-        pointValueTextView.setX(position_x);
-        pointValueTextView.setY(position_y);
         layout.addView(pointValueTextView);
 
         //Upvote Button
         upvoteButton = new ImageButton(context);
-        upvoteButton.setX(position_x-100);
-        upvoteButton.setY(position_y-45);
         upvoteButton.setImageResource(R.drawable.ic_up_arrow_unselected);
         upvoteButton.setPadding(0,0,0,0);
         upvoteButton.setBackgroundColor(Color.TRANSPARENT);
@@ -57,8 +49,6 @@ public class VoteButtons {
 
         //Downvote Button
         downvoteButton = new ImageButton(context);
-        downvoteButton.setX(position_x-100);
-        downvoteButton.setY(position_y+15);
         downvoteButton.setImageResource(R.drawable.ic_down_arrow_unselected);
         downvoteButton.setPadding(0,0,0,0);
         downvoteButton.setBackgroundColor(Color.TRANSPARENT);

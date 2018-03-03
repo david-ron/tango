@@ -38,7 +38,7 @@ public class ImprovedAnswer extends AppCompatActivity {
                 declineButton.setText("Decline " + i);
                 answerContainer.addView(declineButton);
 
-                voteButton = new VoteButtons(answerContainer.getContext(), answerContainer, 0,0);
+                voteButton = new VoteButtons(answerContainer.getContext(), answerContainer);
 
             }
         });
