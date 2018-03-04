@@ -17,6 +17,7 @@ public class ImprovedAnswer extends AppCompatActivity {
     TextView dynamicAnswers;
     VoteButtons voteButton;
     Button SubmitID;
+    TextView answerBox;
     int i = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,12 +25,13 @@ public class ImprovedAnswer extends AppCompatActivity {
         setContentView(R.layout.activity_improved_answer);
         answerContainer = findViewById(R.id.LinearLayout);
         SubmitID = findViewById(R.id.SubmitID);
+        answerBox = findViewById(R.id.AnswerBox);
         SubmitID.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 i++;
                 dynamicAnswers = new TextView(answerContainer.getContext());
-                dynamicAnswers.setText("hello hello "+ i);
+                dynamicAnswers.setText(answerBox.getText());
                 answerContainer.addView(dynamicAnswers);
 
                 acceptButton = new RadioButton(answerContainer.getContext());
