@@ -1,5 +1,7 @@
 package com.tango;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -52,6 +54,8 @@ public class Fragment_Answer extends Fragment {
         //Upvote/Downvote Buttons
         upvoteButton = (ImageButton) view.findViewById(R.id.upvoteButton);
         downvoteButton = (ImageButton) view.findViewById(R.id.downvoteButton);
+        initializeUpvote();
+        initializeDownvote();
 
         //accept deny buttons
         acceptButton = (RadioButton) view.findViewById(R.id.acceptButton);
@@ -60,5 +64,78 @@ public class Fragment_Answer extends Fragment {
         return view;
     }
 
+    void initializeUpvote(){
+        //occurs when up arrow is pressed
+        upvoteButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //If no votes yet, upvoting will add a point.
+                //(up arrow becomes blue)
+                if(vote == Vote.UNSELECTED) {
+                    upvoteButton.setColorFilter(getResources().getColor(R.color.blue));
+                    pointValueTextView.setText(Integer.toString(++pointValue));
+                    vote = Vote.UPVOTED;
+                    //TODO assign pointage value to Database
+                    //TODO assign vote status to Database
+                }
+                //if downvoted, upvoting adds 2 points
+                //(down arrow becomes black and up becomes blue)
+                else if(vote == Vote.DOWNVOTED){
+                    upvoteButton.setColorFilter(getResources().getColor(R.color.blue));
+                    downvoteButton.setColorFilter(getResources().getColor(R.color.black));
+                    pointValue++;
+                    pointValueTextView.setText(Integer.toString(++pointValue));
+                    vote = Vote.UPVOTED;
+                    //TODO assign pointage value to Database
+                    //TODO assign vote status to Database
+                }
+                //if already upvoted, upvoting again reverts to unselected, so removes a point
+                //(up becomes black)
+                else if(vote == Vote.UPVOTED){
+                    upvoteButton.setColorFilter(getResources().getColor(R.color.black));
+                    pointValueTextView.setText(Integer.toString(--pointValue));
+                    vote = Vote.UNSELECTED;
+                    //TODO assign pointage value to Database
+                    //TODO assign vote status to Database
+
+                }
+            }
+        });
+    }
+    void initializeDownvote(){
+        //occurs when down arrow is pressed
+        downvoteButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //If no votes yet, downvoting will remove a point.
+                //down becomes red
+                if(vote == Vote.UNSELECTED) {
+                    downvoteButton.setColorFilter(getResources().getColor(R.color.red));
+                    pointValueTextView.setText(Integer.toString(--pointValue));
+                    vote = Vote.DOWNVOTED;
+                    //TODO assign pointage value to Database
+                    //TODO assign vote status to Database
+                }
+                //if upvoted, downvoting removes 2 points
+                //up becomes black, down becomes red
+                else if(vote == Vote.UPVOTED){
+                    upvoteButton.setColorFilter(getResources().getColor(R.color.black));
+                    downvoteButton.setColorFilter(getResources().getColor(R.color.red));
+                    pointValue--;
+                    pointValueTextView.setText(Integer.toString(--pointValue));
+                    vote = Vote.DOWNVOTED;
+                    //TODO assign pointage value to Database
+                    // TODO assign vote status to Database
+                }
+                //if already downvoted, downvoting again reverts to unselected, so adds a point
+                //downbecomes black
+                else if(vote == Vote.DOWNVOTED) {
+                    downvoteButton.setColorFilter(getResources().getColor(R.color.black));
+                    pointValueTextView.setText(Integer.toString(++pointValue));
+                    vote = Vote.UNSELECTED;
+                    //TODO assign pointage value to Database
+                    //TODO assign vote status to Database
+                }
+            }
+        });
+    }
 
 }

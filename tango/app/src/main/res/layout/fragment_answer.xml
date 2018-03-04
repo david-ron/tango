@@ -13,15 +13,14 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="7dp"
         android:orientation="vertical">
 
         <ImageButton
             android:id="@+id/upvoteButton"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:layout_marginTop="7dp"
+            android:layout_marginLeft="15dp"
             android:layout_toLeftOf="@+id/answerText"
             android:background="@null"
             android:contentDescription="upvote arrow"
@@ -33,12 +32,13 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/upvoteButton"
             android:layout_gravity="center_horizontal"
-            android:text="value" />
+            android:text="/value/" />
 
         <ImageButton
             android:id="@+id/downvoteButton"
             android:layout_width="25dp"
             android:layout_height="25dp"
+            android:layout_marginLeft="15dp"
             android:layout_below="@id/pointValueTextView"
             android:background="@null"
             android:contentDescription="downvote arrow"
