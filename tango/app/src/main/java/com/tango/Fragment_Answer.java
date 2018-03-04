@@ -1,72 +1,87 @@
 package com.tango;
 
-import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.support.constraint.ConstraintLayout;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
 
 /**
- * Created by Play on 14/02/2018.
+ * Created by Daniel on 03/03/2018.
  */
 
-public class VoteButtons {
+public class Fragment_Answer extends Fragment {
 
     int pointValue;
-    TextView pointValueTextView;
-    ImageButton upvoteButton;
-    ImageButton downvoteButton;
+    String answer;
+    private TextView answerText;
 
+    private TextView pointValueTextView;
+    private ImageButton upvoteButton;
+    private ImageButton downvoteButton;
+    private RadioButton acceptButton;
+    private RadioButton denyButton;
+    private RadioGroup radioGroup;
     enum Vote
     {
         UNSELECTED, UPVOTED, DOWNVOTED;
     }
     private Vote vote;
 
-    VoteButtons(LinearLayout layout) {
-       //initial values
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        answer = getArguments().getString("input","No string entered");
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view =inflater.inflate(R.layout.fragment_answer, container, false);
+
+        //initial values
         vote = Vote.UNSELECTED;
 
         //TODO initialize to Database value
         pointValue = 0;
 
-        //TextView
-        pointValueTextView = new TextView(layout.getContext());
+        //TextView for points and text
+        answerText = (TextView) view.findViewById(R.id.answerText);
+        answerText.setText(answer);
+        //TODO initialize answerText to database value
+        pointValueTextView = (TextView) view.findViewById(R.id.pointValueTextView);
         pointValueTextView.setText(Integer.toString(pointValue));
-        layout.addView(pointValueTextView);
 
-        //Upvote Button
-        upvoteButton = new ImageButton(layout.getContext());
-        upvoteButton.setImageResource(R.drawable.ic_up_arrow_unselected);
-        Drawable d = layout.getContext().getResources().getDrawable(R.drawable.ic_up_arrow_unselected);
-        upvoteButton.setLayoutParams(new LinearLayout.LayoutParams(d.getIntrinsicWidth(),d.getIntrinsicHeight()));
-        //upvoteButton.setBackgroundColor(Color.TRANSPARENT);
-        layout.addView(upvoteButton);
-        initializeUpvote(layout.getContext());
+        //Upvote/Downvote Buttons
+        upvoteButton = (ImageButton) view.findViewById(R.id.upvoteButton);
+        downvoteButton = (ImageButton) view.findViewById(R.id.downvoteButton);
+        initializeUpvote();
+        initializeDownvote();
 
-        //Downvote Button
-        downvoteButton = new ImageButton(layout.getContext());
-        downvoteButton.setImageResource(R.drawable.ic_down_arrow_unselected);
-        downvoteButton.setLayoutParams(new LinearLayout.LayoutParams(d.getIntrinsicWidth(),d.getIntrinsicHeight()));
-        //downvoteButton.setBackgroundColor(Color.TRANSPARENT);
-        layout.addView(downvoteButton);
-        initializeDownvote(layout.getContext());
+        //accept deny buttons
+        radioGroup = (RadioGroup) view.findViewById(R.id.radiogroup);
+        acceptButton = (RadioButton) view.findViewById(R.id.acceptButton);
+        denyButton = (RadioButton) view.findViewById(R.id.denyButton);
+        initializeRadio();
+
+        return view;
     }
 
-    void initializeUpvote(final Context context){
-
+    void initializeUpvote(){
         //occurs when up arrow is pressed
         upvoteButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //If no votes yet, upvoting will add a point.
                 //(up arrow becomes blue)
                 if(vote == Vote.UNSELECTED) {
-                    upvoteButton.setColorFilter(context.getResources().getColor(R.color.blue));
+                    upvoteButton.setColorFilter(getResources().getColor(R.color.blue));
                     pointValueTextView.setText(Integer.toString(++pointValue));
                     vote = Vote.UPVOTED;
                     //TODO assign pointage value to Database
@@ -75,8 +90,8 @@ public class VoteButtons {
                 //if downvoted, upvoting adds 2 points
                 //(down arrow becomes black and up becomes blue)
                 else if(vote == Vote.DOWNVOTED){
-                    upvoteButton.setColorFilter(context.getResources().getColor(R.color.blue));
-                    downvoteButton.setColorFilter(context.getResources().getColor(R.color.black));
+                    upvoteButton.setColorFilter(getResources().getColor(R.color.blue));
+                    downvoteButton.setColorFilter(getResources().getColor(R.color.black));
                     pointValue++;
                     pointValueTextView.setText(Integer.toString(++pointValue));
                     vote = Vote.UPVOTED;
@@ -86,7 +101,7 @@ public class VoteButtons {
                 //if already upvoted, upvoting again reverts to unselected, so removes a point
                 //(up becomes black)
                 else if(vote == Vote.UPVOTED){
-                    upvoteButton.setColorFilter(context.getResources().getColor(R.color.black));
+                    upvoteButton.setColorFilter(getResources().getColor(R.color.black));
                     pointValueTextView.setText(Integer.toString(--pointValue));
                     vote = Vote.UNSELECTED;
                     //TODO assign pointage value to Database
@@ -96,15 +111,14 @@ public class VoteButtons {
             }
         });
     }
-
-    void initializeDownvote(final Context context){
+    void initializeDownvote(){
         //occurs when down arrow is pressed
         downvoteButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //If no votes yet, downvoting will remove a point.
                 //down becomes red
                 if(vote == Vote.UNSELECTED) {
-                    downvoteButton.setColorFilter(context.getResources().getColor(R.color.red));
+                    downvoteButton.setColorFilter(getResources().getColor(R.color.red));
                     pointValueTextView.setText(Integer.toString(--pointValue));
                     vote = Vote.DOWNVOTED;
                     //TODO assign pointage value to Database
@@ -113,8 +127,8 @@ public class VoteButtons {
                 //if upvoted, downvoting removes 2 points
                 //up becomes black, down becomes red
                 else if(vote == Vote.UPVOTED){
-                    upvoteButton.setColorFilter(context.getResources().getColor(R.color.black));
-                    downvoteButton.setColorFilter(context.getResources().getColor(R.color.red));
+                    upvoteButton.setColorFilter(getResources().getColor(R.color.black));
+                    downvoteButton.setColorFilter(getResources().getColor(R.color.red));
                     pointValue--;
                     pointValueTextView.setText(Integer.toString(--pointValue));
                     vote = Vote.DOWNVOTED;
@@ -124,7 +138,7 @@ public class VoteButtons {
                 //if already downvoted, downvoting again reverts to unselected, so adds a point
                 //downbecomes black
                 else if(vote == Vote.DOWNVOTED) {
-                    downvoteButton.setColorFilter(context.getResources().getColor(R.color.black));
+                    downvoteButton.setColorFilter(getResources().getColor(R.color.black));
                     pointValueTextView.setText(Integer.toString(++pointValue));
                     vote = Vote.UNSELECTED;
                     //TODO assign pointage value to Database
@@ -133,5 +147,15 @@ public class VoteButtons {
             }
         });
     }
-
+    void initializeRadio(){
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                //TODO ACCESS DATAASE as needed per button pressed
+            }
+        });
+    };
+    public void setText(String text){
+        answerText.setText(text);
+    }
 }
