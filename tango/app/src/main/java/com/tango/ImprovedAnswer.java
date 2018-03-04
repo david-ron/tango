@@ -43,7 +43,7 @@ public class ImprovedAnswer extends AppCompatActivity {
                 answerContainer.addView(declineButton);
 
                 voteButton = new VoteButtons(answerContainer);
-
+                answerBox.setText(null);
             }
         });
 
