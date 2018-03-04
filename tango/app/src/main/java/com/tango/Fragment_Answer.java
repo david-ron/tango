@@ -1,19 +1,16 @@
 package com.tango;
 
-import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
 
 /**
  * Created by Daniel on 03/03/2018.
@@ -28,13 +25,14 @@ public class Fragment_Answer extends Fragment {
     private ImageButton downvoteButton;
     private RadioButton acceptButton;
     private RadioButton denyButton;
-    private RadioGroup radioGroup
-
+    private RadioGroup radioGroup;
     enum Vote
     {
         UNSELECTED, UPVOTED, DOWNVOTED;
     }
     private Vote vote;
+
+
 
     @Nullable
     @Override
@@ -63,6 +61,7 @@ public class Fragment_Answer extends Fragment {
         radioGroup = (RadioGroup) view.findViewById(R.id.radiogroup);
         acceptButton = (RadioButton) view.findViewById(R.id.acceptButton);
         denyButton = (RadioButton) view.findViewById(R.id.denyButton);
+        initializeRadio();
 
         return view;
     }

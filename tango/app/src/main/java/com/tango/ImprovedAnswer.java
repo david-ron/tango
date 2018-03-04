@@ -1,5 +1,7 @@
 package com.tango;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +19,7 @@ public class ImprovedAnswer extends AppCompatActivity {
     TextView dynamicAnswers;
     VoteButtons voteButton;
     int i = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +29,7 @@ public class ImprovedAnswer extends AppCompatActivity {
         testButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+               /*
                 i++;
                 dynamicAnswers = new TextView(answerContainer.getContext());
                 dynamicAnswers.setText("hello hello "+ i);
@@ -38,8 +42,11 @@ public class ImprovedAnswer extends AppCompatActivity {
                 declineButton.setText("Decline " + i);
                 answerContainer.addView(declineButton);
 
-                voteButton = new VoteButtons(answerContainer);
+                voteButton = new VoteButtons(answerContainer);*/
 
+               FragmentTransaction ft = getFragmentManager().beginTransaction();
+               ft.add(R.id.LinearLayout, new Fragment_Answer());
+               ft.commit();
             }
         });
 
