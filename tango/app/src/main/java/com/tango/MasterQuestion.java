@@ -89,7 +89,7 @@ public class MasterQuestion extends BaseActivity implements
                            TextView textquestion= (TextView) v;
                        questions= textquestion.getText().toString();   // get the text of the question and assign to a string
 
-                           Intent intentAnswers = new Intent(MasterQuestion.this, AnsweringQuestion.class); // redirecting to answer page
+                           Intent intentAnswers = new Intent(MasterQuestion.this, ImprovedAnswer.class); // redirecting to answer page
                            intentAnswers.putExtra("questions",questions); // Transfering the string to the answer page
                            startActivity(intentAnswers);
 
@@ -153,7 +153,7 @@ private TextView createNewTextView(String text) {
     textView.setClickable(true);
     textView.setOnClickListener(onClick());
 
-    Intent intentAnswers = new Intent(MasterQuestion.this, AnsweringQuestion.class); // redirecting to answer page
+    Intent intentAnswers = new Intent(MasterQuestion.this, ImprovedAnswer.class); // redirecting to answer page
     intentAnswers.putExtra("questions",text); // Transfering the string to the answer page
     startActivity(intentAnswers);
   // INSERT NEW textView into DB here

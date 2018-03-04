@@ -15,7 +15,47 @@
       },
       "oauth_client": [
         {
-          "client_id": "706601751265-poq9rjj3k1v541b9t8k91hk9kga9f47v.apps.googleusercontent.com",
+          "client_id": "706601751265-aog0joanopictucep12rgbj8kmd58usj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tango",
+            "certificate_hash": "17b003d996d1fa5e77db46c3a4e2041377855bcc"
+          }
+        },
+        {
+          "client_id": "706601751265-ah2ht5hjqblcokfq3tb3m7artff2cdv7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tango",
+            "certificate_hash": "141d65d15fd9bbdd1e86e5c0c07bbdd74fe13407"
+          }
+        },
+        {
+          "client_id": "706601751265-vsrnj0vdo9tph2s8f20fqn6ad0i3nvhh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tango",
+            "certificate_hash": "1a9a02c58ea0bd3e4fdd30501380ee0a58fdb08a"
+          }
+        },
+        {
+          "client_id": "706601751265-cprog0lqtgp0hdibjkfegos09hdtpdi3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tango",
+            "certificate_hash": "285696cd8d270522fdcd9b3a9a77da712b62e0e2"
+          }
+        },
+        {
+          "client_id": "706601751265-nsp77jd27oktpi4blgrajmh7lko46s3t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tango",
+            "certificate_hash": "689d598233d0bd9127f1c3bbb908311cd5978c42"
+          }
+        },
+        {
+          "client_id": "706601751265-paqnjae8d8c82bds17saqcq19b44klep.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.tango",
@@ -23,11 +63,11 @@
           }
         },
         {
-          "client_id": "706601751265-0vsogthr6sch5ac29372hpicraf395be.apps.googleusercontent.com",
+          "client_id": "706601751265-qds4u8l6362aq8jr9oj8sgb63fh73opl.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.tango",
-            "certificate_hash": "f6ee8c47733498eb5a08d85ab656f201aa83c0df"
+            "certificate_hash": "c10c52cf3d0ffa6d635402b3d0e555a2bbfdcfef"
           }
         },
         {
