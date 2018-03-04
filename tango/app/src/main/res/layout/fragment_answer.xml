@@ -31,6 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/upvoteButton"
+            android:layout_marginLeft="7dp"
             android:layout_gravity="center_horizontal"
             android:text="/value/" />
 
@@ -46,24 +47,31 @@
             android:src="@drawable/ic_down_arrow_unselected" />
     </LinearLayout>
 
-    <RadioButton
-        android:id="@+id/acceptButton"
+    <RadioGroup
+        android:id="@+id/radiogroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/answerText"
-        android:layout_alignStart="@+id/answerText"
         android:layout_below="@+id/answerText"
-        android:layout_marginLeft="40dp"
-        android:layout_marginStart="40dp"
-        android:text="@string/accept_text" />
+        android:orientation="horizontal">
 
-    <RadioButton
-        android:id="@+id/denyButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/answerText"
-        android:layout_marginLeft="45dp"
-        android:layout_toRightOf="@id/acceptButton"
-        android:text="@string/deny_string" />
+        <RadioButton
+            android:id="@+id/acceptButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/answerText"
+            android:layout_alignStart="@+id/answerText"
+
+            android:layout_marginLeft="40dp"
+            android:layout_marginStart="40dp"
+            android:text="@string/accept_text" />
+
+        <RadioButton
+            android:id="@+id/denyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:layout_toRightOf="@id/acceptButton"
+            android:text="@string/deny_string" />
+    </RadioGroup>
 
 </RelativeLayout>

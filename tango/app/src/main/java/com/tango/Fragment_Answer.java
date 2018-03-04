@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 /**
@@ -27,6 +28,7 @@ public class Fragment_Answer extends Fragment {
     private ImageButton downvoteButton;
     private RadioButton acceptButton;
     private RadioButton denyButton;
+    private RadioGroup radioGroup
 
     enum Vote
     {
@@ -58,6 +60,7 @@ public class Fragment_Answer extends Fragment {
         initializeDownvote();
 
         //accept deny buttons
+        radioGroup = (RadioGroup) view.findViewById(R.id.radiogroup);
         acceptButton = (RadioButton) view.findViewById(R.id.acceptButton);
         denyButton = (RadioButton) view.findViewById(R.id.denyButton);
 
@@ -137,5 +140,12 @@ public class Fragment_Answer extends Fragment {
             }
         });
     }
-
+    void initializeRadio(){
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                //TODO ACCESS DATAASE as needed per button pressed
+            }
+        });
+    };
 }
