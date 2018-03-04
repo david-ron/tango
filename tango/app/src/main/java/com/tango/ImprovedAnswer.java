@@ -1,6 +1,7 @@
 package com.tango;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,35 +32,30 @@ public class ImprovedAnswer extends AppCompatActivity {
         testButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               /*
-                i++;
-                dynamicAnswers = new TextView(answerContainer.getContext());
-                dynamicAnswers.setText("hello hello "+ i);
-                answerContainer.addView(dynamicAnswers);
-                acceptButton = new RadioButton(answerContainer.getContext());
-                acceptButton.setText("Accept " + i);
-                answerContainer.addView(acceptButton);
-
-                declineButton = new RadioButton(answerContainer.getContext());
-                declineButton.setText("Decline " + i);
-                answerContainer.addView(declineButton);
-
-                voteButton = new VoteButtons(answerContainer);*/
-
+               i++;
+                Fragment_Answer comment = new Fragment_Answer();
+                Bundle args = new Bundle();
+                args.putString("input", "This is random Answer #" +i);
+                comment.setArguments(args);
                FragmentTransaction ft = getFragmentManager().beginTransaction();
-               ft.add(R.id.LinearLayout, new Fragment_Answer());
+               ft.add(R.id.LinearLayout, comment);
                ft.commit();
             }
         });
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                i++;
                 Fragment_Answer comment = new Fragment_Answer();
+                Bundle args = new Bundle();
+                args.putString("input", input.getText().toString());
+                comment.setArguments(args);
 
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
                 ft.add(R.id.LinearLayout, comment);
-                //comment.setText(input.getText().toString());
                 ft.commit();
+                input.setText("");
             }
         });
 

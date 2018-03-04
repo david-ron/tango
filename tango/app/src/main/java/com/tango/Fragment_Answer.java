@@ -19,7 +19,9 @@ import android.widget.TextView;
 public class Fragment_Answer extends Fragment {
 
     int pointValue;
+    String answer;
     private TextView answerText;
+
     private TextView pointValueTextView;
     private ImageButton upvoteButton;
     private ImageButton downvoteButton;
@@ -33,6 +35,11 @@ public class Fragment_Answer extends Fragment {
     private Vote vote;
 
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        answer = getArguments().getString("input","No string entered");
+    }
 
     @Nullable
     @Override
@@ -47,6 +54,7 @@ public class Fragment_Answer extends Fragment {
 
         //TextView for points and text
         answerText = (TextView) view.findViewById(R.id.answerText);
+        answerText.setText(answer);
         //TODO initialize answerText to database value
         pointValueTextView = (TextView) view.findViewById(R.id.pointValueTextView);
         pointValueTextView.setText(Integer.toString(pointValue));
