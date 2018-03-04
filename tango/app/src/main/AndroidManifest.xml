@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AnsweringQuestion">
+        <activity android:name=".ProfilePage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,12 +17,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".Register" />
-
-        <activity android:name=".Feed" />
         <activity android:name=".Login" />
-
         <activity android:name=".MasterQuestion" />
-
+        <activity android:name=".AnsweringQuestion"></activity>
     </application>
 
 </manifest>
