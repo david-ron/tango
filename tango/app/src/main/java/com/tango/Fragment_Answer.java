@@ -147,4 +147,7 @@ public class Fragment_Answer extends Fragment {
             }
         });
     };
+    public void setText(String text){
+        answerText.setText(text);
+    }
 }

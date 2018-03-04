@@ -8,7 +8,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="15dp"
-        android:text="Look at me i am texLook at me i am texLook at me i am texLook at me i am texLook at me i am texLook at me i am texLook at me i am texLook at me i am texLook at me i am texLook at me i am texLook at me i am texLook at me i am texLook at me i am texLook at me i am texLook at me i am texLook at me i am texLook at me i am texLook at me i am texLook at me i am texLook at me i am texLook at me i am texLook at me i am texLook at me i am text"/>
+        android:text="Look at me providing useful criticism to a well thought-out question, friends"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
