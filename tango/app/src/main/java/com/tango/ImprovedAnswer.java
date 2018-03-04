@@ -13,17 +13,18 @@ public class ImprovedAnswer extends AppCompatActivity {
     LinearLayout answerContainer;
     RadioButton acceptButton;
     RadioButton declineButton;
-    Button testButton;
+    
     TextView dynamicAnswers;
     VoteButtons voteButton;
+    Button SubmitID;
     int i = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_improved_answer);
         answerContainer = (LinearLayout) findViewById(R.id.LinearLayout);
-        testButton = (Button) findViewById(R.id.testButton);
-        testButton.setOnClickListener(new View.OnClickListener() {
+        SubmitID = (Button) findViewById(R.id.SubmitID);
+        SubmitID.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 i++;
