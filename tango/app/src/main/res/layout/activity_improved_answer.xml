@@ -28,6 +28,7 @@
 
             </LinearLayout>
                 <EditText
+                    android:id="@+id/AnswerBox"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="write your answer here"/>

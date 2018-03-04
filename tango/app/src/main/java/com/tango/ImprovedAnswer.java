@@ -22,8 +22,8 @@ public class ImprovedAnswer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_improved_answer);
-        answerContainer = (LinearLayout) findViewById(R.id.LinearLayout);
-        SubmitID = (Button) findViewById(R.id.SubmitID);
+        answerContainer = findViewById(R.id.LinearLayout);
+        SubmitID = findViewById(R.id.SubmitID);
         SubmitID.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -31,6 +31,7 @@ public class ImprovedAnswer extends AppCompatActivity {
                 dynamicAnswers = new TextView(answerContainer.getContext());
                 dynamicAnswers.setText("hello hello "+ i);
                 answerContainer.addView(dynamicAnswers);
+
                 acceptButton = new RadioButton(answerContainer.getContext());
                 acceptButton.setText("Accept " + i);
                 answerContainer.addView(acceptButton);
