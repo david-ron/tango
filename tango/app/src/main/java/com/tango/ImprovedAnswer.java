@@ -13,7 +13,7 @@ public class ImprovedAnswer extends AppCompatActivity {
     LinearLayout answerContainer;
     RadioButton acceptButton;
     RadioButton declineButton;
-    
+
     TextView dynamicAnswers;
     VoteButtons voteButton;
     Button SubmitID;
