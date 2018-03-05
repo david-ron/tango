@@ -1,5 +1,6 @@
 package com.tango;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.app.Fragment;
@@ -21,7 +22,7 @@ public class Fragment_Answer extends Fragment {
     int pointValue;
     String answer;
     private TextView answerText;
-
+    private TextView username;
     private TextView pointValueTextView;
     private ImageButton upvoteButton;
     private ImageButton downvoteButton;
@@ -38,6 +39,8 @@ public class Fragment_Answer extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Get the information needed to initialize the fragment. (This is delivered through a Bundle)
+        //see https://stackoverflow.com/questions/9245408/best-practice-for-instantiating-a-new-android-fragment
         answer = getArguments().getString("input","No string entered");
     }
 
@@ -52,9 +55,11 @@ public class Fragment_Answer extends Fragment {
         //TODO initialize to Database value
         pointValue = 0;
 
-        //TextView for points and text
+        //TextView for points and text and username
         answerText = (TextView) view.findViewById(R.id.answerText);
         answerText.setText(answer);
+        username = (TextView) view.findViewById(R.id.username);
+        initializeUsername();
         //TODO initialize answerText to database value
         pointValueTextView = (TextView) view.findViewById(R.id.pointValueTextView);
         pointValueTextView.setText(Integer.toString(pointValue));
@@ -155,7 +160,16 @@ public class Fragment_Answer extends Fragment {
             }
         });
     };
-    public void setText(String text){
-        answerText.setText(text);
-    }
+    //What to do if the username is clicked
+    void initializeUsername(){
+        username.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentProfile = new Intent(view.getContext(), ProfilePage.class); // redirecting to profile page
+                intentProfile.putExtra("username",username.getText()); // Transfering the string to the answer page
+                startActivity(intentProfile);
+            }
+        });
+    };
+
 }
