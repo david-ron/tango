@@ -13,7 +13,7 @@
         <activity android:name=".GoogleSignInActivity">
 =======
         <activity android:name=".ProfilePage">
->>>>>>> Issue #55: Profile page is created and include user's informati                                                                                                       on:tango/app/src/main/AndroidManifest.xml
+>>>>>>> bbb2bc05de3265bc76c3a1a65bc04d4c273fe5db:tango/app/src/main/AndroidManifest.xml
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,7 +22,6 @@
         </activity>
 <<<<<<< HEAD:app/src/main/AndroidManifest.xml
         <activity android:name=".AnsweringQuestion" />
-        <activity android:name=".Feed" />
         <activity android:name=".MasterQuestion" />
         <activity android:name=".BaseActivity" />
         <activity android:name=".VoteOnAnswersTest" />
@@ -32,7 +31,7 @@
         <activity android:name=".Login" />
         <activity android:name=".MasterQuestion" />
         <activity android:name=".AnsweringQuestion"></activity>
->>>>>>> Issue #55: Profile page is created and include user's informati                                                                                                       on:tango/app/src/main/AndroidManifest.xml
+>>>>>>> bbb2bc05de3265bc76c3a1a65bc04d4c273fe5db:tango/app/src/main/AndroidManifest.xml
     </application>
 
 </manifest>
