@@ -14,7 +14,7 @@ public class ProfilePage extends AppCompatActivity {
     ImageView profilePicture;
     Button button;
     private static int PICK_IMAGE = 100;
-    Uri imageInGallery;
+    Uri imageInGallery;           // This is the image inside the gallery
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,14 +34,14 @@ public class ProfilePage extends AppCompatActivity {
 
     private void openGallery() {
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-        startActivityForResult(gallery, PICK_IMAGE);
+        startActivityForResult(gallery, PICK_IMAGE);  // Only 100 images will appear when gallery is opened because PICK_IMAGE=100
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
             imageInGallery = data.getData();
-            profilePicture.setImageURI(imageInGallery);
+            profilePicture.setImageURI(imageInGallery);   // Set the profile picture to rhe image selected in the gallery
         }
     }
 }
