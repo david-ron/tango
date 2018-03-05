@@ -10,6 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".GoogleSignInActivity">
+
+        <activity android:name=".ProfilePage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,8 +23,11 @@
         <activity android:name=".BaseActivity" />
         <activity android:name=".VoteOnAnswersTest" />
         <activity android:name=".ImprovedAnswer"></activity>
-        <activity android:name=".ProfilePage"/>
-
+        
+        <activity android:name=".Register" />
+        <activity android:name=".Login" />
+        <activity android:name=".MasterQuestion" />
+        <activity android:name=".AnsweringQuestion"></activity>
     </application>
 
 </manifest>
