@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.tango">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+<<<<<<< HEAD:app/src/main/AndroidManifest.xml
+        <activity android:name=".GoogleSignInActivity">
+=======
+        <activity android:name=".ProfilePage">
+>>>>>>> Issue #55: Profile page is created and include user's informati                                                                                                       on:tango/app/src/main/AndroidManifest.xml
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+<<<<<<< HEAD:app/src/main/AndroidManifest.xml
+        <activity android:name=".AnsweringQuestion" />
+        <activity android:name=".Feed" />
+        <activity android:name=".MasterQuestion" />
+        <activity android:name=".BaseActivity" />
+        <activity android:name=".VoteOnAnswersTest" />
+        <activity android:name=".ImprovedAnswer"></activity>
+=======
+        <activity android:name=".Register" />
+        <activity android:name=".Login" />
+        <activity android:name=".MasterQuestion" />
+        <activity android:name=".AnsweringQuestion"></activity>
+>>>>>>> Issue #55: Profile page is created and include user's informati                                                                                                       on:tango/app/src/main/AndroidManifest.xml
+    </application>
+
+</manifest>
