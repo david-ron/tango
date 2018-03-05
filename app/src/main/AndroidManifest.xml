@@ -21,6 +21,8 @@
         <activity android:name=".BaseActivity" />
         <activity android:name=".VoteOnAnswersTest" />
         <activity android:name=".ImprovedAnswer"></activity>
+        <activity android:name=".ProfilePage"/>
+
     </application>
 
 </manifest>
