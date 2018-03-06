@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity
+            android:name=".FeedActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".QuestionPageActivity" />
         <activity android:name=".GoogleSignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,11 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AnsweringQuestion" />
-        <activity android:name=".Feed"/>
-        <activity android:name=".MasterQuestion" />
-        <activity android:name=".BaseActivity" />
-        <activity android:name=".VoteOnAnswersTest" />
+        <activity android:name=".AnswerPageActivity"></activity>
 
     </application>
 
