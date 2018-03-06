@@ -58,8 +58,7 @@ public class ImprovedAnswer extends AppCompatActivity {
                 args.putString("input", input.getText().toString());
                 comment.setArguments(args);
 
-                FragmentManager fm = getFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.add(R.id.LinearLayout, comment);
                 ft.commit();
                 input.setText("");

@@ -8,11 +8,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class ProfilePage extends AppCompatActivity {
 
     ImageView profilePicture;
     Button button;
+    TextView username;
     private static int PICK_IMAGE = 100;
     Uri imageInGallery;           // This is the image inside the gallery
 
@@ -20,6 +22,11 @@ public class ProfilePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_page);
+
+        username = (TextView) findViewById(R.id.username);
+
+        Intent intent = getIntent();
+        username.setText(intent.getStringExtra("username"));
 
         profilePicture = (ImageView)findViewById(R.id.profilePicture);
         button = (Button)findViewById(R.id.changepicture);

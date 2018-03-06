@@ -156,7 +156,7 @@ private TextView createNewTextView(String text) {
     Intent intentAnswers = new Intent(MasterQuestion.this, ImprovedAnswer.class); // redirecting to answer page
     intentAnswers.putExtra("questions",text); // Transfering the string to the answer page
     startActivity(intentAnswers);
-  // INSERT NEW textView into DB here
+  //TODO INSERT NEW textView into DB here
     return textView;
     }
 

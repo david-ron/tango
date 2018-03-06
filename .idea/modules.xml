@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/S341.iml" filepath="$PROJECT_DIR$/S341.iml" />
+      <module fileurl="file://E:\Projects\Concordia\SOEN341_travisified\SOEN341\S341.iml" filepath="E:\Projects\Concordia\SOEN341_travisified\SOEN341\S341.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SOEN341.iml" filepath="$PROJECT_DIR$/SOEN341.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://C:\Users\David\S341\app\app.iml" filepath="C:\Users\David\S341\app\app.iml" />
       <module fileurl="file://C:\Users\David\S341\tango.iml" filepath="C:\Users\David\S341\tango.iml" />
