@@ -27,7 +27,20 @@ public class ProfilePageTester {
         View userNameView = mActivity.findViewById(R.id.username);
         assertNotNull(userNameView);
     }
-    
+
+    @Test
+    public void testLunch2(){
+        View profilePic = mActivity.findViewById(R.id.profilePicture);
+        assertNotNull(profilePic);
+
+    }
+
+    @Test
+    public void testLunch3(){
+        View picButton = mActivity.findViewById(R.id.changepicture);
+        assertNotNull(picButton);
+
+    }
 
     @After
     public void tearDown() throws Exception {
