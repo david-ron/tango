@@ -29,6 +29,11 @@ public class MasterQuestionTest {
         assertNotNull(questionButton);
     }
 
+    @Test
+    public void testLunch2(){
+        View questionView = mActivity.findViewById(R.id.LinearLayoutQ);
+        assertNotNull(questionView);
+    }
     @After
     public void tearDown() throws Exception {
         mActivity = null;
