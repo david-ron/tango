@@ -2,6 +2,7 @@ package com.tango;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -10,14 +11,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 import com.tango.models.AnswerModel;
 import com.tango.models.QuestionModel;
@@ -25,6 +33,7 @@ import com.tango.models.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class AnswerPageActivity extends BaseActivity implements View.OnClickListener {
 
@@ -148,9 +157,14 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
                         String commentText = answerField.getText().toString();
                         AnswerModel answerModel = new AnswerModel(uid, authorName, commentText);
 
+                        Map<String, Object> postValues = answerModel.toMap();
                         // Push the answerModel, it will appear in the list
                         answerRef.push().setValue(answerModel);
-
+                        //answerModel.answerID = dataSnapshot.getKey();
+                        //Log.d("BBBBBBBBBB",dataSnapshot.getRef().);
+                        //Log.d("AAAAAAA",answerModel.answerID);
+                        //String testers = answerRef.push().setValue(answerModel).toString();
+                        //answerModel.setAidz(testers);
                         // Clear the field
                         answerField.setText(null);
                     }
@@ -166,28 +180,98 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
 
         public TextView authorView;
         public TextView bodyView;
-
+        public ImageView starView;
+        public TextView numStarsView;
         public AnswerViewHolder(View itemView) {
             super(itemView);
 
             authorView = itemView.findViewById(R.id.comment_author);
             bodyView = itemView.findViewById(R.id.comment_body);
+            starView = itemView.findViewById(R.id.star);
+            numStarsView = itemView.findViewById(R.id.post_num_stars);
+        }
+        public void bindToPost(AnswerModel questionModel, View.OnClickListener starClickListener) {
+
+            numStarsView.setText(String.valueOf(questionModel.starCount));
+
+
+           // Log.d("POSTING", questionModel.toString());
+            //Log.d("POSTING-Question", questionModel.title.toString());
+           // Log.d("POSTING-Answer", questionModel.body.toString());
+
+            starView.setOnClickListener(starClickListener);
         }
     }
 
     private static class AnswerAdapter extends RecyclerView.Adapter<AnswerViewHolder> {
-
+        private DatabaseReference rootDB;
+        private FirebaseRecyclerAdapter<AnswerModel, AnswerViewHolder> nAdapter;
         private Context mContext;
         private DatabaseReference mDatabaseReference;
         private ChildEventListener mChildEventListener;
-
+        private RecyclerView mRecycler;
         private List<String> mCommentIds = new ArrayList<>();
         private List<AnswerModel> mAnswerModels = new ArrayList<>();
 
         public AnswerAdapter(final Context context, DatabaseReference ref) {
             mContext = context;
             mDatabaseReference = ref;
+            rootDB = FirebaseDatabase.getInstance().getReference();
+            Query postsQuery = rootDB;
+            FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<QuestionModel>()
+                    .setQuery(postsQuery, QuestionModel.class)
+                    .build();
+            nAdapter = new FirebaseRecyclerAdapter<AnswerModel, AnswerViewHolder>(options) {
 
+                @Override
+                protected void onBindViewHolder(@NonNull AnswerViewHolder holder, final int position, @NonNull AnswerModel model) {
+                    final AnswerModel answerModel = mAnswerModels.get(position);
+
+
+
+                    holder.authorView.setText(answerModel.author);
+                    holder.bodyView.setText(answerModel.text);
+                    //  holder.numStarsView.setText(answerModel.starCount);
+                    if (answerModel.stars.containsKey(getUid())) {
+                        holder.starView.setImageResource(R.drawable.ic_toggle_star_24);
+                    } else {
+                        holder.starView.setImageResource(R.drawable.ic_toggle_star_outline_24);
+                    }
+                    Log.d("commenterror",answerModel.toString());
+                    //  DatabaseReference postRef = FirebaseRecyclerAdapter.getRef(position);
+                    holder.bindToPost(answerModel, new View.OnClickListener() {
+                        final DatabaseReference postRef = getRef(position);
+
+                        String Key = postRef.getKey();
+
+                        @Override
+                        public void onClick(View starView) {
+                            // Need to write to both places the post is stored
+                            // DatabaseReference globalPostRef = rootDB.child("posts").child(AnswerAdapter.this.toString());
+
+
+                            Log.d("Keytest",Key.toString());
+                            DatabaseReference userPostRef = rootDB.child("post-comments").child(Key);
+                            onStarClicked(userPostRef);
+
+
+
+                            // Run two transactions
+                            // onStarClicked(globalPostRef);
+                            //onStarClicked(userPostRef);
+                        }
+                    });
+
+                }
+
+                @Override
+                public AnswerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                    LayoutInflater inflater = LayoutInflater.from(mContext);
+                    View view = inflater.inflate(R.layout.item_comment, parent, false);
+
+                    return new AnswerViewHolder(view);
+                }
+            };
             // Create child event listener
             // [START child_event_listener_recycler]
             ChildEventListener childEventListener = new ChildEventListener() {
@@ -197,11 +281,17 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
 
                     // A new answerModel has been added, add it to the displayed list
                     AnswerModel answerModel = dataSnapshot.getValue(AnswerModel.class);
-
+                    answerModel.setAidz(dataSnapshot.getKey());
+                    //answerModel.answerID = previousChildName;
+                    //Log.d("newtoiwfoiuoiu",previousChildName);
                     // [START_EXCLUDE]
                     // Update RecyclerView
                     mCommentIds.add(dataSnapshot.getKey());
                     mAnswerModels.add(answerModel);
+                    answerModel.answerID = dataSnapshot.getRef().getParent().getKey();
+                    //answerModel.answerID = previousChildName;
+                   // Log.d("TESTINGTHIS",mAnswerModels.toString());
+                    //Log.d("TESTTHIS",dataSnapshot.getKey().toString());
                     notifyItemInserted(mAnswerModels.size() - 1);
                     // [END_EXCLUDE]
                 }
@@ -214,7 +304,7 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
                     // comment and if so displayed the changed comment.
                     AnswerModel newAnswerModel = dataSnapshot.getValue(AnswerModel.class);
                     String commentKey = dataSnapshot.getKey();
-
+                    //newAnswerModel.answerID = previousChildName;
                     int commentIndex = mCommentIds.indexOf(commentKey);
                     if (commentIndex > -1) {
                         // Replace with the new data
@@ -225,6 +315,7 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
                     } else {
                         Log.w(TAG, "onChildChanged:unknown_child:" + commentKey);
                     }
+
                 }
 
                 @Override
@@ -275,18 +366,116 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
 
         @Override
         public AnswerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
             LayoutInflater inflater = LayoutInflater.from(mContext);
             View view = inflater.inflate(R.layout.item_comment, parent, false);
+
             return new AnswerViewHolder(view);
         }
+        Query postsQuery = rootDB;
+        FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<AnswerModel>()
+                .setQuery(postsQuery, AnswerModel.class)
+                .build();
+
+
 
         @Override
-        public void onBindViewHolder(AnswerViewHolder holder, int position) {
-            AnswerModel answerModel = mAnswerModels.get(position);
+            public void onBindViewHolder (AnswerViewHolder holder, final int position){
+            final AnswerModel answerModel = mAnswerModels.get(position);
+            Log.d("AnswerMdoel",answerModel.toString());
+
+            //nAdapter = setnAdapter(nAdapter);
             holder.authorView.setText(answerModel.author);
             holder.bodyView.setText(answerModel.text);
+
+          //  holder.numStarsView.setText(answerModel.starCount);
+            if (answerModel.stars.containsKey(getUid())) {
+                holder.starView.setImageResource(R.drawable.ic_toggle_star_24);
+            } else {
+                holder.starView.setImageResource(R.drawable.ic_toggle_star_outline_24);
+            }
+            Log.d("commenterror",answerModel.uid.toString());
+
+           //  DatabaseReference postRef = FirebaseRecyclerAdapter.getRef(position);
+            holder.bindToPost(answerModel, new View.OnClickListener() {
+
+
+
+
+                @Override
+                public void onClick(View starView) {
+                    // Need to write to both places the post is stored
+                    //DatabaseReference globalPostRef = rootDB.child("posts").child(answerModel.answerID).child(answerModel.getAidz());
+
+                    //final int keytest = Log.d("Keytest", answerModel.getAidz().toString());
+                    DatabaseReference userPostRef = rootDB.child("post-comments").child(answerModel.answerID).child(answerModel.getAidz());
+                    /*if (answerModel.stars.containsKey(getUid())) {
+                        // Unstar the post and remove self from stars
+                        answerModel.starCount = answerModel.starCount - 1;
+                        answerModel.stars.remove(getUid());
+                        //userPostRef.setValue(answerModel.starCount);
+                        userPostRef.updateChildren(answerModel.toMap());
+
+
+                    } else {
+                        // Star the post and add self to stars
+                        answerModel.starCount = answerModel.starCount + 1;
+                        answerModel.stars.put(getUid(), true);
+                        //userPostRef.setValue(answerModel.starCount);
+                        userPostRef.updateChildren(answerModel.toMap());
+                    }*/
+
+
+                    //onStarClicked(userPostRef);
+
+
+                   // userPostRef.setValue(newCount);
+
+                    // Run two transactions
+                    //onStarClicked(globalPostRef);
+                    onStarClicked(userPostRef);
+                    Log.d("QWERVTB WEQRGEV",answerModel.answerID);
+                }
+            });
+
+        }
+        private void onStarClicked(DatabaseReference postRef) {
+            postRef.runTransaction(new Transaction.Handler() {
+                @Override
+                public Transaction.Result doTransaction(MutableData mutableData) {
+                    AnswerModel p = mutableData.getValue(AnswerModel.class);
+                    if (p == null) {
+                        return Transaction.success(mutableData);
+                    }
+
+                    if (p.stars.containsKey(getUid())) {
+                        // Unstar the post and remove self from stars
+                        p.starCount = p.starCount - 1;
+                        p.stars.remove(getUid());
+                    } else {
+                        // Star the post and add self to stars
+                        p.starCount = p.starCount + 1;
+                        p.stars.put(getUid(), true);
+                    }
+
+                    // Set value and report transaction success
+                    mutableData.setValue(p);
+                    return Transaction.success(mutableData);
+                }
+
+                @Override
+                public void onComplete(DatabaseError databaseError, boolean b,
+                                       DataSnapshot dataSnapshot) {
+                    // Transaction completed
+                    Log.d(TAG, "postTransaction:onComplete:" + databaseError);
+                }
+            });
         }
 
+
+        public String getUid() {
+            return FirebaseAuth.getInstance().getCurrentUser().getUid();
+        }
         @Override
         public int getItemCount() {
             return mAnswerModels.size();
@@ -299,4 +488,6 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
         }
 
     }
+
 }
+

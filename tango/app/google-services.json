@@ -1,35 +1,43 @@
 {
   "project_info": {
-    "project_number": "184493111553",
-    "firebase_url": "https://tango-3fddc.firebaseio.com",
-    "project_id": "tango-3fddc",
-    "storage_bucket": "tango-3fddc.appspot.com"
+    "project_number": "706601751265",
+    "firebase_url": "https://tango-9eaa5.firebaseio.com",
+    "project_id": "tango-9eaa5",
+    "storage_bucket": "tango-9eaa5.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:184493111553:android:5132f2749ddfdb13",
+        "mobilesdk_app_id": "1:706601751265:android:5132f2749ddfdb13",
         "android_client_info": {
           "package_name": "com.tango"
         }
       },
       "oauth_client": [
         {
-          "client_id": "184493111553-792mvr0o6v8gg5e8cg0ne4b99531nf4s.apps.googleusercontent.com",
+          "client_id": "706601751265-poq9rjj3k1v541b9t8k91hk9kga9f47v.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.tango",
-            "certificate_hash": "8b0543f2d26141f8de822bc39cc6fdeda8fb50ed"
+            "certificate_hash": "66dc26a0d7e0143ed07118b236d84811b7dca2d5"
           }
         },
         {
-          "client_id": "184493111553-ar0rs48kpglsfan3lskvc11ejdvlaf4n.apps.googleusercontent.com",
+          "client_id": "706601751265-0vsogthr6sch5ac29372hpicraf395be.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tango",
+            "certificate_hash": "f6ee8c47733498eb5a08d85ab656f201aa83c0df"
+          }
+        },
+        {
+          "client_id": "706601751265-5jg6erh7tr82uhmcpdvujekg999sg1pl.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBVJy-5fW5bZwgeRwSa9aFYUS2fCeLqz7k"
+          "current_key": "AIzaSyACeHo3E_Pl1WkjvU249sg8dVW37RWKiQ8"
         }
       ],
       "services": {
@@ -40,7 +48,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "184493111553-ar0rs48kpglsfan3lskvc11ejdvlaf4n.apps.googleusercontent.com",
+              "client_id": "706601751265-5jg6erh7tr82uhmcpdvujekg999sg1pl.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

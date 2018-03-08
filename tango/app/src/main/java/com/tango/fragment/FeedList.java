@@ -108,6 +108,7 @@ public abstract class FeedList extends Fragment {
                         // Need to write to both places the post is stored
                         DatabaseReference globalPostRef = rootDB.child("posts").child(postRef.getKey());
                         DatabaseReference userPostRef = rootDB.child("user-posts").child(model.uid).child(postRef.getKey());
+                        Log.d("newTESTING",postRef.getKey());
 
                         // Run two transactions
                         onStarClicked(globalPostRef);
