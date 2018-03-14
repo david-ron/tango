@@ -26,7 +26,8 @@ public class VoteButtons {
     {
         UNSELECTED, UPVOTED, DOWNVOTED;
     }
-    private Vote vote;
+    //changed to public
+    Vote vote;
 
     VoteButtons(LinearLayout layout) {
        //initial values

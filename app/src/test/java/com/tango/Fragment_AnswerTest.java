@@ -1,5 +1,8 @@
 package com.tango;
 
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import org.mockito.Mockito;
 import org.junit.Test;
@@ -24,7 +27,10 @@ public class Fragment_AnswerTest {
         int output;
         int expected = 0;
         Fragment_Answer answer = Mockito.mock(Fragment_Answer.class);
+        //answer.onCreate(Mockito.isA(Bundle.class));
+        //answer.onCreateView(Mockito.isA(LayoutInflater.class), Mockito.isA(ViewGroup.class), Mockito.isA(Bundle.class));
         answer.initializeUpvote();
+        //answer.upvoteButton.callOnClick();
         output = answer.pointValue;
         assertEquals(expected, output);
     }
