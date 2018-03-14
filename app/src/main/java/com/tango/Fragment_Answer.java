@@ -1,6 +1,7 @@
 package com.tango;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.app.Fragment;
@@ -8,9 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import java.net.URI;
 
 
 /**
@@ -24,11 +29,14 @@ public class Fragment_Answer extends Fragment {
     private TextView answerText;
     private TextView username;
     private TextView pointValueTextView;
+    private LinearLayout imageContainer;
+    ImageView commentImage;
     private ImageButton upvoteButton;
     private ImageButton downvoteButton;
     private RadioButton acceptButton;
     private RadioButton denyButton;
     private RadioGroup radioGroup;
+    private View view;
     enum Vote
     {
         UNSELECTED, UPVOTED, DOWNVOTED;
@@ -41,19 +49,36 @@ public class Fragment_Answer extends Fragment {
         super.onCreate(savedInstanceState);
         //Get the information needed to initialize the fragment. (This is delivered through a Bundle)
         //see https://stackoverflow.com/questions/9245408/best-practice-for-instantiating-a-new-android-fragment
-        answer = getArguments().getString("input","No string entered");
+
+        if(getArguments().getBundle("strings") != null) {
+            answer = getArguments().getBundle("strings").getString("input", "No string entered");
+        } else {
+            answer = "string bundle not received.";
+        }
+
+        if(getArguments().getBundle("images") != null) {
+            commentImage.setImageURI(Uri.parse(getArguments().getBundle("images").getString("imageUri", "No string entered")));
+        } else {
+            commentImage = null;
+        }
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view =inflater.inflate(R.layout.fragment_answer, container, false);
+        view =inflater.inflate(R.layout.fragment_answer, container, false);
 
         //initial values
         vote = Vote.UNSELECTED;
 
         //TODO initialize to Database value
         pointValue = 0;
+
+        //for image
+        imageContainer = (LinearLayout) view.findViewById(R.id.imageContainer);
+        if(commentImage != null){
+            imageContainer.addView(commentImage);
+        }
 
         //TextView for points and text and username
         answerText = (TextView) view.findViewById(R.id.answerText);
@@ -170,6 +195,6 @@ public class Fragment_Answer extends Fragment {
                 startActivity(intentProfile);
             }
         });
-    };
+    }
 
-}
+ }
