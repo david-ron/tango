@@ -24,7 +24,7 @@ public class Fragment_Answer extends Fragment {
     private TextView answerText;
     private TextView username;
     private TextView pointValueTextView;
-    private ImageButton upvoteButton;
+    ImageButton upvoteButton; //changed to public
     private ImageButton downvoteButton;
     private RadioButton acceptButton;
     private RadioButton denyButton;
