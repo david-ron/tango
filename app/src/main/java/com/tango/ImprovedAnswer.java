@@ -78,6 +78,7 @@ public class ImprovedAnswer extends AppCompatActivity {
                     imageBundle.putString("imageUri",imageInGallery.toString());
                     args.putBundle("images", imageBundle);
                     comment.setArguments(args);
+                    imageInGallery = null;
                 } else{
                     comment.setArguments(args);
                 }
@@ -102,6 +103,7 @@ public class ImprovedAnswer extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
             imageInGallery = data.getData();
+
         }
     }
 

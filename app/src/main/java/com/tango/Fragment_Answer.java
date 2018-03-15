@@ -30,7 +30,8 @@ public class Fragment_Answer extends Fragment {
     private TextView username;
     private TextView pointValueTextView;
     private LinearLayout imageContainer;
-    ImageView commentImage;
+    private ImageView commentImage;
+    private Uri imageUri;
     private ImageButton upvoteButton;
     private ImageButton downvoteButton;
     private RadioButton acceptButton;
@@ -57,9 +58,9 @@ public class Fragment_Answer extends Fragment {
         }
 
         if(getArguments().getBundle("images") != null) {
-            commentImage.setImageURI(Uri.parse(getArguments().getBundle("images").getString("imageUri", "No string entered")));
+            imageUri = Uri.parse(getArguments().getBundle("images").getString("imageUri", "No string entered"));
         } else {
-            commentImage = null;
+            imageUri = null;
         }
     }
 
@@ -75,8 +76,10 @@ public class Fragment_Answer extends Fragment {
         pointValue = 0;
 
         //for image
-        imageContainer = (LinearLayout) view.findViewById(R.id.imageContainer);
-        if(commentImage != null){
+        if(imageUri != null) {
+            imageContainer = (LinearLayout) view.findViewById(R.id.imageContainer);
+            commentImage = new ImageView(view.getContext());
+            commentImage.setImageURI(imageUri);
             imageContainer.addView(commentImage);
         }
 
