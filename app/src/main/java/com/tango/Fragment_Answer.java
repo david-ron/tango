@@ -32,7 +32,7 @@ public class Fragment_Answer extends Fragment {
     private LinearLayout imageContainer;
     private ImageView commentImage;
     private Uri imageUri;
-    private ImageButton upvoteButton;
+    ImageButton upvoteButton; //changed to public
     private ImageButton downvoteButton;
     private RadioButton acceptButton;
     private RadioButton denyButton;

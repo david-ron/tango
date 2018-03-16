@@ -28,12 +28,25 @@ public class ImprovedAnswerTest {
 
 
     @Test
-    public void testLunch(){
+    public void testLunchquestion(){
 View view = mActivity.findViewById(R.id.question);
 assertNotNull(view);
 
     }
+    @Test
+    public void testLunchLL(){
+        View view = mActivity.findViewById(R.id.LinearLayout);
+        assertNotNull(view);
 
+    }
+
+
+    @Test
+    public void testLunchInput(){
+        View view = mActivity.findViewById(R.id.input);
+        assertNotNull(view);
+
+    }
 
 
     @After
