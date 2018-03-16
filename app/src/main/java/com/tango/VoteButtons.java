@@ -26,7 +26,8 @@ public class VoteButtons {
     {
         UNSELECTED, UPVOTED, DOWNVOTED;
     }
-    private Vote vote;
+    //changed to public
+    Vote vote;
 
     VoteButtons(LinearLayout layout) {
        //initial values
@@ -77,7 +78,7 @@ public class VoteButtons {
                 else if(vote == Vote.DOWNVOTED){
                     upvoteButton.setColorFilter(context.getResources().getColor(R.color.blue));
                     downvoteButton.setColorFilter(context.getResources().getColor(R.color.black));
-                    pointValue++;
+                    pointValue = addOne(pointValue); //changed increment to user method
                     pointValueTextView.setText(Integer.toString(++pointValue));
                     vote = Vote.UPVOTED;
                     //TODO assign pointage value to Database
@@ -115,7 +116,7 @@ public class VoteButtons {
                 else if(vote == Vote.UPVOTED){
                     upvoteButton.setColorFilter(context.getResources().getColor(R.color.black));
                     downvoteButton.setColorFilter(context.getResources().getColor(R.color.red));
-                    pointValue--;
+                    pointValue = minusOne(pointValue); //changed decrement to user method
                     pointValueTextView.setText(Integer.toString(--pointValue));
                     vote = Vote.DOWNVOTED;
                     //TODO assign pointage value to Database
@@ -133,5 +134,13 @@ public class VoteButtons {
             }
         });
     }
-
+    //added user methods to facilitate testing
+    public static int addOne(int value){
+        int temp = value + 1;
+        return temp;
+    }
+    public static int minusOne(int value){
+        int temp = value - 1;
+        return temp;
+    }
 }
