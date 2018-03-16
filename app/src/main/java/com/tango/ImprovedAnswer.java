@@ -89,6 +89,16 @@ public class ImprovedAnswer extends AppCompatActivity {
             }
         });
 
+        imageConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(imageConfirm.getText() != ""){
+                    imageInGallery = null;
+                    imageConfirm.setText("");
+                }
+            }
+        });
+
         addImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,7 +116,7 @@ public class ImprovedAnswer extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
             imageInGallery = data.getData();
-            imageConfirm.setText("image will be included on submit");
+            imageConfirm.setText("image will be included on submit. (click here to cancel)");
         }
     }
 
