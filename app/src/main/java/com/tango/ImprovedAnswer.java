@@ -24,6 +24,7 @@ public class ImprovedAnswer extends AppCompatActivity {
     Button submit;
     EditText input;
     TextView question;
+    TextView imageConfirm;
     String questions;
     ImageButton addImageButton;
     Uri imageInGallery;
@@ -41,6 +42,7 @@ public class ImprovedAnswer extends AppCompatActivity {
         answerContainer = (LinearLayout) findViewById(R.id.LinearLayout);
         testButton = (Button) findViewById(R.id.testButton);
         submit = (Button) findViewById(R.id.SubmitID);
+        imageConfirm = (TextView) findViewById(R.id.imageConfirm);
         input = (EditText) findViewById(R.id.input);
         addImageButton = (ImageButton) findViewById(R.id.addImageButton);
 
@@ -79,6 +81,7 @@ public class ImprovedAnswer extends AppCompatActivity {
                     args.putBundle("images", imageBundle);
                     comment.setArguments(args);
                     imageInGallery = null;
+                    imageConfirm.setText("");
                 } else{
                     comment.setArguments(args);
                 }
@@ -103,7 +106,7 @@ public class ImprovedAnswer extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
             imageInGallery = data.getData();
-
+            imageConfirm.setText("image will be included on submit");
         }
     }
 
