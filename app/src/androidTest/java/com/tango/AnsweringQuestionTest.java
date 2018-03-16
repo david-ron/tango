@@ -28,12 +28,37 @@ public class AnsweringQuestionTest {
 
 
     @Test
-    public void testLunch(){
+    public void testLunchReply(){
         View view = mActivity.findViewById(R.id.reply);
         assertNotNull(view);
 
     }
 
+    @Test
+    public void testLunchSubmit(){
+        View view = mActivity.findViewById(R.id.submit);
+        assertNotNull(view);
+
+    }
+
+    @Test
+    public void testLunchTextbox(){
+        View view = mActivity.findViewById(R.id.textBox);
+        assertNotNull(view);
+
+    }
+    @Test
+    public void testLunchquestion(){
+        View view = mActivity.findViewById(R.id.questionInAnswerPage);
+        assertNotNull(view);
+
+    }
+    @Test
+    public void testLunchacceptbutton(){
+        View view = mActivity.findViewById(R.id.acceptButton);
+        assertNotNull(view);
+
+    }
 
 
     @After
