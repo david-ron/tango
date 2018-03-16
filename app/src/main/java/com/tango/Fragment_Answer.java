@@ -81,6 +81,8 @@ public class Fragment_Answer extends Fragment {
             commentImage = new ImageView(view.getContext());
             commentImage.setImageURI(imageUri);
             imageContainer.addView(commentImage);
+            commentImage.getLayoutParams().height = 350;
+            commentImage.requestLayout();
         }
 
         //TextView for points and text and username
