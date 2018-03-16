@@ -34,17 +34,40 @@
                     android:text="Hello.............."/>
 
             </LinearLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
                 <EditText
                     android:id="@+id/input"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="write your answer here"/>
+                <ImageButton
+                    android:id="@+id/addImageButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:src="@drawable/ic_add_image"
+                    android:background="@null"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="20dp"
+                    />
+            </FrameLayout>
 
             <Button
                 android:id="@+id/SubmitID"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="submit"/>
+            <TextView
+                android:id="@+id/imageConfirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="10dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="20dp"
+                android:textColor="@color/red"/>
 
         </LinearLayout>
 

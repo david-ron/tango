@@ -57,21 +57,26 @@
             android:padding="0dp"
             android:src="@drawable/ic_down_arrow_unselected" />
     </LinearLayout>
-
+    <LinearLayout
+        android:id="@+id/imageContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginRight="15dp"
+        android:layout_alignLeft="@id/answerText"
+        android:layout_below="@id/answerText">
+    </LinearLayout>
     <RadioGroup
         android:id="@+id/radiogroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/answerText"
+        android:layout_below="@+id/imageContainer"
         android:orientation="horizontal">
 
         <RadioButton
             android:id="@+id/acceptButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/answerText"
-            android:layout_alignStart="@+id/answerText"
-
             android:layout_marginLeft="40dp"
             android:layout_marginStart="40dp"
             android:text="@string/accept_text" />
