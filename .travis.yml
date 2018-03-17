@@ -13,8 +13,8 @@ cache:
 android:
         components:
                 - platform-tools
-                - build-tools-27.0.2
-                - android-27
+                - build-tools-26.0.2
+                - android-26
                 - extra-android-m2repository
                 - sys-img-armeabi-v7a-android-tv-l
 script:
