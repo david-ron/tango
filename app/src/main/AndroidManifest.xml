@@ -22,6 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".AnswerPageActivity"></activity>
+        <activity android:name=".ProfilePage"/>
 
     </application>
 

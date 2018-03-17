@@ -21,6 +21,7 @@ import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.Transaction;
 import com.tango.AnswerPageActivity;
+import com.tango.ProfilePage;
 import com.tango.R;
 import com.tango.models.QuestionModel;
 import com.tango.viewholder.QuestionView;
@@ -99,6 +100,15 @@ public abstract class FeedList extends Fragment {
                 } else {
                     viewHolder.starView.setImageResource(R.drawable.ic_toggle_star_outline_24);
                 }
+
+                viewHolder.authorView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getActivity(), ProfilePage.class);
+                        intent.putExtra(AnswerPageActivity.EXTRA_POST_KEY,postKey);
+                        startActivity(intent);
+                    }
+                });
 
                 // Bind QuestionModel to ViewHolder, setting OnClickListener for the star button
                 // This will keep all the text in QuestionModel updated ( Author, Title , Body )
