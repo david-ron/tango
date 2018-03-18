@@ -29,14 +29,14 @@ public class QuestionPageActivityTest {
 
     @Test
     public void testLaunch2(){
-        View questionView = mActivity.findViewById(R.id.field_title);
-        assertNotNull(questionView);
+        View questionViewTitle = mActivity.findViewById(R.id.field_title);
+        assertNotNull(questionViewTitle);
     }
 
     @Test
     public void testLaunch3(){
-        View questionView = mActivity.findViewById(R.id.field_body);
-        assertNotNull(questionView);
+        View questionViewBody = mActivity.findViewById(R.id.field_body);
+        assertNotNull(questionViewBody);
     }
 
     @After
