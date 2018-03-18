@@ -95,7 +95,13 @@ public class FeedActivity extends BaseActivity {
             startActivity(new Intent(this, GoogleSignInActivity.class));
             finish();
             return true;
-        } else {
+        }
+        else if(i == R.id.action_profile) {
+            startActivity(new Intent(this, ProfilePage.class));
+            finish();
+            return true;
+        }
+        else {
             return super.onOptionsItemSelected(item);
         }
     }
