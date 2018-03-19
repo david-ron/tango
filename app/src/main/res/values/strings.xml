@@ -83,6 +83,25 @@
     <string name="sign_up">Sign Up</string>
     <string name="question_title">Question Title</string>
     <string name="tell_us_more_about_your_question">Tell us more about your question</string>
+    <string name="post_your_answer">Post your answer</string>
+    <string name="post">Post</string>
+    <string name="welcome_to">Welcome to</string>
+
+    <string name="tango_logo">Tango logo</string>
+    <string name="username">USERNAME</string>
+    <string name="answers">Answers</string>
+    <string name="_0">0</string>
+    <string name="change_picture">Change picture</string>
+
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="questions">Questions</string>
+    <string name="accepted">Accepted</string>
+  
+    <string name="user_email_com">user@email.com</string>
+    <string name="profile_picture">Profile picture</string>
+    <string name="profile_image">Profile image</string>
+    <string name="profile_string_profile_picture">Profile @string/profile_picture</string>
 
 
 </resources>

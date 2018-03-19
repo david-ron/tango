@@ -22,13 +22,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/title_bottom_margin"
-            android:text="Welcome to"
+            android:text="@string/welcome_to"
             android:theme="@style/ThemeOverlay.MyTitleText" />
 
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/tango_logo"
             app:srcCompat="@drawable/logotango" />
 
     </LinearLayout>
@@ -59,7 +60,7 @@
             android:paddingLeft="100dp"
             android:paddingRight="16dp"
             android:visibility="gone"
-            tools:visibility="visible">
+            tools:visibility="visible" android:paddingStart="100dp" android:paddingEnd="16dp">
 
         </LinearLayout>
 
@@ -70,8 +71,7 @@
             android:layout_alignTop="@+id/sign_out_and_disconnect"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="24dp"
-            android:layout_weight="1"
-            android:text="Sign Out"
+            android:text="@string/sign_out"
             android:theme="@style/ThemeOverlay.MyDarkButton"
             android:visibility="invisible"
             tools:visibility="visible" />
