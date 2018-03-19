@@ -1,9 +1,7 @@
 package com.tango;
 
-import android.support.design.widget.FloatingActionButton;
 import android.support.test.rule.ActivityTestRule;
 import android.view.View;
-import android.widget.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
