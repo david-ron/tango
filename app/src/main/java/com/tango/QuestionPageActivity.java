@@ -58,7 +58,7 @@ public class QuestionPageActivity extends BaseActivity {
      * Checks if all fields have a valid input / not Empty
      * Add new question to the DataBase
      */
-    private void submitPost() {
+    public void submitPost() {
         final String title = QuestionTitle.getText().toString();
         final String body = QuestionBody.getText().toString();
 
@@ -113,7 +113,7 @@ public class QuestionPageActivity extends BaseActivity {
                 });
     }
 
-    private void setEditingEnabled(boolean enabled) {
+    public void setEditingEnabled(boolean enabled) {
         QuestionTitle.setEnabled(enabled);
         QuestionBody.setEnabled(enabled);
         if (enabled) {
@@ -124,7 +124,7 @@ public class QuestionPageActivity extends BaseActivity {
     }
 
     // Writes the actual post to the DB
-    private void writeNewPost(String userId, String username, String title, String body) {
+    public void writeNewPost(String userId, String username, String title, String body) {
         // Create new questionModel at /user-posts/$userid/$postid and at
         // /posts/$postid simultaneously
         String key = rootDB.child("posts").push().getKey();
