@@ -45,36 +45,52 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="AnswerPageActivityTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/androidTest/java/com/tango/AnswerPageActivityTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="347">
-              <caret line="37" column="5" lean-forward="false" selection-start-line="27" selection-start-column="4" selection-end-line="37" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProfilePage.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/tango/ProfilePage.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="233">
-              <caret line="26" column="56" lean-forward="false" selection-start-line="26" selection-start-column="48" selection-end-line="26" selection-end-column="56" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProfilePageTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ProfilePageTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/androidTest/java/com/tango/ProfilePageTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="18" column="23" lean-forward="false" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
+            <state relative-caret-position="415">
+              <caret line="40" column="5" lean-forward="false" selection-start-line="16" selection-start-column="3" selection-end-line="40" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FeedActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/tango/FeedActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="133">
+              <caret line="43" column="45" lean-forward="false" selection-start-line="43" selection-start-column="32" selection-end-line="43" selection-end-column="45" />
+              <folding>
+                <element signature="e#0#3685#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FeedActivityTest.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/androidTest/java/com/tango/FeedActivityTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="407">
+              <caret line="28" column="9" lean-forward="false" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="9" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_feed.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_feed.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="12" column="27" lean-forward="false" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -1865,6 +1881,7 @@
         <option value="$PROJECT_DIR$/app/src/androidTest/java/com/tango/AnswerPageActivityTest.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/tango/ProfilePage.java" />
         <option value="$PROJECT_DIR$/app/src/androidTest/java/com/tango/ProfilePageTest.java" />
+        <option value="$PROJECT_DIR$/app/src/androidTest/java/com/tango/FeedActivityTest.java" />
       </list>
     </option>
   </component>
@@ -2365,7 +2382,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Android Instrumented Tests.ProfilePageTest">
+  <component name="RunManager" selected="Android Instrumented Tests.FeedActivityTest">
     <configuration default="false" name="GoogleSignInActivity..." type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests" temporary="true" nameIsGenerated="true">
       <module name="app" />
       <option name="TESTING_TYPE" value="2" />
@@ -2546,6 +2563,51 @@
       </Profilers>
       <method />
     </configuration>
+    <configuration default="false" name="FeedActivityTest" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests" temporary="true" nameIsGenerated="true">
+      <module name="app" />
+      <option name="TESTING_TYPE" value="2" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="com.tango.FeedActivityTest" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="EXTRA_OPTIONS" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Hybrid>
+      <Java />
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+      </Profilers>
+      <method />
+    </configuration>
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -2615,7 +2677,7 @@
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
       <method>
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1521415460686" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1521417585275" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2662,7 +2724,7 @@
         <option name="ADVANCED_PROFILING_ENABLED" value="false" />
       </Profilers>
       <method>
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1521415460686" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1521417585275" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2844,22 +2906,24 @@
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
       <method>
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1521415460687" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1521417585276" />
       </method>
     </configuration>
-    <list size="5">
+    <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Android App.app" />
       <item index="1" class="java.lang.String" itemvalue="Android Instrumented Tests.GoogleSignInActivity..." />
       <item index="2" class="java.lang.String" itemvalue="Android Instrumented Tests.QuestionPageActivity..." />
       <item index="3" class="java.lang.String" itemvalue="Android Instrumented Tests.AnswerPageActivityTest" />
       <item index="4" class="java.lang.String" itemvalue="Android Instrumented Tests.ProfilePageTest" />
+      <item index="5" class="java.lang.String" itemvalue="Android Instrumented Tests.FeedActivityTest" />
     </list>
     <recent_temporary>
-      <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="Android Instrumented Tests.ProfilePageTest" />
-        <item index="1" class="java.lang.String" itemvalue="Android Instrumented Tests.AnswerPageActivityTest" />
-        <item index="2" class="java.lang.String" itemvalue="Android Instrumented Tests.QuestionPageActivity..." />
-        <item index="3" class="java.lang.String" itemvalue="Android Instrumented Tests.GoogleSignInActivity..." />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Android Instrumented Tests.FeedActivityTest" />
+        <item index="1" class="java.lang.String" itemvalue="Android Instrumented Tests.ProfilePageTest" />
+        <item index="2" class="java.lang.String" itemvalue="Android Instrumented Tests.AnswerPageActivityTest" />
+        <item index="3" class="java.lang.String" itemvalue="Android Instrumented Tests.QuestionPageActivity..." />
+        <item index="4" class="java.lang.String" itemvalue="Android Instrumented Tests.GoogleSignInActivity..." />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="Applet" default="true" selected="false">
@@ -2895,35 +2959,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="AnswerPageActivityTest - 2018.03.18 at 18h 53m 37s.xml">
-      <configuration name="AnswerPageActivityTest" configurationId="AndroidTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="AnswerPageActivityTest - 2018.03.18 at 18h 55m 37s.xml">
-      <configuration name="AnswerPageActivityTest" configurationId="AndroidTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="AnswerPageActivityTest - 2018.03.18 at 18h 56m 52s.xml">
-      <configuration name="AnswerPageActivityTest" configurationId="AndroidTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="AnswerPageActivityTest - 2018.03.18 at 18h 58m 18s.xml">
-      <configuration name="AnswerPageActivityTest" configurationId="AndroidTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="AnswerPageActivityTest - 2018.03.18 at 19h 08m 10s.xml">
-      <configuration name="AnswerPageActivityTest" configurationId="AndroidTestRunConfigurationType" />
-    </history-entry>
     <history-entry file="AnswerPageActivityTest - 2018.03.18 at 19h 10m 17s.xml">
       <configuration name="AnswerPageActivityTest" configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
     <history-entry file="AnswerPageActivityTest - 2018.03.18 at 19h 13m 27s.xml">
       <configuration name="AnswerPageActivityTest" configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
+    <history-entry file="FeedActivityTest - 2018.03.18 at 19h 54m 19s.xml">
+      <configuration name="FeedActivityTest" configurationId="AndroidTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="FeedActivityTest - 2018.03.18 at 19h 54m 46s.xml">
+      <configuration name="FeedActivityTest" configurationId="AndroidTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="FeedActivityTest - 2018.03.18 at 19h 55m 46s.xml">
+      <configuration name="FeedActivityTest" configurationId="AndroidTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="FeedActivityTest - 2018.03.18 at 19h 57m 29s.xml">
+      <configuration name="FeedActivityTest" configurationId="AndroidTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="FeedActivityTest - 2018.03.18 at 19h 58m 30s.xml">
+      <configuration name="FeedActivityTest" configurationId="AndroidTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="FeedActivityTest - 2018.03.18 at 19h 59m 38s.xml">
+      <configuration name="FeedActivityTest" configurationId="AndroidTestRunConfigurationType" />
+    </history-entry>
     <history-entry file="ProfilePageTest - 2018.03.18 at 19h 23m 34s.xml">
       <configuration name="ProfilePageTest" configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
     <history-entry file="ProfilePageTest - 2018.03.18 at 19h 24m 16s.xml">
       <configuration name="ProfilePageTest" configurationId="AndroidTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="QuestionPageActivity___ - 2018.03.18 at 18h 53m 13s.xml">
-      <configuration name="QuestionPageActivity..." configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
@@ -2981,7 +3045,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/tango/AnswerPageActivity.java" />
     <entry file="file://$PROJECT_DIR$/local.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -3048,16 +3111,6 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/include_post_text.xml" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/include_post_author.xml" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/tango/ToIntegrate/ImprovedAnswer.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_feed.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_profile_page.xml">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -3093,17 +3146,6 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/tango/ToIntegrate/Fragment_Answer.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/tango/viewholder/QuestionView.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/tango/fragment/FeedList.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/tango/FeedActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1023">
-          <caret line="98" column="43" lean-forward="false" selection-start-line="98" selection-start-column="43" selection-end-line="98" selection-end-column="43" />
-          <folding>
-            <element signature="e#0#3685#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/tango/GoogleSignInActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="755">
@@ -3234,8 +3276,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/androidTest/java/com/tango/ProfilePageTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="18" column="23" lean-forward="false" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
+        <state relative-caret-position="415">
+          <caret line="40" column="5" lean-forward="false" selection-start-line="16" selection-start-column="3" selection-end-line="40" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/tango/FeedActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="43" column="45" lean-forward="false" selection-start-line="43" selection-start-column="32" selection-end-line="43" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#3685#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_feed.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="27" lean-forward="false" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/androidTest/java/com/tango/FeedActivityTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="407">
+          <caret line="28" column="9" lean-forward="false" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
