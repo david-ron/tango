@@ -130,7 +130,7 @@ public abstract class FeedList extends Fragment {
         mRecycler.setAdapter(mAdapter);
     }
 
-    private void onStarClicked(DatabaseReference postRef) {
+    public void onStarClicked(DatabaseReference postRef) {
         postRef.runTransaction(new Transaction.Handler() {
             @Override
             public Transaction.Result doTransaction(MutableData mutableData) {
