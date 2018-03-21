@@ -54,7 +54,7 @@ public class ProfilePage extends AppCompatActivity {
         } );
     }
 
-    private void openGallery() {
+    public void openGallery() {
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         startActivityForResult(gallery, PICK_IMAGE);  // Only 100 images will appear when gallery is opened because PICK_IMAGE=100
     }
