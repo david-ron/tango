@@ -1,7 +1,10 @@
 package com.tango;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,6 +58,10 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
     private Button postAnswerButton;
     private RecyclerView answerRecyclerView;
 
+    private Button addImageButton;
+    private Uri imageInGallery;
+    private final int PICK_IMAGE = 100;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,9 +88,33 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
         postAnswerButton = findViewById(R.id.button_post_comment);
         answerRecyclerView = findViewById(R.id.recycler_comments);
 
+        // Image as an answer button
+        addImageButton = (Button) findViewById(R.id.image_answer);
+
         postAnswerButton.setOnClickListener(this);
         answerRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        addImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openGallery(); //Find the image you want
+            }
+
+
+        });
+    }
+
+    // opens the gallery after the users clicks on the button
+    private void openGallery() {
+        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(gallery, PICK_IMAGE);  // Only 100 images will appear when gallery is opened because PICK_IMAGE=100
+    }
+    // Gets the selected image
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
+            imageInGallery = data.getData();
+        }
     }
 
     @Override
@@ -141,6 +173,7 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
             postAnswer();
         }
     }
+
 
     // Add new answer to the DB
     private void postAnswer() {
@@ -488,6 +521,8 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
         }
 
     }
+
+
 
 }
 
