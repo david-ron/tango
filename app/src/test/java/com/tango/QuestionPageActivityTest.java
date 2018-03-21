@@ -4,15 +4,12 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.widget.EditText;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
-
 import static org.junit.Assert.*;
 
 /**
@@ -44,9 +41,6 @@ public class QuestionPageActivityTest {
         GoogleSignInActivity qa = new GoogleSignInActivity();
         qa.onClick(view);
         qa.hideProgressDialog();
-        //qp.setEditingEnabled(false);
-        //qp.submitPost();
-        //qp.onCreate(mock(Bundle.class));
         qp.hideProgressDialog();
         assertTrue(true);
     }
