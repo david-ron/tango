@@ -13,7 +13,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
-        android:hint="Question Title"
+        android:hint="@string/question_title"
         android:maxLines="1" />
 
     <EditText
@@ -25,7 +25,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="5dp"
-        android:hint="Tell us more about your question"
+        android:hint="@string/tell_us_more_about_your_question"
         android:inputType="textMultiLine"
         android:maxLines="10"
         android:scrollHorizontally="false" />
@@ -37,6 +37,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_margin="16dp"
-        android:src="@drawable/ic_navigation_check_24"/>
+        android:src="@drawable/ic_navigation_check_24" android:layout_alignParentEnd="true"/>
 
 </RelativeLayout>

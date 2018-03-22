@@ -10,6 +10,7 @@
         android:id="@+id/post_author_photo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/profile_string_profile_picture"
         android:src="@drawable/ic_action_account_circle_40" />
 
     <TextView
@@ -19,6 +20,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:gravity="center_vertical"
-        tools:text="someauthor@email.com" />
+        tools:text="someauthor@email.com" android:layout_marginStart="10dp" />
 
 </LinearLayout>

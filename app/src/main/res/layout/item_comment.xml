@@ -12,7 +12,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/post_author_layout"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal" android:layout_alignParentEnd="true">
 
         <ImageView
             android:id="@+id/star"
@@ -21,7 +21,8 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:background="?attr/selectableItemBackground"
-            android:src="@drawable/ic_toggle_star_outline_24" />
+            android:contentDescription="@string/profile_picture"
+            android:src="@drawable/ic_toggle_star_outline_24" android:layout_marginStart="10dp" android:layout_marginEnd="5dp" />
 
         <TextView
             android:id="@+id/post_num_stars"
@@ -37,7 +38,8 @@
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_centerVertical="true"
-        android:src="@drawable/ic_action_account_circle_40"/>
+        android:contentDescription="@string/profile_picture"
+        android:src="@drawable/ic_action_account_circle_40" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,7 +47,7 @@
         android:orientation="vertical"
         android:layout_marginLeft="10dp"
         android:padding="5dp"
-        android:layout_toRightOf="@+id/comment_photo">
+        android:layout_toRightOf="@+id/comment_photo" android:layout_toEndOf="@+id/comment_photo" android:layout_marginStart="10dp">
 
         <TextView
             android:id="@+id/comment_author"
