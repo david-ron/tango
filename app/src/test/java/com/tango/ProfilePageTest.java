@@ -2,13 +2,16 @@ package com.tango;
 
 import org.junit.Test;
 import org.junit.Before;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import org.mockito.Mock;
 import org.mockito.Mockito;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -40,6 +43,7 @@ public class ProfilePageTest {
         doReturn(username).when(tested).findViewById(R.id.username);
 
     }
+
     @Test
     public void shouldSetupListener() throws Exception {
         tested.onCreate(mock(Bundle.class));
@@ -63,7 +67,7 @@ public class ProfilePageTest {
     @Test
     public void onActivityResult() throws Exception {
         tested.openGallery();
-        tested.onActivityResult(0,0, mock(Intent.class));
+        tested.onActivityResult(0, 0, mock(Intent.class));
         doNothing().when(tested).finish();
         assertTrue(true);
     }

@@ -1,8 +1,10 @@
 package com.tango.viewholder;
 
 import android.view.View;
+
 import org.junit.Test;
 import org.mockito.Mockito;
+
 import static org.junit.Assert.*;
 
 /**

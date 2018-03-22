@@ -18,15 +18,15 @@ import static org.junit.Assert.*;
 public class QuestionPageActivityTest {
     @Mock
     private QuestionPageActivity tested;
-    private EditText QuestionTitle;
-    private EditText QuestionBody;
+    private EditText questionTitle;
+    private EditText questionBody;
     private FloatingActionButton submitButton;
 
     @Before
     public void setUp() throws Exception {
         tested = Mockito.mock(QuestionPageActivity.class);
-        doReturn(QuestionTitle).when(tested).findViewById(R.id.field_title);
-        doReturn(QuestionBody).when(tested).findViewById(R.id.field_body);
+        doReturn(questionTitle).when(tested).findViewById(R.id.field_title);
+        doReturn(questionBody).when(tested).findViewById(R.id.field_body);
         doReturn(submitButton).when(tested).findViewById(R.id.fab_submit_post);
     }
 

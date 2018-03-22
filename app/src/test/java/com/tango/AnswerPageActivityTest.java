@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.View;
+
 import com.google.firebase.database.DatabaseReference;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.junit.Assert.*;
@@ -24,12 +27,13 @@ public class AnswerPageActivityTest {
     AnswerPageActivity.AnswerViewHolder av;
 
     @Before
-    public  void setUp() {
+    public void setUp() {
         ap = Mockito.mock(AnswerPageActivity.class);
         aa = Mockito.mock(AnswerPageActivity.AnswerAdapter.class);
         av = Mockito.mock(AnswerPageActivity.AnswerViewHolder.class);
 
     }
+
     @Test
     public void onCreate() throws Exception {
         View view = Mockito.mock(View.class);
