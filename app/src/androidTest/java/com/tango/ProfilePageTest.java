@@ -35,6 +35,12 @@ public class ProfilePageTest {
         assertNotNull(pictureButton);
     }
 
+    @Test
+    public void testLaunch3(){
+        View picture = mActivity.findViewById(R.id.profilePicture);
+        assertNotNull(picture);
+    }
+
     @After
     public void tearDown() throws Exception {
         mActivity = null;

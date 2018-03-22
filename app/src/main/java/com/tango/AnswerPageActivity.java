@@ -143,7 +143,7 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
     }
 
     // Add new answer to the DB
-    private void postAnswer() {
+    public void postAnswer() {
         final String uid = getUid();
         FirebaseDatabase.getInstance().getReference().child("users").child(uid)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -176,7 +176,7 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
                 });
     }
 
-    private static class AnswerViewHolder extends RecyclerView.ViewHolder {
+    public static class AnswerViewHolder extends RecyclerView.ViewHolder {
 
         public TextView authorView;
         public TextView bodyView;
@@ -203,7 +203,7 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
         }
     }
 
-    private static class AnswerAdapter extends RecyclerView.Adapter<AnswerViewHolder> {
+    public static class AnswerAdapter extends RecyclerView.Adapter<AnswerViewHolder> {
         private DatabaseReference rootDB;
         private FirebaseRecyclerAdapter<AnswerModel, AnswerViewHolder> nAdapter;
         private Context mContext;

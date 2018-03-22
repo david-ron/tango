@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'jacoco'
 android {
+
+
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.tango"
@@ -14,6 +16,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug{
+            testCoverageEnabled true
         }
     }
     lintOptions {
@@ -50,6 +55,24 @@ dependencies {
     compile "com.google.android.gms:play-services-auth:11.8.0"
     compile 'com.google.firebase:firebase-database:11.8.0'
 }
+
+
+task jacocoTestReport(type: JacocoReport, dependsOn: 'testDebugUnitTest') {
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+
+    def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
+    def debugTree = fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: fileFilter)
+    def mainSrc = "${project.projectDir}/src/main/java"
+
+    sourceDirectories = files([mainSrc])
+    classDirectories = files([debugTree])
+    executionData = files("${buildDir}/jacoco/testDebugUnitTest.exec")
+}
+
 
 
 apply plugin: 'com.google.gms.google-services'
