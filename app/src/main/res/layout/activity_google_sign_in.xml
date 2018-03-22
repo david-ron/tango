@@ -11,18 +11,30 @@
         android:layout_width="match_parent"
         android:layout_height="18dp"
         android:layout_weight="3"
-        android:background="@color/cardview_dark_background"
+        android:background="@drawable/gradientbackground"
         android:gravity="center_horizontal"
         android:orientation="vertical">
-
 
         <TextView
             android:id="@+id/title_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/title_bottom_margin"
-            android:text="Google Sign-in"
-            android:theme="@style/ThemeOverlay.MyTitleText" />
+            android:layout_marginTop="@dimen/title_bottom_margin"
+            android:text="Tango?"
+            android:textColor="#ffff"
+            android:textSize="100dp"
+            android:fontFamily="cursive"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AskThe world!"
+            android:textColor="#ffff"
+            android:layout_marginTop="10dp"
+            android:textSize="30dp"
+            android:fontFamily="cursive"
+            />
+
 
     </LinearLayout>
 
@@ -31,7 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_weight="1"
-        android:background="@color/cardview_dark_background">
+        android:background="#f2a456">
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/sign_in_button"
