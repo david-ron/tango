@@ -91,7 +91,7 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
 
         // Image as an answer button
         addImageButton = (Button) findViewById(R.id.button_image_answer);
-        imageInComment = findViewById(R.id.image_in_comment);
+        imageInComment = (ImageView) findViewById(R.id.image_in_comment);
 
         postAnswerButton.setOnClickListener(this);
         answerRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -191,7 +191,6 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
                         // Get user information
                         User user = dataSnapshot.getValue(User.class);
                         String authorName = user.username;
-
                         // Create new answerModel object
                         String commentText = answerField.getText().toString();
                         AnswerModel answerModel = new AnswerModel(uid, authorName, commentText, imageInComment);
