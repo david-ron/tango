@@ -1,13 +1,8 @@
 package com.tango.viewholder;
 
 import android.view.View;
-
-import com.tango.models.QuestionModel;
-
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-
 import static org.junit.Assert.*;
 
 /**
@@ -18,7 +13,6 @@ public class QuestionViewTest {
     @Test
     public void bindToPost() throws Exception {
         View view = Mockito.mock(View.class);
-
         QuestionView qt = new QuestionView(view);
         assertTrue(true);
     }
