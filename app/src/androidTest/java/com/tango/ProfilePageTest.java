@@ -24,19 +24,19 @@ public class ProfilePageTest {
     }
 
     @Test
-    public void testLaunch1(){
+    public void testLaunch1() {
         View username = mActivity.findViewById(R.id.username);
         assertNotNull(username);
     }
 
     @Test
-    public void testLaunch2(){
+    public void testLaunch2() {
         View pictureButton = mActivity.findViewById(R.id.changepicture);
         assertNotNull(pictureButton);
     }
 
     @Test
-    public void testLaunch3(){
+    public void testLaunch3() {
         View picture = mActivity.findViewById(R.id.profilePicture);
         assertNotNull(picture);
     }

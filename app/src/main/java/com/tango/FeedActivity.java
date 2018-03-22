@@ -45,22 +45,25 @@ public class FeedActivity extends BaseActivity {
 
         // Create the adapter that will return a fragment for each section
         pageAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
-            private final Fragment[] mFragments = new Fragment[] {
+            private final Fragment[] mFragments = new Fragment[]{
                     new RecentPosts(),
                     new MyPosts()
             };
-            private final String[] mFragmentNames = new String[] {
+            private final String[] mFragmentNames = new String[]{
                     getString(R.string.heading_recent),
                     getString(R.string.heading_my_posts)
             };
+
             @Override
             public Fragment getItem(int position) {
                 return mFragments[position];
             }
+
             @Override
             public int getCount() {
                 return mFragments.length;
             }
+
             @Override
             public CharSequence getPageTitle(int position) {
                 return mFragmentNames[position];
@@ -95,13 +98,11 @@ public class FeedActivity extends BaseActivity {
             startActivity(new Intent(this, GoogleSignInActivity.class));
             finish();
             return true;
-        }
-        else if(i == R.id.action_profile) {
+        } else if (i == R.id.action_profile) {
             startActivity(new Intent(this, ProfilePage.class));
             finish();
             return true;
-        }
-        else {
+        } else {
             return super.onOptionsItemSelected(item);
         }
     }

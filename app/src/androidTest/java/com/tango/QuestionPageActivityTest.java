@@ -2,10 +2,13 @@ package com.tango;
 
 import org.junit.After;
 import org.junit.Before;
+
 import android.support.test.rule.ActivityTestRule;
 import android.view.View;
+
 import org.junit.Rule;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 /**
@@ -22,19 +25,19 @@ public class QuestionPageActivityTest {
     }
 
     @Test
-    public void testLaunch1(){
+    public void testLaunch1() {
         View questionButton = mActivity.findViewById(R.id.fab_submit_post);
         assertNotNull(questionButton);
     }
 
     @Test
-    public void testLaunch2(){
+    public void testLaunch2() {
         View questionViewTitle = mActivity.findViewById(R.id.field_title);
         assertNotNull(questionViewTitle);
     }
 
     @Test
-    public void testLaunch3(){
+    public void testLaunch3() {
         View questionViewBody = mActivity.findViewById(R.id.field_body);
         assertNotNull(questionViewBody);
     }

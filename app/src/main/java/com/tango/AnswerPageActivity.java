@@ -113,13 +113,13 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
         };
         questionRef.addValueEventListener(postListener);
 
-    // Keep copy of post listener so we can remove it when app stops
-    questionListener = postListener;
+        // Keep copy of post listener so we can remove it when app stops
+        questionListener = postListener;
 
-    // Listen for new answers
-    mAdapter = new AnswerAdapter(this, answerRef);
+        // Listen for new answers
+        mAdapter = new AnswerAdapter(this, answerRef);
         answerRecyclerView.setAdapter(mAdapter);
-}
+    }
 
     @Override
     public void onStop() {
@@ -182,6 +182,7 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
         public TextView bodyView;
         public ImageView starView;
         public TextView numStarsView;
+
         public AnswerViewHolder(View itemView) {
             super(itemView);
 
@@ -190,14 +191,15 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
             starView = itemView.findViewById(R.id.star);
             numStarsView = itemView.findViewById(R.id.post_num_stars);
         }
+
         public void bindToPost(AnswerModel questionModel, View.OnClickListener starClickListener) {
 
             numStarsView.setText(String.valueOf(questionModel.starCount));
 
 
-           // Log.d("POSTING", questionModel.toString());
+            // Log.d("POSTING", questionModel.toString());
             //Log.d("POSTING-Question", questionModel.title.toString());
-           // Log.d("POSTING-Answer", questionModel.body.toString());
+            // Log.d("POSTING-Answer", questionModel.body.toString());
 
             starView.setOnClickListener(starClickListener);
         }
@@ -228,7 +230,6 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
                     final AnswerModel answerModel = mAnswerModels.get(position);
 
 
-
                     holder.authorView.setText(answerModel.author);
                     holder.bodyView.setText(answerModel.text);
                     //  holder.numStarsView.setText(answerModel.starCount);
@@ -237,7 +238,7 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
                     } else {
                         holder.starView.setImageResource(R.drawable.ic_toggle_star_outline_24);
                     }
-                    Log.d("commenterror",answerModel.toString());
+                    Log.d("commenterror", answerModel.toString());
                     //  DatabaseReference postRef = FirebaseRecyclerAdapter.getRef(position);
                     holder.bindToPost(answerModel, new View.OnClickListener() {
                         final DatabaseReference postRef = getRef(position);
@@ -250,10 +251,9 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
                             // DatabaseReference globalPostRef = rootDB.child("posts").child(AnswerAdapter.this.toString());
 
 
-                            Log.d("Keytest",Key.toString());
+                            Log.d("Keytest", Key.toString());
                             DatabaseReference userPostRef = rootDB.child("post-comments").child(Key);
                             onStarClicked(userPostRef);
-
 
 
                             // Run two transactions
@@ -290,7 +290,7 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
                     mAnswerModels.add(answerModel);
                     answerModel.answerID = dataSnapshot.getRef().getParent().getKey();
                     //answerModel.answerID = previousChildName;
-                   // Log.d("TESTINGTHIS",mAnswerModels.toString());
+                    // Log.d("TESTINGTHIS",mAnswerModels.toString());
                     //Log.d("TESTTHIS",dataSnapshot.getKey().toString());
                     notifyItemInserted(mAnswerModels.size() - 1);
                     // [END_EXCLUDE]
@@ -372,34 +372,32 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
 
             return new AnswerViewHolder(view);
         }
+
         Query postsQuery = rootDB;
         FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<AnswerModel>()
                 .setQuery(postsQuery, AnswerModel.class)
                 .build();
 
 
-
         @Override
-            public void onBindViewHolder (AnswerViewHolder holder, final int position){
+        public void onBindViewHolder(AnswerViewHolder holder, final int position) {
             final AnswerModel answerModel = mAnswerModels.get(position);
-            Log.d("AnswerMdoel",answerModel.toString());
+            Log.d("AnswerMdoel", answerModel.toString());
 
             //nAdapter = setnAdapter(nAdapter);
             holder.authorView.setText(answerModel.author);
             holder.bodyView.setText(answerModel.text);
 
-          //  holder.numStarsView.setText(answerModel.starCount);
+            //  holder.numStarsView.setText(answerModel.starCount);
             if (answerModel.stars.containsKey(getUid())) {
                 holder.starView.setImageResource(R.drawable.ic_toggle_star_24);
             } else {
                 holder.starView.setImageResource(R.drawable.ic_toggle_star_outline_24);
             }
-            Log.d("commenterror",answerModel.uid.toString());
+            Log.d("commenterror", answerModel.uid.toString());
 
-           //  DatabaseReference postRef = FirebaseRecyclerAdapter.getRef(position);
+            //  DatabaseReference postRef = FirebaseRecyclerAdapter.getRef(position);
             holder.bindToPost(answerModel, new View.OnClickListener() {
-
-
 
 
                 @Override
@@ -409,36 +407,20 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
 
                     //final int keytest = Log.d("Keytest", answerModel.getAidz().toString());
                     DatabaseReference userPostRef = rootDB.child("post-comments").child(answerModel.answerID).child(answerModel.getAidz());
-                    /*if (answerModel.stars.containsKey(getUid())) {
-                        // Unstar the post and remove self from stars
-                        answerModel.starCount = answerModel.starCount - 1;
-                        answerModel.stars.remove(getUid());
-                        //userPostRef.setValue(answerModel.starCount);
-                        userPostRef.updateChildren(answerModel.toMap());
-
-
-                    } else {
-                        // Star the post and add self to stars
-                        answerModel.starCount = answerModel.starCount + 1;
-                        answerModel.stars.put(getUid(), true);
-                        //userPostRef.setValue(answerModel.starCount);
-                        userPostRef.updateChildren(answerModel.toMap());
-                    }*/
-
-
                     //onStarClicked(userPostRef);
 
 
-                   // userPostRef.setValue(newCount);
+                    // userPostRef.setValue(newCount);
 
                     // Run two transactions
                     //onStarClicked(globalPostRef);
                     onStarClicked(userPostRef);
-                    Log.d("QWERVTB WEQRGEV",answerModel.answerID);
+                    Log.d("QWERVTB WEQRGEV", answerModel.answerID);
                 }
             });
 
         }
+
         private void onStarClicked(DatabaseReference postRef) {
             postRef.runTransaction(new Transaction.Handler() {
                 @Override
@@ -476,6 +458,7 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
         public String getUid() {
             return FirebaseAuth.getInstance().getCurrentUser().getUid();
         }
+
         @Override
         public int getItemCount() {
             return mAnswerModels.size();

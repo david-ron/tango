@@ -28,8 +28,8 @@ public class QuestionPageActivity extends BaseActivity {
     private DatabaseReference rootDB;
 
 
-    private EditText QuestionTitle;
-    private EditText QuestionBody;
+    private EditText questionTitle;
+    private EditText questionBody;
     private FloatingActionButton submitButton;
 
     @Override
@@ -41,8 +41,8 @@ public class QuestionPageActivity extends BaseActivity {
         rootDB = FirebaseDatabase.getInstance().getReference();
 
         // Initialize Fields
-        QuestionTitle = findViewById(R.id.field_title);
-        QuestionBody = findViewById(R.id.field_body);
+        questionTitle = findViewById(R.id.field_title);
+        questionBody = findViewById(R.id.field_body);
         submitButton = findViewById(R.id.fab_submit_post);
 
         submitButton.setOnClickListener(new View.OnClickListener() {
@@ -59,18 +59,18 @@ public class QuestionPageActivity extends BaseActivity {
      * Add new question to the DataBase
      */
     public void submitPost() {
-        final String title = QuestionTitle.getText().toString();
-        final String body = QuestionBody.getText().toString();
+        final String title = questionTitle.getText().toString();
+        final String body = questionBody.getText().toString();
 
         // Title is required
         if (TextUtils.isEmpty(title)) {
-            QuestionTitle.setError(REQUIRED);
+            questionTitle.setError(REQUIRED);
             return;
         }
 
         // Body is required
         if (TextUtils.isEmpty(body)) {
-            QuestionBody.setError(REQUIRED);
+            questionBody.setError(REQUIRED);
             return;
         }
 
@@ -114,8 +114,8 @@ public class QuestionPageActivity extends BaseActivity {
     }
 
     public void setEditingEnabled(boolean enabled) {
-        QuestionTitle.setEnabled(enabled);
-        QuestionBody.setEnabled(enabled);
+        questionTitle.setEnabled(enabled);
+        questionBody.setEnabled(enabled);
         if (enabled) {
             submitButton.setVisibility(View.VISIBLE);
         } else {
