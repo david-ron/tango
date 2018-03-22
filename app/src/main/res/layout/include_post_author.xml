@@ -20,6 +20,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:gravity="center_vertical"
-        tools:text="someauthor@email.com" android:layout_marginStart="10dp" />
+        tools:text="Username" />
 
 </LinearLayout>
