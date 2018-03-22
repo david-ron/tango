@@ -59,8 +59,9 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
     private RecyclerView answerRecyclerView;
 
     private Button addImageButton;
-    private Uri imageInGallery;
+    public Uri imageInGallery;
     private final int PICK_IMAGE = 100;
+    public ImageView imageInComment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +90,8 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
         answerRecyclerView = findViewById(R.id.recycler_comments);
 
         // Image as an answer button
-        addImageButton = (Button) findViewById(R.id.image_answer);
+        addImageButton = (Button) findViewById(R.id.button_image_answer);
+        imageInComment = findViewById(R.id.image_in_comment);
 
         postAnswerButton.setOnClickListener(this);
         answerRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -114,6 +116,7 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
             imageInGallery = data.getData();
+            imageInComment.setImageURI(imageInGallery);
         }
     }
 
@@ -172,6 +175,9 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
         if (i == R.id.button_post_comment) {
             postAnswer();
         }
+        if (i == R.id.button_image_answer){
+            postImage();
+        }
     }
 
 
@@ -188,7 +194,7 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
 
                         // Create new answerModel object
                         String commentText = answerField.getText().toString();
-                        AnswerModel answerModel = new AnswerModel(uid, authorName, commentText);
+                        AnswerModel answerModel = new AnswerModel(uid, authorName, commentText, imageInComment);
 
                         Map<String, Object> postValues = answerModel.toMap();
                         // Push the answerModel, it will appear in the list
@@ -209,12 +215,40 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
                 });
     }
 
+    private void postImage(){
+        final String uid = getUid();
+        FirebaseDatabase.getInstance().getReference().child("users").child(uid)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // Get user information
+                        User user = dataSnapshot.getValue(User.class);
+                        String authorName = user.username;
+                        // Create new answerModel object
+                        String commentText = answerField.getText().toString();
+                        AnswerModel answerModel = new AnswerModel(uid, authorName, commentText, imageInComment);
+                        Map<String, Object> postValues = answerModel.toMap();
+                        // Push the answerModel, it will appear in the list
+                        answerRef.push().setValue(answerModel);
+                        // Clear the field
+                        answerField.setText(null);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+    }
+
     private static class AnswerViewHolder extends RecyclerView.ViewHolder {
 
         public TextView authorView;
         public TextView bodyView;
         public ImageView starView;
         public TextView numStarsView;
+        public ImageView imageInCommentView;
         public AnswerViewHolder(View itemView) {
             super(itemView);
 
@@ -222,6 +256,8 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
             bodyView = itemView.findViewById(R.id.comment_body);
             starView = itemView.findViewById(R.id.star);
             numStarsView = itemView.findViewById(R.id.post_num_stars);
+            imageInCommentView = itemView.findViewById(R.id.image_in_comment);
+
         }
         public void bindToPost(AnswerModel questionModel, View.OnClickListener starClickListener) {
 

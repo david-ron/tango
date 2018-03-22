@@ -61,6 +61,12 @@
             android:layout_height="wrap_content"
             tools:text="This is the answerModel text.."/>
 
+        <ImageView
+            android:id="@+id/image_in_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_action_account_circle_40"/>
+
     </LinearLayout>
 
 </RelativeLayout>
