@@ -59,7 +59,7 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
     private RecyclerView answerRecyclerView;
 
     private Button addImageButton;
-    public Uri imageInGallery;
+    public static Uri imageInGallery;
     private final int PICK_IMAGE = 100;
     public ImageView imageInComment;
 
@@ -116,7 +116,7 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
             imageInGallery = data.getData();
-            imageInComment.setImageURI(imageInGallery);
+            //imageInComment.setImageURI(imageInGallery);
         }
     }
 
@@ -225,6 +225,9 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
                         String authorName = user.username;
                         // Create new answerModel object
                         String commentText = answerField.getText().toString();
+                        // setting the image to the one selected in gallery
+                        imageInComment.setImageURI(imageInGallery);
+                        // Passing to the model
                         AnswerModel answerModel = new AnswerModel(uid, authorName, commentText, imageInComment);
                         Map<String, Object> postValues = answerModel.toMap();
                         // Push the answerModel, it will appear in the list
@@ -256,6 +259,7 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
             starView = itemView.findViewById(R.id.star);
             numStarsView = itemView.findViewById(R.id.post_num_stars);
             imageInCommentView = itemView.findViewById(R.id.image_in_comment);
+
 
         }
         public void bindToPost(AnswerModel questionModel, View.OnClickListener starClickListener) {
@@ -299,6 +303,8 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
 
                     holder.authorView.setText(answerModel.author);
                     holder.bodyView.setText(answerModel.text);
+                    // Image in Gallery
+                    holder.imageInCommentView= answerModel.imageAnswer;
                     //  holder.numStarsView.setText(answerModel.starCount);
                     if (answerModel.stars.containsKey(getUid())) {
                         holder.starView.setImageResource(R.drawable.ic_toggle_star_24);
@@ -455,6 +461,7 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
             //nAdapter = setnAdapter(nAdapter);
             holder.authorView.setText(answerModel.author);
             holder.bodyView.setText(answerModel.text);
+            holder.imageInCommentView= answerModel.imageAnswer;
 
           //  holder.numStarsView.setText(answerModel.starCount);
             if (answerModel.stars.containsKey(getUid())) {
