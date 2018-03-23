@@ -40,8 +40,8 @@ public class GoogleSignInActivity extends BaseActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google_sign_in);
-            if(findViewById(R.id.sign_in_button).getVisibility() != View.VISIBLE){
-            Intent mainFeed = new Intent(activity,FeedActivity.class);
+        if (findViewById(R.id.sign_in_button).getVisibility() != View.VISIBLE) {
+            Intent mainFeed = new Intent(activity, FeedActivity.class);
             startActivity(mainFeed);
         }
 
@@ -109,7 +109,7 @@ public class GoogleSignInActivity extends BaseActivity implements View.OnClickLi
 
                             updateUI(user);
 
-                            Intent mainFeed = new Intent(activity,FeedActivity.class);
+                            Intent mainFeed = new Intent(activity, FeedActivity.class);
                             startActivity(mainFeed);
                         } else {
                             // If sign in fails, display a message to the user.

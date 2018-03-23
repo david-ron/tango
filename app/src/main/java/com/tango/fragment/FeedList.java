@@ -37,11 +37,12 @@ public abstract class FeedList extends Fragment {
     private RecyclerView mRecycler;
     private LinearLayoutManager mManager;
 
-    public FeedList() {}
+    public FeedList() {
+    }
 
     @Override
-    public View onCreateView (LayoutInflater inflater, ViewGroup container,
-                              Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.fragment_all_posts, container, false);
 
@@ -118,7 +119,7 @@ public abstract class FeedList extends Fragment {
                         // Need to write to both places the post is stored
                         DatabaseReference globalPostRef = rootDB.child("posts").child(postRef.getKey());
                         DatabaseReference userPostRef = rootDB.child("user-posts").child(model.uid).child(postRef.getKey());
-                        Log.d("newTESTING",postRef.getKey());
+                        Log.d("newTESTING", postRef.getKey());
 
                         // Run two transactions
                         onStarClicked(globalPostRef);

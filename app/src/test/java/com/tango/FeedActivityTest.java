@@ -7,10 +7,12 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -33,6 +35,7 @@ public class FeedActivityTest {
         doReturn(viewPage).when(tested).findViewById(R.id.container);
 
     }
+
     @Test
     public void onCreate() throws Exception {
         FeedActivity fa = new FeedActivity();

@@ -1,9 +1,7 @@
 package com.tango.models;
 
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
-import com.google.firebase.database.Query;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,9 +14,10 @@ public class AnswerModel {
     public String author;
     public String text;
     public int starCount = 0;
-    private String Aid;
+    private String aid;
     public String answerID;
     public Map<String, Boolean> stars = new HashMap<>();
+
     public AnswerModel() {
         // Default constructor required for calls to DataSnapshot.getValue(AnswerModel.class)
     }
@@ -31,11 +30,11 @@ public class AnswerModel {
     }
 
     public void setAidz(String aid) {
-        Aid = aid;
+        this.aid = aid;
     }
 
     public String getAidz() {
-        return Aid;
+        return aid;
     }
 
     // [START post_to_map]
