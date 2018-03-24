@@ -16,32 +16,24 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/title_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/title_bottom_margin"
-            android:text="Tango?"
-            android:textColor="#ffff"
-            android:textSize="100dp"
-            android:fontFamily="cursive"/>
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="300dp"
+            android:layout_height="250dp"
+            android:layout_marginTop="90dp"
+            android:contentDescription="@string/tango_logo"
+            app:srcCompat="@drawable/logotango" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="AskThe world!"
-            android:textColor="#ffff"
-            android:layout_marginTop="10dp"
+            android:textColor="#e2383e"
             android:textSize="30dp"
             android:fontFamily="cursive"
             />
 
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/tango_logo"
-            app:srcCompat="@drawable/logotango" />
+
 
     </LinearLayout>
 
@@ -50,11 +42,11 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_weight="1"
-        android:background="#f2a456">
+        android:background="#cacaca">
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/sign_in_button"
-            android:layout_width="110dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:visibility="visible"
@@ -77,7 +69,7 @@
 
         <Button
             android:id="@+id/sign_out_button"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/sign_out_and_disconnect"
             android:layout_centerHorizontal="true"
