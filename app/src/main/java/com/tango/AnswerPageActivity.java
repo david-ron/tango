@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -31,6 +32,9 @@ import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.tango.models.AnswerModel;
 import com.tango.models.QuestionModel;
 import com.tango.models.User;
@@ -58,10 +62,15 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
     private Button postAnswerButton;
     private RecyclerView answerRecyclerView;
 
+    // Image answer
     private Button addImageButton;
-    public  Uri imageInGallery;
-    private final int PICK_IMAGE = 100;
+    public  Uri selectedImage;
+    private static final int RC_PHOTO_PICKER = 2;
     public ImageView imageInComment;
+
+    // Firebase instance for image storage
+    private FirebaseStorage mFirebaseStorage;
+    private StorageReference mImageAnswerReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +89,9 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
          */
         questionRef = FirebaseDatabase.getInstance().getReference().child("posts").child(questionKey);
         answerRef = FirebaseDatabase.getInstance().getReference().child("post-comments").child(questionKey);
+        mFirebaseStorage = FirebaseStorage.getInstance();
+
+        mImageAnswerReference = mFirebaseStorage.getReference().child("comment_photos");
 
         // Initialize Views
         authorView = findViewById(R.id.post_author);
@@ -95,6 +107,17 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
 
         postAnswerButton.setOnClickListener(this);
         answerRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        //Opening gallery to post image
+        addImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/jpeg");
+                intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+                startActivityForResult(Intent.createChooser(intent, "Complete action using"), RC_PHOTO_PICKER);
+            }
+        });
 
     }
 
@@ -155,6 +178,58 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
         }
     }
 
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+        if(requestCode == RC_PHOTO_PICKER && resultCode == RESULT_OK){
+            selectedImage = data.getData();
+
+            /**
+             assume the image is located at Oumar/Gallery/Photos/WinterSelfie
+             The method getLastPathSegment will give WinterSelfie as a result
+
+             The first line is for making a reference to store the image at "comment_photos"
+             The second line is for uploading the image to Firebase Storage
+             **/
+            StorageReference picturesReference = mImageAnswerReference.child(selectedImage.getLastPathSegment());
+            picturesReference.putFile(selectedImage).addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            // When the image has successfully uploaded, we get its download URL
+                            final Uri downloadUrl = taskSnapshot.getDownloadUrl();
+
+//                            // Set the download URL to the message box, so that the user can send it to the database
+//                            AnswerModel ImageAsAnswer = new AnswerModel(null, authorName, downloadUrl.toString());
+//                            mMessagesDatabaseReference.push().setValue(imageAsAnswer);
+
+                            final String uid = getUid();
+                            FirebaseDatabase.getInstance().getReference().child("users").child(uid)
+                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                            // Get user information
+                                            User user = dataSnapshot.getValue(User.class);
+                                            String authorName = user.username;
+                                            // Create new answerModel object
+                                            String commentText = answerField.getText().toString();
+                                            AnswerModel answerModel = new AnswerModel(uid, authorName, commentText, downloadUrl.toString());
+
+                                            Map<String, Object> postValues = answerModel.toMap();
+                                            // Push the answerModel, it will appear in the list
+                                            answerRef.push().setValue(answerModel);
+                                            answerField.setText(null);
+                                        }
+
+                                        @Override
+                                        public void onCancelled(DatabaseError databaseError) {
+
+                                        }
+                                    });
+
+                        }
+                    });
+            }
+        }
+    
+
 
     // Add new answer to the DB
     private void postAnswer() {
@@ -168,7 +243,7 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
                         String authorName = user.username;
                         // Create new answerModel object
                         String commentText = answerField.getText().toString();
-                        AnswerModel answerModel = new AnswerModel(uid, authorName, commentText, imageInComment);
+                        AnswerModel answerModel = new AnswerModel(uid, authorName, commentText, null);
 
                         Map<String, Object> postValues = answerModel.toMap();
                         // Push the answerModel, it will appear in the list

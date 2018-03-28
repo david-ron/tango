@@ -20,17 +20,17 @@ public class AnswerModel {
     public int starCount = 0;
     private String Aid;
     public String answerID;
-    public ImageView imageAnswer;
+    public String imageAnswerURL;
     public Map<String, Boolean> stars = new HashMap<>();
     public AnswerModel() {
         // Default constructor required for calls to DataSnapshot.getValue(AnswerModel.class)
     }
 
-    public AnswerModel(String uid, String author, String text, ImageView image) {
+    public AnswerModel(String uid, String author, String text, String image) {
         this.uid = uid;
         this.author = author;
         this.text = text;
-        this.imageAnswer= image;
+        this.imageAnswerURL= image;
 
     }
 
@@ -50,7 +50,7 @@ public class AnswerModel {
         result.put("author", author);
         result.put("starCount", starCount);
         result.put("stars", stars);
-        result.put("image", imageAnswer);
+        result.put("image", imageAnswerURL);
 
         return result;
     }
