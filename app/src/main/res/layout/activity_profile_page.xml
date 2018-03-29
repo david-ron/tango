@@ -10,69 +10,51 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp">
-
-        <TextView
-            android:id="@+id/username"
-            android:layout_marginTop="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="USERNAME"
-            android:translationZ="1dp"
-            android:gravity="center"
-            android:textColor="#FFF" />
+        android:layout_height="275dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="240dp"
+            android:id="@+id/firstlayout"
             android:background="@drawable/gradientbackground"
             android:orientation="vertical">
             <ImageView
-                android:layout_width="90dp"
-                android:layout_height="90dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="55dp"
+                android:layout_marginTop="20dp"
                 android:id="@+id/profilePicture"
                 android:background="#e6e2e1"
                 android:src="@drawable/profilepicture" />
-            <Button
-                android:layout_width="50dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:text="Change picture"
-                android:layout_marginTop="5dp"
-                android:background="#56CCF2"
-                android:id="@+id/changepicture"
-                android:textSize="5dp"/>
+
             <LinearLayout
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:layout_gravity="center">
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp">
                 <TextView
-                    android:layout_marginTop="5dp"
+                    android:id="@+id/username"
+                    android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="First Name"
-                    android:textSize="21sp"
-                    android:textColor="#fff"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=" "/>
-                <TextView
-                    android:layout_marginTop="5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="Last Name"
-                    android:textSize="21sp"
+                    android:text="UserName"
+                    android:textSize="25dp"
                     android:textColor="#fff"
                     android:textStyle="bold"/>
             </LinearLayout>
+
         </LinearLayout>
-        <android.support.v7.widget.CardView
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:text="Change picture"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="220dp"
+            android:background="#f25680"
+            android:id="@+id/changepicture"
+            android:textSize="10dp"/>
+        <!--<android.support.v7.widget.CardView
             android:layout_width="270dp"
             android:layout_height="70dp"
             android:layout_centerHorizontal="true"
@@ -100,8 +82,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
-                        android:text="0"
-                        android:textSize="15dp"
+                        android:text="@string/_0"
+                        android:textSize="15sp"
                         android:paddingTop="10dp"
                         android:textColor="#2057a3"/>
                 </LinearLayout>
@@ -115,7 +97,7 @@
                         android:id="@+id/AnswersInProfilePage"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
-                        android:text="Answers"
+                        android:text="@string/answers"
                         android:textSize="15dp"
                         />
                     <TextView
@@ -150,13 +132,12 @@
                         android:textColor="#2057a3"/>
                 </LinearLayout>
             </LinearLayout>
-
-        </android.support.v7.widget.CardView>
+        </android.support.v7.widget.CardView>-->
     </RelativeLayout>
     <android.support.v7.widget.CardView
         android:layout_width="340dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="15dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="2dp"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:orientation="vertical"
@@ -173,21 +154,20 @@
                 android:orientation="vertical"
                 >
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_contact_mail_black_24dp"/>
                 <TextView
+                    android:id="@+id/email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="user@email.com"
-                    android:textSize="18dp"
-                    android:layout_marginTop="10dp"
+                    android:textSize="25dp"
+                    android:layout_marginTop="20dp"
                     android:layout_gravity="center"
                     />
             </LinearLayout>
-
-
         </LinearLayout>
     </android.support.v7.widget.CardView>
 

@@ -2,8 +2,15 @@
 .gradle
 /local.properties
 /.idea/workspace.xml
+.idea/workspace.xml
 /.idea/libraries
 .DS_Store
 /build
 /captures
 .externalNativeBuild
+app/.idea/.name
+app/.idea/libraries/
+app/.idea/vcs.xml
+app/.idea/workspace.xml
+
+

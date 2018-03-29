@@ -2,10 +2,12 @@ package com.tango;
 
 import android.support.test.rule.ActivityTestRule;
 import android.view.View;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 /**
@@ -23,14 +25,14 @@ public class GoogleSignInActivityTest {
     }
 
     @Test
-    public void testLaunchTitle(){
+    public void testLaunchTitle() {
         View viewTitle = mActivity.findViewById(R.id.title_text);
         assertNotNull(viewTitle);
 
     }
 
     @Test
-    public void testLaunchSignInButton(){
+    public void testLaunchSignInButton() {
         View viewButton = mActivity.findViewById(R.id.sign_in_button);
         assertNotNull(viewButton);
 

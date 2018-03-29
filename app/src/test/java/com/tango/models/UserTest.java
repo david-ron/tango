@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class UserTest {
 
     @Test
-    public void User(){
+    public void User() {
         User user = new User(" ", " ");
         User user2 = new User();
         assertTrue(true);

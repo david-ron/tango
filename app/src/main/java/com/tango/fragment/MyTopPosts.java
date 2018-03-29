@@ -5,7 +5,8 @@ import com.google.firebase.database.Query;
 
 public class MyTopPosts extends FeedList {
 
-    public MyTopPosts() {}
+    public MyTopPosts() {
+    }
 
     @Override
     public Query getQuery(DatabaseReference databaseReference) {
