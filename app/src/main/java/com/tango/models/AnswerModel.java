@@ -25,7 +25,11 @@ public class AnswerModel {
     public AnswerModel() {
         // Default constructor required for calls to DataSnapshot.getValue(AnswerModel.class)
     }
-
+    public AnswerModel(String uid, String author, String text){
+        this.uid = uid;
+        this.author = author;
+        this.text = text;
+    }
     public AnswerModel(String uid, String author, String text, String image) {
         this.uid = uid;
         this.author = author;
