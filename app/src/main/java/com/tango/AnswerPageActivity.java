@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -228,7 +229,7 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
                     });
             }
         }
-    
+
 
 
     // Add new answer to the DB
@@ -279,6 +280,7 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
             bodyView = itemView.findViewById(R.id.comment_body);
             starView = itemView.findViewById(R.id.star);
             numStarsView = itemView.findViewById(R.id.post_num_stars);
+            imageInCommentView = itemView.findViewById(R.id.image_in_comment);
 
 
         }
@@ -323,6 +325,17 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
 
                     holder.authorView.setText(answerModel.author);
                     holder.bodyView.setText(answerModel.text);
+                    // Photo as answer
+                    //AnswerModel message = getItem(position);
+                    boolean isPhoto = answerModel.getImageAnswerURL() != null;
+                    if (isPhoto) {
+                        //messageTextView.setVisibility(View.GONE);
+                        holder.imageInCommentView.setVisibility(View.VISIBLE);
+                        Glide.with(holder.imageInCommentView.getContext())
+                                .load(answerModel.getImageAnswerURL())
+                                .into(holder.imageInCommentView);
+                    }
+
                     //  holder.numStarsView.setText(answerModel.starCount);
                     if (answerModel.stars.containsKey(getUid())) {
                         holder.starView.setImageResource(R.drawable.ic_toggle_star_24);
@@ -479,6 +492,15 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
             //nAdapter = setnAdapter(nAdapter);
             holder.authorView.setText(answerModel.author);
             holder.bodyView.setText(answerModel.text);
+
+            boolean isPhoto = answerModel.getImageAnswerURL() != null;
+            if (isPhoto) {
+                //messageTextView.setVisibility(View.GONE);
+                holder.imageInCommentView.setVisibility(View.VISIBLE);
+                Glide.with(holder.imageInCommentView.getContext())
+                        .load(answerModel.getImageAnswerURL())
+                        .into(holder.imageInCommentView);
+            }
 
           //  holder.numStarsView.setText(answerModel.starCount);
             if (answerModel.stars.containsKey(getUid())) {

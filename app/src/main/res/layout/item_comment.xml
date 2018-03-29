@@ -36,8 +36,8 @@
         android:id="@+id/comment_photo"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_centerVertical="true"
         android:src="@drawable/ic_action_account_circle_40"/>
+        <!--android:layout_centerVertical="true"-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -65,7 +65,8 @@
             android:id="@+id/image_in_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_action_account_circle_40"/>
+            android:layout_gravity="center"
+           />
 
     </LinearLayout>
 

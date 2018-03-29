@@ -56,5 +56,9 @@ public class AnswerModel {
     }
     // [END post_to_map]
 
+    public String getImageAnswerURL() {
+        return imageAnswerURL;
+    }
+
 }
 // [END comment_class]
