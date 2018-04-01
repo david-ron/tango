@@ -170,7 +170,7 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
                 });
     }
 
-    private static class AnswerViewHolder extends RecyclerView.ViewHolder {
+    static class AnswerViewHolder extends RecyclerView.ViewHolder {
 
         public TextView authorView;
         public TextView bodyView;
@@ -187,7 +187,7 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
         }
     }
 
-    private class AnswerAdapter extends RecyclerView.Adapter<AnswerViewHolder> {
+    class AnswerAdapter extends RecyclerView.Adapter<AnswerViewHolder> {
 
         private Context mContext;
         private DatabaseReference mDatabaseReference;
