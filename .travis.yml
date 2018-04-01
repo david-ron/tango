@@ -13,15 +13,19 @@ cache:
 android:
         components:
                 - platform-tools
-                - build-tools-26.0.2
+                - tools
+                - build-tools-27.0.2
                 - android-27
+                - add-on
+                - extra-android-support
                 - extra-android-m2repository
                 - sys-img-armeabi-v7a-android-tv-l
 script:
         - ./gradlew build
         - ./gradlew test
 before_install:
-        - chmod +x gradlew
+        - chmod +x ./gradlew
+        - yes | sdkmanager "platforms;android-27"
 bbefore_script:
   - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
   - emulator -avd test -no-audio -no-window &
