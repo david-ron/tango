@@ -1,7 +1,10 @@
 package com.tango;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,12 +14,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -27,6 +33,9 @@ import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.tango.models.AnswerModel;
 import com.tango.models.QuestionModel;
 import com.tango.models.User;
@@ -54,6 +63,16 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
     private Button postAnswerButton;
     private RecyclerView answerRecyclerView;
 
+    // Image answer
+    private Button addImageButton;
+    public  Uri selectedImage;
+    private static final int RC_PHOTO_PICKER = 2;
+    public ImageView imageInComment;
+
+    // Firebase instance for image storage
+    private FirebaseStorage mFirebaseStorage;
+    private StorageReference mImageAnswerReference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +90,9 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
          */
         questionRef = FirebaseDatabase.getInstance().getReference().child("posts").child(questionKey);
         answerRef = FirebaseDatabase.getInstance().getReference().child("post-comments").child(questionKey);
+        mFirebaseStorage = FirebaseStorage.getInstance();
+
+        mImageAnswerReference = mFirebaseStorage.getReference().child("comment_photos");
 
         // Initialize Views
         authorView = findViewById(R.id.post_author);
@@ -80,8 +102,23 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
         postAnswerButton = findViewById(R.id.button_post_comment);
         answerRecyclerView = findViewById(R.id.recycler_comments);
 
+        // Image as an answer button
+        addImageButton = (Button) findViewById(R.id.button_image_answer);
+        imageInComment = (ImageView) findViewById(R.id.image_in_comment);
+
         postAnswerButton.setOnClickListener(this);
         answerRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        //Opening gallery to post image
+        addImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/jpeg");
+                intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+                startActivityForResult(Intent.createChooser(intent, "Complete action using"), RC_PHOTO_PICKER);
+            }
+        });
 
     }
 
@@ -142,6 +179,59 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
         }
     }
 
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+        if(requestCode == RC_PHOTO_PICKER && resultCode == RESULT_OK){
+            selectedImage = data.getData();
+
+            /**
+             assume the image is located at Oumar/Gallery/Photos/WinterSelfie
+             The method getLastPathSegment will give WinterSelfie as a result
+
+             The first line is for making a reference to store the image at "comment_photos"
+             The second line is for uploading the image to Firebase Storage
+             **/
+            StorageReference picturesReference = mImageAnswerReference.child(selectedImage.getLastPathSegment());
+            picturesReference.putFile(selectedImage).addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            // When the image has successfully uploaded, we get its download URL
+                            final Uri downloadUrl = taskSnapshot.getDownloadUrl();
+
+//                            // Set the download URL to the message box, so that the user can send it to the database
+//                            AnswerModel ImageAsAnswer = new AnswerModel(null, authorName, downloadUrl.toString());
+//                            mMessagesDatabaseReference.push().setValue(imageAsAnswer);
+
+                            final String uid = getUid();
+                            FirebaseDatabase.getInstance().getReference().child("users").child(uid)
+                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                            // Get user information
+                                            User user = dataSnapshot.getValue(User.class);
+                                            String authorName = user.username;
+                                            // Create new answerModel object
+                                            String commentText = answerField.getText().toString();
+                                            AnswerModel answerModel = new AnswerModel(uid, authorName, commentText, downloadUrl.toString());
+
+                                            Map<String, Object> postValues = answerModel.toMap();
+                                            // Push the answerModel, it will appear in the list
+                                            answerRef.push().setValue(answerModel);
+                                            answerField.setText(null);
+                                        }
+
+                                        @Override
+                                        public void onCancelled(DatabaseError databaseError) {
+
+                                        }
+                                    });
+
+                        }
+                    });
+            }
+        }
+
+
+
     // Add new answer to the DB
     public void postAnswer() {
         final String uid = getUid();
@@ -152,10 +242,9 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
                         // Get user information
                         User user = dataSnapshot.getValue(User.class);
                         String authorName = user.username;
-
                         // Create new answerModel object
                         String commentText = answerField.getText().toString();
-                        AnswerModel answerModel = new AnswerModel(uid, authorName, commentText);
+                        AnswerModel answerModel = new AnswerModel(uid, authorName, commentText, null);
 
                         Map<String, Object> postValues = answerModel.toMap();
                         // Push the answerModel, it will appear in the list
@@ -176,13 +265,15 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
                 });
     }
 
+
     public static class AnswerViewHolder extends RecyclerView.ViewHolder {
 
         public TextView authorView;
         public TextView bodyView;
         public ImageView starView;
         public TextView numStarsView;
-
+        public ImageView imageInCommentView;
+      
         public AnswerViewHolder(View itemView) {
             super(itemView);
 
@@ -190,6 +281,9 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
             bodyView = itemView.findViewById(R.id.comment_body);
             starView = itemView.findViewById(R.id.star);
             numStarsView = itemView.findViewById(R.id.post_num_stars);
+            imageInCommentView = itemView.findViewById(R.id.image_in_comment);
+
+
         }
 
         public void bindToPost(AnswerModel questionModel, View.OnClickListener starClickListener) {
@@ -232,6 +326,17 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
 
                     holder.authorView.setText(answerModel.author);
                     holder.bodyView.setText(answerModel.text);
+                    // Photo as answer
+                    //AnswerModel message = getItem(position);
+                    boolean isPhoto = answerModel.getImageAnswerURL() != null;
+                    if (isPhoto) {
+                        //messageTextView.setVisibility(View.GONE);
+                        holder.imageInCommentView.setVisibility(View.VISIBLE);
+                        Glide.with(holder.imageInCommentView.getContext())
+                                .load(answerModel.getImageAnswerURL())
+                                .into(holder.imageInCommentView);
+                    }
+
                     //  holder.numStarsView.setText(answerModel.starCount);
                     if (answerModel.stars.containsKey(getUid())) {
                         holder.starView.setImageResource(R.drawable.ic_toggle_star_24);
@@ -388,7 +493,17 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
             holder.authorView.setText(answerModel.author);
             holder.bodyView.setText(answerModel.text);
 
-            //  holder.numStarsView.setText(answerModel.starCount);
+            boolean isPhoto = answerModel.getImageAnswerURL() != null;
+            if (isPhoto) {
+                //messageTextView.setVisibility(View.GONE);
+                holder.imageInCommentView.setVisibility(View.VISIBLE);
+                Glide.with(holder.imageInCommentView.getContext())
+                        .load(answerModel.getImageAnswerURL())
+                        .into(holder.imageInCommentView);
+            }
+
+          //  holder.numStarsView.setText(answerModel.starCount);
+
             if (answerModel.stars.containsKey(getUid())) {
                 holder.starView.setImageResource(R.drawable.ic_toggle_star_24);
             } else {
@@ -471,6 +586,8 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
         }
 
     }
+
+
 
 }
 

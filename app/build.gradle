@@ -4,6 +4,7 @@ android {
 
 
     compileSdkVersion 27
+    buildToolsVersion "27.0.2"
     defaultConfig {
         applicationId "com.tango"
         minSdkVersion 15
@@ -54,6 +55,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile "com.google.android.gms:play-services-auth:11.8.0"
     compile 'com.google.firebase:firebase-database:11.8.0'
+    compile 'com.google.firebase:firebase-storage:11.8.0'
+    compile 'com.github.bumptech.glide:glide:3.6.0'
+
 }
 
 
