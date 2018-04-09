@@ -299,7 +299,7 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
         }
     }
 
-    public static class AnswerAdapter extends RecyclerView.Adapter<AnswerViewHolder> {
+    public class AnswerAdapter extends RecyclerView.Adapter<AnswerViewHolder> {
         private DatabaseReference rootDB;
         private FirebaseRecyclerAdapter<AnswerModel, AnswerViewHolder> nAdapter;
         private Context mContext;
@@ -343,7 +343,7 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
                     } else {
                         holder.starView.setImageResource(R.drawable.ic_toggle_star_outline_24);
                     }
-                    Log.d("commenterror", answerModel.toString());
+                   // Log.d("commenterror", answerModel.toString());
                     //  DatabaseReference postRef = FirebaseRecyclerAdapter.getRef(position);
                     holder.bindToPost(answerModel, new View.OnClickListener() {
                         final DatabaseReference postRef = getRef(position);
@@ -351,19 +351,8 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
                         String Key = postRef.getKey();
 
                         @Override
-                        public void onClick(View starView) {
-                            // Need to write to both places the post is stored
-                            // DatabaseReference globalPostRef = rootDB.child("posts").child(AnswerAdapter.this.toString());
-
-
-                            Log.d("Keytest", Key.toString());
-                            DatabaseReference userPostRef = rootDB.child("post-comments").child(Key);
-                            onStarClicked(userPostRef);
-
-
-                            // Run two transactions
-                            // onStarClicked(globalPostRef);
-                            //onStarClicked(userPostRef);
+                        public void onClick(View view) {
+                              onStarClicked(answerRef.child(mCommentIds.get(position)), answerModel,position);
                         }
                     });
 
@@ -516,27 +505,14 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
 
 
                 @Override
-                public void onClick(View starView) {
-                    // Need to write to both places the post is stored
-                    //DatabaseReference globalPostRef = rootDB.child("posts").child(answerModel.answerID).child(answerModel.getAidz());
-
-                    //final int keytest = Log.d("Keytest", answerModel.getAidz().toString());
-                    DatabaseReference userPostRef = rootDB.child("post-comments").child(answerModel.answerID).child(answerModel.getAidz());
-                    //onStarClicked(userPostRef);
-
-
-                    // userPostRef.setValue(newCount);
-
-                    // Run two transactions
-                    //onStarClicked(globalPostRef);
-                    onStarClicked(userPostRef);
-                    Log.d("QWERVTB WEQRGEV", answerModel.answerID);
+                public void onClick(View view) {
+                     onStarClicked(answerRef.child(mCommentIds.get(position)), answerModel,position);
                 }
             });
 
         }
 
-        private void onStarClicked(DatabaseReference postRef) {
+        private void onStarClicked(DatabaseReference postRef, final AnswerModel answerModel,int position) {
             postRef.runTransaction(new Transaction.Handler() {
                 @Override
                 public Transaction.Result doTransaction(MutableData mutableData) {
@@ -545,6 +521,9 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
                         return Transaction.success(mutableData);
                     }
 
+                                 p.author = answerModel.author;
+                                        p.text = answerModel.text;
+                                      p.uid = answerModel.uid;
                     if (p.stars.containsKey(getUid())) {
                         // Unstar the post and remove self from stars
                         p.starCount = p.starCount - 1;
@@ -566,7 +545,7 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
                     // Transaction completed
                     Log.d(TAG, "postTransaction:onComplete:" + databaseError);
                 }
-            });
+                    });
         }
 
 
