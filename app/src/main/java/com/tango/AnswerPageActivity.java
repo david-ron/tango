@@ -90,8 +90,11 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
          */
         questionRef = FirebaseDatabase.getInstance().getReference().child("posts").child(questionKey);
         answerRef = FirebaseDatabase.getInstance().getReference().child("post-comments").child(questionKey);
-        mFirebaseStorage = FirebaseStorage.getInstance();
 
+        /**
+         * comment_photos contains the Images
+         */
+        mFirebaseStorage = FirebaseStorage.getInstance();
         mImageAnswerReference = mFirebaseStorage.getReference().child("comment_photos");
 
         // Initialize Views

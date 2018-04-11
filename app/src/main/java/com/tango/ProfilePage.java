@@ -10,8 +10,21 @@ import android.widget.ImageView;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.tango.models.AnswerModel;
+import com.tango.models.User;
+
+import java.util.Map;
 
 public class ProfilePage extends AppCompatActivity {
 
@@ -20,10 +33,15 @@ public class ProfilePage extends AppCompatActivity {
     TextView username;
     TextView email;
     private static int PICK_IMAGE = 100;
+    private static final int RC_PHOTO_PICKER = 2;
     Uri imageInGallery;           // This is the image inside the gallery
 
     //Access to Firebase
     private FirebaseAuth mAuth;
+
+    // Firebase instance for image storage
+    private FirebaseStorage mFirebaseStorage;
+    private StorageReference mProfilePictureReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +61,13 @@ public class ProfilePage extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
 
+        /**
+         * profile_picture contains the Profile pictures
+         */
+
+        mFirebaseStorage = FirebaseStorage.getInstance();
+        mProfilePictureReference = mFirebaseStorage.getReference().child("profile_picture");
+
         // Setting username and email
         username.setText(usernameFromEmail(user.getEmail()));
         email.setText(user.getEmail());
@@ -50,21 +75,45 @@ public class ProfilePage extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openGallery();
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/jpeg");
+                intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+                startActivityForResult(Intent.createChooser(intent, "Complete action using"), RC_PHOTO_PICKER);
             }
         });
     }
 
-    public void openGallery() {
-        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-        startActivityForResult(gallery, PICK_IMAGE);  // Only 100 images will appear when gallery is opened because PICK_IMAGE=100
-    }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
+        if (requestCode == RC_PHOTO_PICKER && resultCode == RESULT_OK) {
             imageInGallery = data.getData();
-            profilePicture.setImageURI(imageInGallery);   // Set the profile picture to rhe image selected in the gallery
+
+            mAuth = FirebaseAuth.getInstance();
+            FirebaseUser userForProfilePicture = mAuth.getCurrentUser();
+           // profilePicture.setImageURI(imageInGallery);   // Set the profile picture to rhe image selected in the gallery
+
+            /**
+             assume the image is located at Oumar/Gallery/Photos/WinterSelfie
+             The method getLastPathSegment will give WinterSelfie as a result
+
+             The first line is for making a reference to store the image at "comment_photos"
+             The second line is for uploading the image to Firebase Storage
+             **/
+            StorageReference picturesReference = mProfilePictureReference.child(userForProfilePicture.getEmail());
+            picturesReference.putFile(imageInGallery).addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    // When the image has successfully uploaded, we get its download URL
+                    final Uri downloadUrl = taskSnapshot.getDownloadUrl();
+
+//                            // Set the download URL to the message box, so that the user can send it to the database
+//                            AnswerModel ImageAsAnswer = new AnswerModel(null, authorName, downloadUrl.toString());
+//                            mMessagesDatabaseReference.push().setValue(imageAsAnswer);
+
+                    Glide.with(profilePicture.getContext()).load(downloadUrl.toString()).into(profilePicture);
+
+                }
+            });
         }
     }
 
@@ -74,6 +123,10 @@ public class ProfilePage extends AppCompatActivity {
         } else {
             return email;
         }
+    }
+
+    public String getUid() {
+        return FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 
 }
