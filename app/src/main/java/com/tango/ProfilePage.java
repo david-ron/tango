@@ -18,12 +18,15 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.tango.models.AnswerModel;
 import com.tango.models.User;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class ProfilePage extends AppCompatActivity {
@@ -42,6 +45,10 @@ public class ProfilePage extends AppCompatActivity {
     // Firebase instance for image storage
     private FirebaseStorage mFirebaseStorage;
     private StorageReference mProfilePictureReference;
+    public HashMap<String, Uri> usersWithProfilePicture = new HashMap();
+
+    public String userEmail="";
+    public String userPictureUrl="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,18 +66,36 @@ public class ProfilePage extends AppCompatActivity {
 
         // Get the current user
         mAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = mAuth.getCurrentUser();
+        final FirebaseUser user = mAuth.getCurrentUser();
 
         /**
          * profile_picture contains the Profile pictures
          */
 
         mFirebaseStorage = FirebaseStorage.getInstance();
+       // mProfilePictureReference = mFirebaseStorage.getReference().child("profile_picture");
         mProfilePictureReference = mFirebaseStorage.getReference().child("profile_picture");
 
         // Setting username and email
         username.setText(usernameFromEmail(user.getEmail()));
         email.setText(user.getEmail());
+
+//
+//        if(usersWithProfilePicture.containsKey(user.getEmail())){
+            StorageReference picturesReference = mProfilePictureReference.child(user.getEmail());
+            picturesReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
+            {
+                @Override
+                public void onSuccess(Uri downloadUrl)
+                {
+                    String url = downloadUrl.toString();
+
+                    Glide.with(profilePicture.getContext()).load(url).into(profilePicture);
+
+                }
+            });
+
+   //     }
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,7 +115,7 @@ public class ProfilePage extends AppCompatActivity {
             imageInGallery = data.getData();
 
             mAuth = FirebaseAuth.getInstance();
-            FirebaseUser userForProfilePicture = mAuth.getCurrentUser();
+            final FirebaseUser userForProfilePicture = mAuth.getCurrentUser();
            // profilePicture.setImageURI(imageInGallery);   // Set the profile picture to rhe image selected in the gallery
 
             /**
@@ -109,6 +134,7 @@ public class ProfilePage extends AppCompatActivity {
 //                            // Set the download URL to the message box, so that the user can send it to the database
 //                            AnswerModel ImageAsAnswer = new AnswerModel(null, authorName, downloadUrl.toString());
 //                            mMessagesDatabaseReference.push().setValue(imageAsAnswer);
+                    usersWithProfilePicture.put(userForProfilePicture.getEmail(),downloadUrl);
 
                     Glide.with(profilePicture.getContext()).load(downloadUrl.toString()).into(profilePicture);
 
