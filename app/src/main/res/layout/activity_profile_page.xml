@@ -5,8 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.tango.ProfilePage"
-    android:background="#fafafa"
-    android:orientation="vertical">
+    android:background="?attr/backgroundColor"
+    android:orientation="vertical"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -40,7 +41,7 @@
                     android:layout_gravity="center_horizontal"
                     android:text="UserName"
                     android:textSize="25dp"
-                    android:textColor="#fff"
+                    android:textColor="?attr/textcolor"
                     android:textStyle="bold"/>
             </LinearLayout>
 
@@ -165,6 +166,7 @@
                     android:text="user@email.com"
                     android:textSize="25dp"
                     android:layout_marginTop="20dp"
+                    android:textColor="?attr/textcolor"
                     android:layout_gravity="center"
                     />
             </LinearLayout>
