@@ -1,11 +1,14 @@
 package com.tango;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatDelegate;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -42,7 +45,17 @@ public class QuestionPageActivity extends BaseActivity {
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
+        if(Build.VERSION.SDK_INT>=21){
+            Window window = this.getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+                window.setStatusBarColor(this.getResources().getColor(R.color.black));
+            } else {
+                window.setStatusBarColor(this.getResources().getColor(R.color.blue));
+            }
 
+        }
         // Set rootDB to root of FireBase DataBase
         rootDB = FirebaseDatabase.getInstance().getReference();
 

@@ -39,6 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:textColor="?attr/textcolor"
         android:layout_margin="16dp"
         android:src="@drawable/ic_navigation_check_24" android:layout_alignParentEnd="true"/>
 
