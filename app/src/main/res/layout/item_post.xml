@@ -3,12 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp">
+    android:layout_margin="5dp"
+    android:background="?attr/backgroundColor">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:background="?attr/backgroundColor"
+        android:textColor="?attr/textcolor">
 
         <include
             android:id="@+id/post_author_layout"
@@ -25,6 +28,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignTop="@+id/post_author_layout"
             android:gravity="center_vertical"
+            android:background="?attr/backgroundColor"
             android:orientation="horizontal" android:layout_alignParentEnd="true">
 
             <ImageView
@@ -33,7 +37,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="5dp"
-                android:background="?attr/selectableItemBackground"
+
+
                 android:contentDescription="@string/profile_picture"
                 android:src="@drawable/ic_toggle_star_outline_24" android:layout_marginStart="10dp" android:layout_marginEnd="5dp"/>
 
@@ -42,6 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:textColor="?attr/textcolor"
                 tools:text="7" />
 
         </LinearLayout>
@@ -51,6 +57,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/post_author_layout"
+            android:background="?attr/backgroundColor"
+            android:textColor="?attr/textcolor"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp" android:layout_alignParentStart="true" android:layout_marginStart="5dp"/>
 

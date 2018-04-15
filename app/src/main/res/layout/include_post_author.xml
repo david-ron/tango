@@ -4,12 +4,14 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="?attr/backgroundColor">
 
     <ImageView
         android:id="@+id/post_author_photo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:contentDescription="@string/profile_string_profile_picture"
         android:src="@drawable/ic_action_account_circle_40" />
 
@@ -20,6 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:gravity="center_vertical"
+        android:background="?attr/backgroundColor"
+        android:textColor="?attr/textcolor"
         tools:text="Username" />
 
 </LinearLayout>

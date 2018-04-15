@@ -7,6 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="?attr/backgroundColor"
     tools:context="com.tango.AnswerPageActivity">
 
     <include
@@ -41,14 +42,17 @@
             android:layout_weight="0.6"
             android:layout_height="wrap_content"
             android:maxLines="1"
-            android:hint="Post your answer"/>
+            android:textColor="?attr/textcolor"
+            android:hint="Post your answer"
+            android:textColorHint="?attr/textcolor"/>
         <Button
             android:id="@+id/button_image_answer"
             style="@style/Base.Widget.AppCompat.Button.Borderless"
             android:layout_width="0dp"
             android:layout_weight="0.2"
             android:layout_height="wrap_content"
-            android:text="Image"/>
+            android:text="Image"
+            android:textColor="?attr/textcolor"/>
 
 
         <Button
@@ -57,7 +61,8 @@
             android:layout_width="0dp"
             android:layout_weight="0.2"
             android:layout_height="wrap_content"
-            android:text="@string/post"/>
+            android:text="@string/post"
+            android:textColor="?attr/textcolor"/>
 
     </LinearLayout>
 
