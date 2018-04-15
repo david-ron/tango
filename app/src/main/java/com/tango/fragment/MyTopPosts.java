@@ -12,8 +12,8 @@ public class MyTopPosts extends FeedList {
     public Query getQuery(DatabaseReference databaseReference) {
         // My top posts by number of stars
         String myUserId = getUid();
-        Query myTopPostsQuery = databaseReference.child("user-posts").child(myUserId)
-                .orderByChild("starCount");
+        Query myTopPostsQuery = databaseReference.child("posts")
+                .orderByChild("starCount").limitToFirst(100);
 
         return myTopPostsQuery;
     }

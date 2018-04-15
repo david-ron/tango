@@ -67,15 +67,15 @@ public class FeedActivity extends BaseActivity {
         pageAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
             private final Fragment[] mFragments = new Fragment[]{
                     new RecentPosts(),
-                    new MyPosts(),
                     new MyTopPosts(),
+                    new MyPosts(),
                     new Favorites()
                     //new Favorites()
             };
             private final String[] mFragmentNames = new String[]{
                     getString(R.string.heading_recent),
-                    getString(R.string.heading_my_posts),
                     getString(R.string.heading_my_top_posts),
+                    getString(R.string.heading_my_posts),
                     getString(R.string.heading_favorites)
             };
 
