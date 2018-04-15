@@ -71,6 +71,7 @@
     <string name="heading_recent">Recent Questions</string>
     <string name="heading_my_posts">My Posts</string>
     <string name="heading_my_top_posts">Top Posts</string>
+    <string name="heading_favorites">Favorites</string>
 
     <string name="menu_login">Log in</string>
     <string name="menu_logout">Log out</string>

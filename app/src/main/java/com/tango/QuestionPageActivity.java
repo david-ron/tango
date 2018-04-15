@@ -153,7 +153,7 @@ public class QuestionPageActivity extends BaseActivity {
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put("/posts/" + key, postValues);
         childUpdates.put("/user-posts/" + userId + "/" + key, postValues);
-
+        //childUpdates.put("/favorites/" + stars + "/" + userId + "/" + key , postValues);
         rootDB.updateChildren(childUpdates);
     }
     // [END write_fan_out]

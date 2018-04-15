@@ -31,6 +31,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.tango.fragment.Favorites;
 import com.tango.fragment.MyPosts;
 import com.tango.fragment.MyTopPosts;
 import com.tango.fragment.RecentPosts;
@@ -66,11 +67,16 @@ public class FeedActivity extends BaseActivity {
         pageAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
             private final Fragment[] mFragments = new Fragment[]{
                     new RecentPosts(),
-                    new MyPosts()
+                    new MyPosts(),
+                    new MyTopPosts(),
+                    new Favorites()
+                    //new Favorites()
             };
             private final String[] mFragmentNames = new String[]{
                     getString(R.string.heading_recent),
-                    getString(R.string.heading_my_posts)
+                    getString(R.string.heading_my_posts),
+                    getString(R.string.heading_my_top_posts),
+                    getString(R.string.heading_favorites)
             };
 
             @Override
