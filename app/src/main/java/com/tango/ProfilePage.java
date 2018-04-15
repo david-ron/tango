@@ -3,6 +3,7 @@ package com.tango;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -20,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageException;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.tango.models.AnswerModel;
@@ -56,11 +59,6 @@ public class ProfilePage extends AppCompatActivity {
         setContentView(R.layout.activity_profile_page);
         username = (TextView) findViewById(R.id.username);
         email = (TextView) findViewById(R.id.email);
-
-        // This code was used when answers redirected to a profile page which is no longer the case
-        //      Intent intent = getIntent();
-        //      username.setText(intent.getStringExtra("username"));
-
         profilePicture = (ImageView) findViewById(R.id.profilePicture);
         button = (Button) findViewById(R.id.changepicture);
 
@@ -73,29 +71,49 @@ public class ProfilePage extends AppCompatActivity {
          */
 
         mFirebaseStorage = FirebaseStorage.getInstance();
-       // mProfilePictureReference = mFirebaseStorage.getReference().child("profile_picture");
         mProfilePictureReference = mFirebaseStorage.getReference().child("profile_picture");
 
         // Setting username and email
         username.setText(usernameFromEmail(user.getEmail()));
         email.setText(user.getEmail());
 
-//
-//        if(usersWithProfilePicture.containsKey(user.getEmail())){
-            StorageReference picturesReference = mProfilePictureReference.child(user.getEmail());
-            picturesReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
+        StorageReference picturesReference = mProfilePictureReference.child(user.getEmail());
+        picturesReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
+        {
+            @Override
+            public void onSuccess(Uri downloadUrl)
             {
-                @Override
-                public void onSuccess(Uri downloadUrl)
-                {
-                    String url = downloadUrl.toString();
+                final String url = downloadUrl.toString();
+                Glide.with(profilePicture.getContext()).load(url).into(profilePicture);
 
-                    Glide.with(profilePicture.getContext()).load(url).into(profilePicture);
+                ///////////////////////////
+                final String uid = getUid();
+                FirebaseDatabase.getInstance().getReference().child("users").child(uid)
+                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                // Get user information
+                                User user = dataSnapshot.getValue(User.class);
+                                user.profilePictureUrl=url;
+                            }
 
-                }
-            });
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
 
-   //     }
+                            }
+                        });
+                ///////////////////
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+                int errorCode = ((StorageException) exception).getErrorCode();
+                String errorMessage = exception.getMessage();
+            }
+        });
+
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override

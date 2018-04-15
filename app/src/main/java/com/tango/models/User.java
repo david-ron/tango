@@ -17,7 +17,7 @@ public class User {
     public User(String username, String email) {
         this.username = username;
         this.email = email;
-        this.profilePictureUrl="";
+        this.profilePictureUrl="No Profile Picture";
     }
 
 }

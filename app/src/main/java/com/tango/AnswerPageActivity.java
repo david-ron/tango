@@ -24,6 +24,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -69,9 +70,13 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
     private static final int RC_PHOTO_PICKER = 2;
     public ImageView imageInComment;
 
+    //
+    private ImageView profilePicture;
+
     // Firebase instance for image storage
     private FirebaseStorage mFirebaseStorage;
     private StorageReference mImageAnswerReference;
+    private StorageReference mProfilePictureReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +101,7 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
          */
         mFirebaseStorage = FirebaseStorage.getInstance();
         mImageAnswerReference = mFirebaseStorage.getReference().child("comment_photos");
+        mProfilePictureReference = mFirebaseStorage.getReference().child("profile_picture");
 
         // Initialize Views
         authorView = findViewById(R.id.post_author);
@@ -104,6 +110,7 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
         answerField = findViewById(R.id.field_comment_text);
         postAnswerButton = findViewById(R.id.button_post_comment);
         answerRecyclerView = findViewById(R.id.recycler_comments);
+        profilePicture = (ImageView) findViewById(R.id.comment_photo);
 
         // Image as an answer button
         addImageButton = (Button) findViewById(R.id.button_image_answer);
@@ -212,9 +219,10 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
                                             // Get user information
                                             User user = dataSnapshot.getValue(User.class);
                                             String authorName = user.username;
+                                            String profilePicture= user.profilePictureUrl;
                                             // Create new answerModel object
                                             String commentText = answerField.getText().toString();
-                                            AnswerModel answerModel = new AnswerModel(uid, authorName, commentText, downloadUrl.toString());
+                                            AnswerModel answerModel = new AnswerModel(uid, authorName, commentText, downloadUrl.toString(), profilePicture);
 
                                             Map<String, Object> postValues = answerModel.toMap();
                                             // Push the answerModel, it will appear in the list
@@ -243,11 +251,33 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         // Get user information
-                        User user = dataSnapshot.getValue(User.class);
+                        ///// Jai ajoute final
+                        final User user = dataSnapshot.getValue(User.class);
                         String authorName = user.username;
+                        String profilePicture= user.profilePictureUrl;
+                        final String url="";
+                        ////////sdfsdfsdfsdfsdfs
+                        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                        final FirebaseUser userPP = mAuth.getCurrentUser();
+                        mFirebaseStorage = FirebaseStorage.getInstance();
+                        mProfilePictureReference = mFirebaseStorage.getReference().child("profile_picture");
+//                    if(!(answerModel.profilePicture.equals("No Profile Picture"))){
+
+                        StorageReference picturesReference = mProfilePictureReference.child(userPP.getEmail());
+                        picturesReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
+                        {
+                            @Override
+                            public void onSuccess(Uri downloadUrl)
+                            {
+                                user.profilePictureUrl= downloadUrl.toString();
+
+                            }
+                        });
+                        ///////////////dsfsdfsdfsdf
                         // Create new answerModel object
+                        profilePicture="https://firebasestorage.googleapis.com/v0/b/tango-9eaa5.appspot.com/o/profile_picture%2Foumarba221296%40hotmail.fr?alt=media&token=19d3841d-be3c-4fd6-b5a9-b21a444ba794";
                         String commentText = answerField.getText().toString();
-                        AnswerModel answerModel = new AnswerModel(uid, authorName, commentText, null);
+                        AnswerModel answerModel = new AnswerModel(uid, authorName, commentText, null,profilePicture);
 
                         Map<String, Object> postValues = answerModel.toMap();
                         // Push the answerModel, it will appear in the list
@@ -276,6 +306,7 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
         public ImageView starView;
         public TextView numStarsView;
         public ImageView imageInCommentView;
+        public ImageView profilePictureView;
       
         public AnswerViewHolder(View itemView) {
             super(itemView);
@@ -285,6 +316,7 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
             starView = itemView.findViewById(R.id.star);
             numStarsView = itemView.findViewById(R.id.post_num_stars);
             imageInCommentView = itemView.findViewById(R.id.image_in_comment);
+            profilePictureView = itemView.findViewById(R.id.comment_photo);
 
 
         }
@@ -311,6 +343,12 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
         private RecyclerView mRecycler;
         private List<String> mCommentIds = new ArrayList<>();
         private List<AnswerModel> mAnswerModels = new ArrayList<>();
+        String url="";
+
+        //////
+        FirebaseStorage mFirebaseStorage;
+        StorageReference mProfilePictureReference;
+        ///
 
         public AnswerAdapter(final Context context, DatabaseReference ref) {
             mContext = context;
@@ -323,7 +361,7 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
             nAdapter = new FirebaseRecyclerAdapter<AnswerModel, AnswerViewHolder>(options) {
 
                 @Override
-                protected void onBindViewHolder(@NonNull AnswerViewHolder holder, final int position, @NonNull AnswerModel model) {
+                protected void onBindViewHolder(@NonNull  AnswerViewHolder holder, final int position, @NonNull AnswerModel model) {
                     final AnswerModel answerModel = mAnswerModels.get(position);
 
 
@@ -338,7 +376,12 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
                         Glide.with(holder.imageInCommentView.getContext())
                                 .load(answerModel.getImageAnswerURL())
                                 .into(holder.imageInCommentView);
+
+
                     }
+                    Glide.with(holder.profilePictureView.getContext())
+                            .load("https://firebasestorage.googleapis.com/v0/b/tango-9eaa5.appspot.com/o/profile_picture%2Foumarba221296%40hotmail.fr?alt=media&token=19d3841d-be3c-4fd6-b5a9-b21a444ba794")
+                            .into(holder.profilePictureView);
 
                     //  holder.numStarsView.setText(answerModel.starCount);
                     if (answerModel.stars.containsKey(getUid())) {
@@ -369,6 +412,70 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
                             //onStarClicked(userPostRef);
                         }
                     });
+
+                    //Trying to make the profile picture appear when answers are generated
+                    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                    final FirebaseUser user = mAuth.getCurrentUser();
+                    mFirebaseStorage = FirebaseStorage.getInstance();
+                    mProfilePictureReference = mFirebaseStorage.getReference().child("profile_picture");
+//                    if(!(answerModel.profilePicture.equals("No Profile Picture"))){
+
+                        StorageReference picturesReference = mProfilePictureReference.child(user.getEmail());
+                        picturesReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
+                        {
+                            @Override
+                            public void onSuccess(Uri downloadUrl)
+                            {
+//                                Glide.with(holder.profilePictureView.getContext())
+//                                        .load("https://firebasestorage.googleapis.com/v0/b/tango-9eaa5.appspot.com/o/profile_picture%2Foumarba221296%40hotmail.fr?alt=media&token=19d3841d-be3c-4fd6-b5a9-b21a444ba794")
+//                                        .into(holder.profilePictureView);
+
+                            }
+                        });
+
+
+//                    }
+
+//                    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+//                    final FirebaseUser user = mAuth.getCurrentUser();
+//                    String usernameforpp= answerModel.author;
+//                    String emailforpp=user.getEmail();
+//
+//
+//                    mFirebaseStorage = FirebaseStorage.getInstance();
+//                    mProfilePictureReference = mFirebaseStorage.getReference().child("profile_picture");
+//
+//
+//                    final String uid = getUid();
+//                    FirebaseDatabase.getInstance().getReference().child("users").child(uid)
+//                            .addListenerForSingleValueEvent(new ValueEventListener() {
+//                                @Override
+//                                public void onDataChange(DataSnapshot dataSnapshot) {
+//                                    // Get user information
+//                                    User user = dataSnapshot.getValue(User.class);
+//                                    if(!(user.profilePictureUrl.equals("No Profile Picture"))){
+//
+//                                        StorageReference picturesReference = mProfilePictureReference.child(user.email);
+//                                        picturesReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
+//                                        {
+//                                            @Override
+//                                            public void onSuccess(Uri downloadUrl)
+//                                            {
+//                                                final String url = downloadUrl.toString();
+//                                                Glide.with(holder.profilePicture.getContext()).load(url).into(holder.profilePicture);
+//
+//                                            }
+//                                        });
+//
+//                                    }
+//                                }
+//
+//                                @Override
+//                                public void onCancelled(DatabaseError databaseError) {
+//
+//                                }
+//                            });
+                    ////////////////////////DFSDFADASDFASFASFASF//////
 
                 }
 
@@ -504,6 +611,9 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
                         .load(answerModel.getImageAnswerURL())
                         .into(holder.imageInCommentView);
             }
+            Glide.with(holder.profilePictureView.getContext())
+                    .load("https://firebasestorage.googleapis.com/v0/b/tango-9eaa5.appspot.com/o/profile_picture%2Foumarba221296%40hotmail.fr?alt=media&token=19d3841d-be3c-4fd6-b5a9-b21a444ba794")
+                    .into(holder.profilePictureView);
 
           //  holder.numStarsView.setText(answerModel.starCount);
 
