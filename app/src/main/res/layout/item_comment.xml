@@ -10,29 +10,37 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/post_author_layout"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:background="?attr/backgroundColor"
         android:layout_alignTop="@+id/post_author_layout"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" android:layout_alignParentEnd="true">
+        android:background="?attr/backgroundColor"
+        android:gravity="top|center_vertical|start"
+        android:orientation="horizontal"
+        android:translationZ="0.01dp">
 
         <ImageView
             android:id="@+id/star"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
+            android:layout_marginStart="10dp"
 
 
+            android:adjustViewBounds="false"
             android:contentDescription="@string/profile_picture"
-            android:src="@drawable/ic_toggle_star_outline_24" android:layout_marginStart="10dp" android:layout_marginEnd="5dp" />
+            android:src="@drawable/ic_toggle_star_outline_24"
+            android:visibility="visible" />
 
         <TextView
             android:id="@+id/post_num_stars"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="18dp"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
             android:gravity="center"
             android:textColor="?attr/textcolor"
+            android:visibility="visible"
             tools:text="7" />
 
     </LinearLayout>
@@ -47,18 +55,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginLeft="10dp"
+        android:layout_toEndOf="@+id/comment_photo"
+        android:layout_toRightOf="@+id/comment_photo"
         android:background="?attr/backgroundColor"
-        android:padding="5dp"
-        android:layout_toRightOf="@+id/comment_photo" android:layout_toEndOf="@+id/comment_photo" android:layout_marginStart="10dp">
+        android:orientation="vertical"
+        android:padding="5dp">
 
         <TextView
             android:id="@+id/comment_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
             android:textColor="?attr/textcolor"
+            android:textStyle="bold"
             tools:text="John Doe" />
 
         <TextView
@@ -68,15 +76,14 @@
             android:layout_height="wrap_content"
             android:textColor="?attr/textcolor"
 
-            tools:text="This is the answerModel text.."/>
+            tools:text="This is the answerModel text.." />
 
 
         <ImageView
             android:id="@+id/image_in_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-           />
+            android:layout_gravity="center" />
 
     </LinearLayout>
 
