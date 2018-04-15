@@ -41,7 +41,7 @@ public class FeedActivity extends BaseActivity {
 
     private static final String TAG = "FeedActivity";
 
-    private FragmentPagerAdapter pageAdapter;
+    private FragmentPagerAdapter page_Adapter;
     private ViewPager view_Page;
 
     @Override
@@ -66,7 +66,7 @@ public class FeedActivity extends BaseActivity {
 
         }
         // Create the adapter that will return a fragment for each section
-        pageAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
+        page_Adapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
             private final Fragment[] mFragments = new Fragment[]{
                     new RecentPosts(),
                     new MyTopPosts(),
@@ -98,13 +98,13 @@ public class FeedActivity extends BaseActivity {
         };
         // Set up the ViewPager with the sections adapter.
         view_Page = findViewById(R.id.container);
-        view_Page.setAdapter(pageAdapter);
-        TabLayout tabLayout = findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(view_Page);
+        view_Page.setAdapter(page_Adapter);
+        TabLayout tab_Layout = findViewById(R.id.tabs);
+        tab_Layout.setupWithViewPager(view_Page);
         if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
-            tabLayout.setTabTextColors(getResources().getColorStateList(R.color.grey_100));
+            tab_Layout.setTabTextColors(getResources().getColorStateList(R.color.grey_100));
         } else {
-            tabLayout.setTabTextColors(getResources().getColorStateList(R.color.black));
+            tab_Layout.setTabTextColors(getResources().getColorStateList(R.color.black));
         }
 
         // Button launches QuestionPageActivity
@@ -131,18 +131,18 @@ public class FeedActivity extends BaseActivity {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int i = item.getItemId();
-        if (i == R.id.action_logout) {
+        int itemClicked = item.getItemId();
+        if (itemClicked == R.id.action_logout) {
             FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(this, GoogleSignInActivity.class));
             finish();
             return true;
-        } else if (i == R.id.action_profile) {
+        } else if (itemClicked == R.id.action_profile) {
             startActivity(new Intent(this, ProfilePage.class));
             finish();
             return true;
         }
-        else if (i == R.id.switch_dark) {
+        else if (itemClicked == R.id.switch_dark) {
 
             if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
                 setTheme(R.style.AppTheme);
@@ -166,8 +166,8 @@ public class FeedActivity extends BaseActivity {
         }
     }
     public void restartApp(){
-        Intent i = new Intent(getApplicationContext(),FeedActivity.class);
-        startActivity(i);
+        Intent nextActivity = new Intent(getApplicationContext(),FeedActivity.class);
+        startActivity(nextActivity);
         finish();
     }
 
