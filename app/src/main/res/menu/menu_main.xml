@@ -20,11 +20,11 @@
         android:title="SwitchTheme"
         android:visible="true"
         app:showAsAction="ifRoom" />
-    <item
+   <!-- <item
         android:id="@+id/switch_light"
         android:icon="@drawable/ic_light_mode"
         android:title="SwitchTheme"
         android:visible="true"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom" />-->
 
 </menu>
