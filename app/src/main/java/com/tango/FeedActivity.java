@@ -19,6 +19,7 @@ package com.tango;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -47,6 +48,7 @@ public class FeedActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
             setTheme(R.style.NightTheme);
+
         } else {
             setTheme(R.style.AppTheme);
         }
@@ -117,9 +119,16 @@ public class FeedActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+            menu.findItem(R.id.switch_dark).setIcon(R.drawable.ic_dark_mode);
+
+        } else {
+            menu.findItem(R.id.switch_dark).setIcon(R.drawable.ic_light_mode);
+        }
         return true;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int i = item.getItemId();
@@ -134,16 +143,23 @@ public class FeedActivity extends BaseActivity {
             return true;
         }
         else if (i == R.id.switch_dark) {
-            setTheme(R.style.NightTheme);
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            restartApp();
-            return true;
-        }
-        else if (i == R.id.switch_light){
-            setTheme(R.style.AppTheme);
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            restartApp();
-            return true;
+
+            if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+                setTheme(R.style.AppTheme);
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                item.setIcon(R.drawable.ic_dark_mode);
+                restartApp();
+                return true;
+
+            } else {
+                setTheme(R.style.NightTheme);
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                item.setIcon(R.drawable.ic_light_mode);
+                restartApp();
+                return true;
+            }
+            
+
         }
         else {
             return super.onOptionsItemSelected(item);
