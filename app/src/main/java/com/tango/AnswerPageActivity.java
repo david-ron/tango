@@ -505,9 +505,14 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
             if (isPhoto) {
                 //messageTextView.setVisibility(View.GONE);
                 holder.imageInCommentView.setVisibility(View.VISIBLE);
+                if(answerModel.getImageAnswerURL() == )
+                Glide.with(holder.imageInCommentView.getContext())
+                        .load(answerModel.getImageAnswerURL()).asGif()
+                        .into(holder.imageInCommentView);
                 Glide.with(holder.imageInCommentView.getContext())
                         .load(answerModel.getImageAnswerURL())
                         .into(holder.imageInCommentView);
+
             }
 
           //  holder.numStarsView.setText(answerModel.starCount);
