@@ -86,24 +86,6 @@ public class ProfilePage extends AppCompatActivity {
                 final String url = downloadUrl.toString();
                 Glide.with(profilePicture.getContext()).load(url).into(profilePicture);
 
-                ///////////////////////////
-                final String uid = getUid();
-                FirebaseDatabase.getInstance().getReference().child("users").child(uid)
-                        .addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                // Get user information
-                                User user = dataSnapshot.getValue(User.class);
-                                user.profilePictureUrl=url;
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                            }
-                        });
-                ///////////////////
-
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -152,9 +134,23 @@ public class ProfilePage extends AppCompatActivity {
 //                            // Set the download URL to the message box, so that the user can send it to the database
 //                            AnswerModel ImageAsAnswer = new AnswerModel(null, authorName, downloadUrl.toString());
 //                            mMessagesDatabaseReference.push().setValue(imageAsAnswer);
-                    usersWithProfilePicture.put(userForProfilePicture.getEmail(),downloadUrl);
 
                     Glide.with(profilePicture.getContext()).load(downloadUrl.toString()).into(profilePicture);
+                    final String uid = getUid();
+                    FirebaseDatabase.getInstance().getReference().child("users").child(uid)
+                            .addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    // Get user information
+                                    User user = dataSnapshot.getValue(User.class);
+                                    user.setProfilePictureUrl(downloadUrl.toString());
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
 
                 }
             });

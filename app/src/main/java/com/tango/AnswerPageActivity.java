@@ -46,6 +46,7 @@ import java.util.List;
 import java.util.Map;
 
 public class AnswerPageActivity extends BaseActivity implements View.OnClickListener {
+    static String url;
 
     private static final String TAG = "AnswerPageActivity";
 
@@ -243,6 +244,7 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
 
 
 
+
     // Add new answer to the DB
     public void postAnswer() {
         final String uid = getUid();
@@ -251,33 +253,12 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         // Get user information
-                        ///// Jai ajoute final
-                        final User user = dataSnapshot.getValue(User.class);
-                        String authorName = user.username;
-                        String profilePicture= user.profilePictureUrl;
-                        final String url="";
-                        ////////sdfsdfsdfsdfsdfs
-                        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-                        final FirebaseUser userPP = mAuth.getCurrentUser();
-                        mFirebaseStorage = FirebaseStorage.getInstance();
-                        mProfilePictureReference = mFirebaseStorage.getReference().child("profile_picture");
-//                    if(!(answerModel.profilePicture.equals("No Profile Picture"))){
-
-                        StorageReference picturesReference = mProfilePictureReference.child(userPP.getEmail());
-                        picturesReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
-                        {
-                            @Override
-                            public void onSuccess(Uri downloadUrl)
-                            {
-                                user.profilePictureUrl= downloadUrl.toString();
-
-                            }
-                        });
-                        ///////////////dsfsdfsdfsdf
-                        // Create new answerModel object
-                        profilePicture="https://firebasestorage.googleapis.com/v0/b/tango-9eaa5.appspot.com/o/profile_picture%2Foumarba221296%40hotmail.fr?alt=media&token=19d3841d-be3c-4fd6-b5a9-b21a444ba794";
+                        User user = dataSnapshot.getValue(User.class);
+                        String authorName = user.username;// Create new answerModel object
+                        //profilePicture="https://firebasestorage.googleapis.com/v0/b/tango-9eaa5.appspot.com/o/profile_picture%2Foumarba221296%40hotmail.fr?alt=media&token=4d2b66ef-a42d-405e-87a7-5e9b3e4c6aaa";
+                        String profilePicture = user.profilePictureUrl;
                         String commentText = answerField.getText().toString();
-                        AnswerModel answerModel = new AnswerModel(uid, authorName, commentText, null,profilePicture);
+                        AnswerModel answerModel = new AnswerModel(uid, authorName, commentText, profilePicture);
 
                         Map<String, Object> postValues = answerModel.toMap();
                         // Push the answerModel, it will appear in the list
@@ -379,9 +360,12 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
 
 
                     }
-                    Glide.with(holder.profilePictureView.getContext())
-                            .load("https://firebasestorage.googleapis.com/v0/b/tango-9eaa5.appspot.com/o/profile_picture%2Foumarba221296%40hotmail.fr?alt=media&token=19d3841d-be3c-4fd6-b5a9-b21a444ba794")
-                            .into(holder.profilePictureView);
+                    boolean isProfilePictureInDB= answerModel.getProfilePicture() != null;
+                    if(isProfilePictureInDB) {
+                        Glide.with(holder.profilePictureView.getContext())
+                                .load(answerModel.getProfilePicture())
+                                .into(holder.profilePictureView);
+                    }
 
                     //  holder.numStarsView.setText(answerModel.starCount);
                     if (answerModel.stars.containsKey(getUid())) {
@@ -412,71 +396,6 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
                             //onStarClicked(userPostRef);
                         }
                     });
-
-                    //Trying to make the profile picture appear when answers are generated
-                    FirebaseAuth mAuth = FirebaseAuth.getInstance();
-                    final FirebaseUser user = mAuth.getCurrentUser();
-                    mFirebaseStorage = FirebaseStorage.getInstance();
-                    mProfilePictureReference = mFirebaseStorage.getReference().child("profile_picture");
-//                    if(!(answerModel.profilePicture.equals("No Profile Picture"))){
-
-                        StorageReference picturesReference = mProfilePictureReference.child(user.getEmail());
-                        picturesReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
-                        {
-                            @Override
-                            public void onSuccess(Uri downloadUrl)
-                            {
-//                                Glide.with(holder.profilePictureView.getContext())
-//                                        .load("https://firebasestorage.googleapis.com/v0/b/tango-9eaa5.appspot.com/o/profile_picture%2Foumarba221296%40hotmail.fr?alt=media&token=19d3841d-be3c-4fd6-b5a9-b21a444ba794")
-//                                        .into(holder.profilePictureView);
-
-                            }
-                        });
-
-
-//                    }
-
-//                    FirebaseAuth mAuth = FirebaseAuth.getInstance();
-//                    final FirebaseUser user = mAuth.getCurrentUser();
-//                    String usernameforpp= answerModel.author;
-//                    String emailforpp=user.getEmail();
-//
-//
-//                    mFirebaseStorage = FirebaseStorage.getInstance();
-//                    mProfilePictureReference = mFirebaseStorage.getReference().child("profile_picture");
-//
-//
-//                    final String uid = getUid();
-//                    FirebaseDatabase.getInstance().getReference().child("users").child(uid)
-//                            .addListenerForSingleValueEvent(new ValueEventListener() {
-//                                @Override
-//                                public void onDataChange(DataSnapshot dataSnapshot) {
-//                                    // Get user information
-//                                    User user = dataSnapshot.getValue(User.class);
-//                                    if(!(user.profilePictureUrl.equals("No Profile Picture"))){
-//
-//                                        StorageReference picturesReference = mProfilePictureReference.child(user.email);
-//                                        picturesReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
-//                                        {
-//                                            @Override
-//                                            public void onSuccess(Uri downloadUrl)
-//                                            {
-//                                                final String url = downloadUrl.toString();
-//                                                Glide.with(holder.profilePicture.getContext()).load(url).into(holder.profilePicture);
-//
-//                                            }
-//                                        });
-//
-//                                    }
-//                                }
-//
-//                                @Override
-//                                public void onCancelled(DatabaseError databaseError) {
-//
-//                                }
-//                            });
-                    ////////////////////////DFSDFADASDFASFASFASF//////
-
                 }
 
                 @Override
@@ -611,9 +530,12 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
                         .load(answerModel.getImageAnswerURL())
                         .into(holder.imageInCommentView);
             }
-            Glide.with(holder.profilePictureView.getContext())
-                    .load("https://firebasestorage.googleapis.com/v0/b/tango-9eaa5.appspot.com/o/profile_picture%2Foumarba221296%40hotmail.fr?alt=media&token=19d3841d-be3c-4fd6-b5a9-b21a444ba794")
-                    .into(holder.profilePictureView);
+            boolean isProfilePictureInDB= answerModel.getProfilePicture() != null;
+            if(isProfilePictureInDB) {
+                Glide.with(holder.profilePictureView.getContext())
+                        .load(answerModel.getProfilePicture())
+                        .into(holder.profilePictureView);
+            }
 
           //  holder.numStarsView.setText(answerModel.starCount);
 
@@ -697,6 +619,8 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
                 mDatabaseReference.removeEventListener(mChildEventListener);
             }
         }
+
+
 
     }
 

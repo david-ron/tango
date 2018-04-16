@@ -30,6 +30,7 @@ public class AnswerModel {
         this.uid = uid;
         this.author = author;
         this.text = text;
+        this.imageAnswerURL= null;
         this.profilePicture = profilePicture;
     }
     public AnswerModel(String uid, String author, String text, String image, String profilePicture) {
