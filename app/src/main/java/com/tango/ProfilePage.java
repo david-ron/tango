@@ -1,12 +1,18 @@
 package com.tango;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatDelegate;
+import android.support.v7.widget.CardView;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Button;
 import android.widget.TextView;
@@ -55,10 +61,41 @@ public class ProfilePage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+            setTheme(R.style.NightTheme);
+          //  cardView.setCardBackgroundColor(Color.BLACK);
+        } else {
+            setTheme(R.style.AppTheme);
+           // cardView.setCardBackgroundColor(Color.WHITE);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_page);
+        if(Build.VERSION.SDK_INT>=21){
+            Window window = this.getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+                window.setStatusBarColor(this.getResources().getColor(R.color.black));
+            } else {
+                window.setStatusBarColor(this.getResources().getColor(R.color.blue));
+            }
+
+        }
         username = (TextView) findViewById(R.id.username);
         email = (TextView) findViewById(R.id.email);
+
+         CardView cardView = findViewById(R.id.card);
+        if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+
+              cardView.setCardBackgroundColor(Color.BLACK);
+        } else {
+
+             cardView.setCardBackgroundColor(Color.WHITE);
+        }
+        // This code was used when answers redirected to a profile page which is no longer the case
+        //      Intent intent = getIntent();
+        //      username.setText(intent.getStringExtra("username"));
+
         profilePicture = (ImageView) findViewById(R.id.profilePicture);
         button = (Button) findViewById(R.id.changepicture);
 

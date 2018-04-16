@@ -17,16 +17,22 @@
 package com.tango;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatDelegate;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.tango.fragment.Favorites;
 import com.tango.fragment.MyPosts;
 import com.tango.fragment.MyTopPosts;
 import com.tango.fragment.RecentPosts;
@@ -35,23 +41,44 @@ public class FeedActivity extends BaseActivity {
 
     private static final String TAG = "FeedActivity";
 
-    private FragmentPagerAdapter pageAdapter;
+    private FragmentPagerAdapter page_Adapter;
     private ViewPager view_Page;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+            setTheme(R.style.NightTheme);
+
+        } else {
+            setTheme(R.style.AppTheme);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
+        if(Build.VERSION.SDK_INT>=21){
+            Window window = this.getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+                window.setStatusBarColor(this.getResources().getColor(R.color.black));
+            } else {
+                window.setStatusBarColor(this.getResources().getColor(R.color.blue));
+            }
 
+        }
         // Create the adapter that will return a fragment for each section
-        pageAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
+        page_Adapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
             private final Fragment[] mFragments = new Fragment[]{
                     new RecentPosts(),
-                    new MyPosts()
+                    new MyTopPosts(),
+                    new MyPosts(),
+                    new Favorites()
+                    //new Favorites()
             };
             private final String[] mFragmentNames = new String[]{
                     getString(R.string.heading_recent),
-                    getString(R.string.heading_my_posts)
+                    getString(R.string.heading_my_top_posts),
+                    getString(R.string.heading_my_posts),
+                    getString(R.string.heading_favorites)
             };
 
             @Override
@@ -71,9 +98,14 @@ public class FeedActivity extends BaseActivity {
         };
         // Set up the ViewPager with the sections adapter.
         view_Page = findViewById(R.id.container);
-        view_Page.setAdapter(pageAdapter);
-        TabLayout tabLayout = findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(view_Page);
+        view_Page.setAdapter(page_Adapter);
+        TabLayout tab_Layout = findViewById(R.id.tabs);
+        tab_Layout.setupWithViewPager(view_Page);
+        if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+            tab_Layout.setTabTextColors(getResources().getColorStateList(R.color.grey_100));
+        } else {
+            tab_Layout.setTabTextColors(getResources().getColorStateList(R.color.black));
+        }
 
         // Button launches QuestionPageActivity
         findViewById(R.id.fab_new_post).setOnClickListener(new View.OnClickListener() {
@@ -87,24 +119,56 @@ public class FeedActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+            menu.findItem(R.id.switch_dark).setIcon(R.drawable.ic_dark_mode);
+
+        } else {
+            menu.findItem(R.id.switch_dark).setIcon(R.drawable.ic_light_mode);
+        }
         return true;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int i = item.getItemId();
-        if (i == R.id.action_logout) {
+        int itemClicked = item.getItemId();
+        if (itemClicked == R.id.action_logout) {
             FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(this, GoogleSignInActivity.class));
             finish();
             return true;
-        } else if (i == R.id.action_profile) {
+        } else if (itemClicked == R.id.action_profile) {
             startActivity(new Intent(this, ProfilePage.class));
             finish();
             return true;
-        } else {
+        }
+        else if (itemClicked == R.id.switch_dark) {
+
+            if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+                setTheme(R.style.AppTheme);
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                item.setIcon(R.drawable.ic_dark_mode);
+                restartApp();
+                return true;
+
+            } else {
+                setTheme(R.style.NightTheme);
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                item.setIcon(R.drawable.ic_light_mode);
+                restartApp();
+                return true;
+            }
+            
+
+        }
+        else {
             return super.onOptionsItemSelected(item);
         }
+    }
+    public void restartApp(){
+        Intent nextActivity = new Intent(getApplicationContext(),FeedActivity.class);
+        startActivity(nextActivity);
+        finish();
     }
 
 }
