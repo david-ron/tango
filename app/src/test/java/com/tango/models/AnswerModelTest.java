@@ -17,7 +17,7 @@ public class AnswerModelTest {
         a.toMap();
         String output;
         String expected = "Question test";
-        AnswerModel qt = new AnswerModel("1234", "author", "text");
+        AnswerModel qt = new AnswerModel("1234", "author", "text","");
         qt.setAidz(input);
         output = qt.getAidz();
         assertEquals(expected, output);
@@ -28,7 +28,7 @@ public class AnswerModelTest {
         String input = "Question test";
         String output;
         String expected = "Question test";
-        AnswerModel qt = new AnswerModel("1234", "author", "text");
+        AnswerModel qt = new AnswerModel("1234", "author", "text","");
         qt.setAidz(input);
         output = qt.getAidz();
         assertEquals(expected, output);

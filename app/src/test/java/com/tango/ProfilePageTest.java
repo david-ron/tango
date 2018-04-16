@@ -66,7 +66,8 @@ public class ProfilePageTest {
 
     @Test
     public void onActivityResult() throws Exception {
-        tested.openGallery();
+        //tested.openGallery();
+
         tested.onActivityResult(0, 0, mock(Intent.class));
         doNothing().when(tested).finish();
         assertTrue(true);

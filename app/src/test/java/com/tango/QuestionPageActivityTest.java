@@ -33,7 +33,7 @@ public class QuestionPageActivityTest {
     @Test
     public void onCreate() throws Exception {
         tested.onCreate(mock(Bundle.class));
-        tested.writeNewPost(" "," "," ","");
+        tested.writeNewPost(" "," "," ","","");
         tested.submitPost();
         tested.setEditingEnabled(true);
         View view = Mockito.mock(View.class);

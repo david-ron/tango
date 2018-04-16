@@ -15,17 +15,19 @@ public class QuestionModel {
     public String title;
     public String body;
     public int starCount = 0;
+    public String profilePicture;
     public Map<String, Boolean> stars = new HashMap<>();
 
     public QuestionModel() {
         // Default constructor required for calls to DataSnapshot.getValue(QuestionModel.class)
     }
 
-    public QuestionModel(String uid, String author, String title, String body) {
+    public QuestionModel(String uid, String author, String title, String body, String profilePicture) {
         this.uid = uid;
         this.author = author;
         this.title = title;
         this.body = body;
+        this.profilePicture= profilePicture;
     }
 
     // [START post_to_map]
@@ -38,6 +40,7 @@ public class QuestionModel {
         result.put("body", body);
         result.put("starCount", starCount);
         result.put("stars", stars);
+        result.put("profilePicture", profilePicture);
 
         return result;
     }

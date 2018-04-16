@@ -26,7 +26,7 @@ public class GoogleSignInActivityTest {
 
     @Test
     public void testLaunchTitle() {
-        View viewTitle = mActivity.findViewById(R.id.title_text);
+        View viewTitle = mActivity.findViewById(R.string.google_title_text);
         assertNotNull(viewTitle);
 
     }
