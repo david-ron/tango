@@ -44,6 +44,8 @@ import com.tango.models.AnswerModel;
 import com.tango.models.QuestionModel;
 import com.tango.models.User;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -505,14 +507,17 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
             if (isPhoto) {
                 //messageTextView.setVisibility(View.GONE);
                 holder.imageInCommentView.setVisibility(View.VISIBLE);
-               
+                if(answerModel.getImageAnswerURL().getBytes()[0] == 47 &&
+                        answerModel.getImageAnswerURL().getBytes()[1] == 49 &&
+                        answerModel.getImageAnswerURL().getBytes()[2] == 46){
                 Glide.with(holder.imageInCommentView.getContext())
                         .load(answerModel.getImageAnswerURL()).asGif()
-                        .into(holder.imageInCommentView);
-                Glide.with(holder.imageInCommentView.getContext())
-                        .load(answerModel.getImageAnswerURL())
-                        .into(holder.imageInCommentView);
-
+                        .into(holder.imageInCommentView);}
+                        else {
+                    Glide.with(holder.imageInCommentView.getContext())
+                            .load(answerModel.getImageAnswerURL())
+                            .into(holder.imageInCommentView);
+                }
             }
 
           //  holder.numStarsView.setText(answerModel.starCount);
