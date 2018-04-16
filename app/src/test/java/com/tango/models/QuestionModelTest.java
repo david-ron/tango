@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class QuestionModelTest {
     @Test
     public void toMap() throws Exception {
-        QuestionModel qm = new QuestionModel("uid", "author", "title", "body");
+        QuestionModel qm = new QuestionModel("uid", "author", "title", "body","");
         QuestionModel q = new QuestionModel();
         q.toMap();
         q.uid = " ";
