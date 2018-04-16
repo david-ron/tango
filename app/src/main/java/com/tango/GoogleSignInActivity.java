@@ -60,7 +60,6 @@ public class GoogleSignInActivity extends BaseActivity implements View.OnClickLi
                 .build();
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
     }

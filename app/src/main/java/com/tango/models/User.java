@@ -34,6 +34,9 @@ public class User {
     public void setProfilePictureUrl(String url){
         this.profilePictureUrl= url;
     }
+    public String getProfilePictureUrl(){
+        return this.profilePictureUrl;
+    }
 
 //    public String getProfilePictureUrl(){
 //        FirebaseStorage mFirebaseStorage;

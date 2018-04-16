@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,6 +36,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageException;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.tango.models.AnswerModel;
@@ -73,6 +75,7 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
 
     //
     private ImageView profilePicture;
+    private ImageView questionProfilePictureView;
 
     // Firebase instance for image storage
     private FirebaseStorage mFirebaseStorage;
@@ -99,6 +102,7 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
 
         /**
          * comment_photos contains the Images
+         * profile_picture contais the profile pictures
          */
         mFirebaseStorage = FirebaseStorage.getInstance();
         mImageAnswerReference = mFirebaseStorage.getReference().child("comment_photos");
@@ -112,6 +116,7 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
         postAnswerButton = findViewById(R.id.button_post_comment);
         answerRecyclerView = findViewById(R.id.recycler_comments);
         profilePicture = (ImageView) findViewById(R.id.comment_photo);
+        questionProfilePictureView = (ImageView) findViewById(R.id.post_author_photo);
 
         // Image as an answer button
         addImageButton = (Button) findViewById(R.id.button_image_answer);
@@ -148,6 +153,32 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
                 authorView.setText(questionModel.author);
                 questionTitleView.setText(questionModel.title);
                 questionBodyView.setText(questionModel.body);
+
+                /**
+                 * Putting the author of the question profile picture
+                 */
+                FirebaseAuth mAuth;
+                mAuth = FirebaseAuth.getInstance();
+                final FirebaseUser user = mAuth.getCurrentUser();
+                StorageReference picturesReference = mProfilePictureReference.child(user.getEmail());
+                picturesReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
+                {
+                    @Override
+                    public void onSuccess(Uri downloadUrl)
+                    {
+                        final String url = downloadUrl.toString();
+                        Glide.with(questionProfilePictureView.getContext()).load(url).into(questionProfilePictureView);
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        // Handle any errors
+                        int errorCode = ((StorageException) exception).getErrorCode();
+                        String errorMessage = exception.getMessage();
+                    }
+                });
+
 
             }
 
@@ -190,6 +221,9 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
         }
     }
 
+    /**
+     *Opening the gallery and sending the image to the database
+     */
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode,data);
         if(requestCode == RC_PHOTO_PICKER && resultCode == RESULT_OK){
@@ -209,9 +243,6 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
                             final Uri downloadUrl = taskSnapshot.getDownloadUrl();
 
 //                            // Set the download URL to the message box, so that the user can send it to the database
-//                            AnswerModel ImageAsAnswer = new AnswerModel(null, authorName, downloadUrl.toString());
-//                            mMessagesDatabaseReference.push().setValue(imageAsAnswer);
-
                             final String uid = getUid();
                             FirebaseDatabase.getInstance().getReference().child("users").child(uid)
                                     .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -255,7 +286,6 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
                         // Get user information
                         User user = dataSnapshot.getValue(User.class);
                         String authorName = user.username;// Create new answerModel object
-                        //profilePicture="https://firebasestorage.googleapis.com/v0/b/tango-9eaa5.appspot.com/o/profile_picture%2Foumarba221296%40hotmail.fr?alt=media&token=4d2b66ef-a42d-405e-87a7-5e9b3e4c6aaa";
                         String profilePicture = user.profilePictureUrl;
                         String commentText = answerField.getText().toString();
                         AnswerModel answerModel = new AnswerModel(uid, authorName, commentText, profilePicture);
@@ -263,12 +293,6 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
                         Map<String, Object> postValues = answerModel.toMap();
                         // Push the answerModel, it will appear in the list
                         answerRef.push().setValue(answerModel);
-                        //answerModel.answerID = dataSnapshot.getKey();
-                        //Log.d("BBBBBBBBBB",dataSnapshot.getRef().);
-                        //Log.d("AAAAAAA",answerModel.answerID);
-                        //String testers = answerRef.push().setValue(answerModel).toString();
-                        //answerModel.setAidz(testers);
-                        // Clear the field
                         answerField.setText(null);
                     }
 
@@ -305,12 +329,6 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
         public void bindToPost(AnswerModel questionModel, View.OnClickListener starClickListener) {
 
             numStarsView.setText(String.valueOf(questionModel.starCount));
-
-
-            // Log.d("POSTING", questionModel.toString());
-            //Log.d("POSTING-Question", questionModel.title.toString());
-            // Log.d("POSTING-Answer", questionModel.body.toString());
-
             starView.setOnClickListener(starClickListener);
         }
     }
@@ -349,10 +367,8 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
                     holder.authorView.setText(answerModel.author);
                     holder.bodyView.setText(answerModel.text);
                     // Photo as answer
-                    //AnswerModel message = getItem(position);
                     boolean isPhoto = answerModel.getImageAnswerURL() != null;
                     if (isPhoto) {
-                        //messageTextView.setVisibility(View.GONE);
                         holder.imageInCommentView.setVisibility(View.VISIBLE);
                         Glide.with(holder.imageInCommentView.getContext())
                                 .load(answerModel.getImageAnswerURL())
@@ -436,7 +452,8 @@ public class AnswerPageActivity extends BaseActivity implements View.OnClickList
 
                     // A comment has changed, use the key to determine if we are displaying this
                     // comment and if so displayed the changed comment.
-                    AnswerModel newAnswerModel = dataSnapshot.getValue(AnswerModel.class);
+                    final AnswerModel newAnswerModel = dataSnapshot.getValue(AnswerModel.class);
+                    User newUser1= dataSnapshot.getValue(User.class);
                     String commentKey = dataSnapshot.getKey();
                     //newAnswerModel.answerID = previousChildName;
                     int commentIndex = mCommentIds.indexOf(commentKey);

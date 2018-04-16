@@ -70,6 +70,9 @@ public class AnswerModel {
     public String getProfilePicture() {
         return profilePicture;
     }
+    public void setProfilePicture(String profilePicture){
+        this.profilePicture=profilePicture;
+    }
 
 }
 // [END comment_class]

@@ -1,18 +1,29 @@
 package com.tango;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageException;
+import com.google.firebase.storage.StorageReference;
 import com.tango.models.QuestionModel;
 import com.tango.models.User;
 
@@ -31,11 +42,19 @@ public class QuestionPageActivity extends BaseActivity {
     private EditText questionTitle;
     private EditText questionBody;
     private FloatingActionButton submitButton;
+    private ImageView profilePictureQuestion;
+
+    private FirebaseStorage mFirebaseStorage;
+    private StorageReference mProfilePictureReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
+
+
+        mFirebaseStorage = FirebaseStorage.getInstance();
+        mProfilePictureReference = mFirebaseStorage.getReference().child("profile_picture");
 
         // Set rootDB to root of FireBase DataBase
         rootDB = FirebaseDatabase.getInstance().getReference();
@@ -44,6 +63,7 @@ public class QuestionPageActivity extends BaseActivity {
         questionTitle = findViewById(R.id.field_title);
         questionBody = findViewById(R.id.field_body);
         submitButton = findViewById(R.id.fab_submit_post);
+        profilePictureQuestion = findViewById(R.id.post_author_photo);
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +81,29 @@ public class QuestionPageActivity extends BaseActivity {
     public void submitPost() {
         final String title = questionTitle.getText().toString();
         final String body = questionBody.getText().toString();
+
+        // Tried this to glide the profile picture but oddly it cannot find the view
+//        FirebaseAuth mAuth;
+//        mAuth = FirebaseAuth.getInstance();
+//        final FirebaseUser user = mAuth.getCurrentUser();
+//        StorageReference picturesReference = mProfilePictureReference.child(user.getEmail());
+//        picturesReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
+//        {
+//            @Override
+//            public void onSuccess(Uri downloadUrl)
+//            {
+//                final String url = downloadUrl.toString();
+//                Glide.with(profilePictureQuestion.getContext()).load(url).into(profilePictureQuestion);
+//
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception exception) {
+//                // Handle any errors
+//                int errorCode = ((StorageException) exception).getErrorCode();
+//                String errorMessage = exception.getMessage();
+//            }
+//        });
 
         // Title is required
         if (TextUtils.isEmpty(title)) {
@@ -96,7 +139,7 @@ public class QuestionPageActivity extends BaseActivity {
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             // Write new question
-                            writeNewPost(userId, user.username, title, body);
+                            writeNewPost(userId, user.username, title, body, user.getProfilePictureUrl());
                         }
 
                         // Finish this Activity, back to the stream
@@ -124,11 +167,11 @@ public class QuestionPageActivity extends BaseActivity {
     }
 
     // Writes the actual post to the DB
-    public void writeNewPost(String userId, String username, String title, String body) {
+    public void writeNewPost(String userId, String username, String title, String body, String profilePicture) {
         // Create new questionModel at /user-posts/$userid/$postid and at
         // /posts/$postid simultaneously
         String key = rootDB.child("posts").push().getKey();
-        QuestionModel questionModel = new QuestionModel(userId, username, title, body);
+        QuestionModel questionModel = new QuestionModel(userId, username, title, body, profilePicture);
         Map<String, Object> postValues = questionModel.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();
