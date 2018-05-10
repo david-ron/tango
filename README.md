@@ -3,7 +3,6 @@
 <table>
   <tr>
     <th>Name</th>
-    <th>Student ID</th>
     <th>Email</th>
   </tr>
   <tr>
