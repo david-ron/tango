@@ -6,7 +6,7 @@
     <th>Email</th>
   </tr>
   <tr>
-    <td>**David Ronci**</td>
+    <td>David Ronci</td>
     <td>ronci.david@gmail.com</td>
   </tr>
   <tr>
